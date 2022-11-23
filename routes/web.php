@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,8 @@ Auth::routes();
 
 Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/', function () {
-    return view('home');
-});
+        return view('home');
+    });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/admin/departments',  DepartmentController::class);
 });

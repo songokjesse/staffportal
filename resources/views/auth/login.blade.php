@@ -8,7 +8,7 @@
                 <img src="{{asset('logo.png')}}" width="300" height="150" class="rounded" alt="logo">
             </div>
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+{{--                <div class="card-header">{{ __('Login') }}</div>--}}
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

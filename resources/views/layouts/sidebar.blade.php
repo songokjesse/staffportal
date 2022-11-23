@@ -42,7 +42,7 @@
                     <i class="fs-4 bi-person"></i> <span class="ms-1 d-none  d-sm-inline">Profile</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-white">
+                <a href="/admin/departments" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-house-gear"></i> <span class="ms-1 d-none  d-sm-inline">Departments</span></a>
             </li>
             <li>
