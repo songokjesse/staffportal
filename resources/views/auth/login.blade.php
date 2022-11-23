@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="text-center mb-3">
+                <img src="{{asset('logo.png')}}" width="300" height="150" class="rounded" alt="logo">
+            </div>
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 

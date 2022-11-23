@@ -73,9 +73,15 @@
                 </div>
             </div>
         </nav>
-                <main class="py-4">
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                @include('layouts.sidebar')
+
+                <main class="col py-4">
                     @yield('content')
                 </main>
+            </div>
+        </div>
     </div>
 </body>
 </html>

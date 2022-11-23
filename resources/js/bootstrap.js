@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import Alpine from 'alpinejs';
+
 window._ = _;
 
 import 'bootstrap';
@@ -34,3 +36,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+window.Alpine = Alpine;
+Alpine.start();
