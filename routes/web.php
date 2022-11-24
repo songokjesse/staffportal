@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +30,12 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/', function () {
         return view('home');
     });
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+//    Admin
     Route::resource('/admin/departments',  DepartmentController::class);
+    Route::resource('/admin/users',  UserController::class);
+    Route::resource('/admin/roles',  RolesController::class);
+    Route::resource('/admin/permissions',  PermissionsController::class);
 });

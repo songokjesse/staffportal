@@ -38,7 +38,7 @@
             {{--                </ul>--}}
             {{--            </li>--}}
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-white">
+                <a href="{{route('profile')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-person"></i> <span class="ms-1 d-none  d-sm-inline">Profile</span></a>
             </li>
             <li>
@@ -54,8 +54,16 @@
                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Leave</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-white">
+                <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Users</span></a>
+            </li>
+            <li>
+                <a href="{{route('roles.index')}}" class="nav-link px-0 align-middle text-white">
+                    <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Roles</span></a>
+            </li>
+            <li>
+                <a href="{{route('permissions.index')}}" class="nav-link px-0 align-middle text-white">
+                    <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Permissions</span></a>
             </li>
         </ul>
         <hr>
