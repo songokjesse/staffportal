@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('pf')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();

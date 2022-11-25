@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,8 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 //    Admin
+    Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
+
     Route::resource('/admin/departments',  DepartmentController::class);
     Route::resource('/admin/users',  UserController::class);
     Route::resource('/admin/roles',  RolesController::class);
