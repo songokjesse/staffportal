@@ -16,7 +16,7 @@
                             <a href="{{route('users.create')}}" class="btn btn-success btn-sm" ><i class="bi bi-person-add"></i> Add User</a>
                         </div>
 
-                            <table class="table table-striped">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col" >#</th>
