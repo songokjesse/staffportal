@@ -36,6 +36,7 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
 //    Admin
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
+    Route::post('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'store'])->name('save_assigned_staff_to_department');
 
     Route::resource('/admin/departments',  DepartmentController::class);
     Route::resource('/admin/users',  UserController::class);

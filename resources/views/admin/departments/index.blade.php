@@ -14,7 +14,7 @@
                             <h2>{{ __('Departments') }}</h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                         <a href="{{route('departments.create')}}" class="btn btn-success btn-sm" ><i class="bi bi-house-add"></i> Add Department</a>
-                        <a href="{{route('departments.create')}}" class="btn btn-info btn-sm" ><i class="bi bi-person-add"></i> Assign Staff to Departments</a>
+                        <a href="{{route('assign_staff_to_department')}}" class="btn btn-info btn-sm" ><i class="bi bi-person-add"></i> Assign Staff to Departments</a>
                         </div>
 
                         <table class="table table-responsive table-striped table-bordered">
