@@ -65,13 +65,11 @@ class UserController extends Controller
      *
      * @param User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function show(User $user)
     {
-        return view('admin.users.show', [
-            'user' => $user
-        ]);
+        return view('admin.users.show', ['user' => $user ]);
     }
 
     /**
