@@ -46,7 +46,7 @@
                     <i class="fs-4 bi-house-gear"></i> <span class="ms-1 d-none  d-sm-inline">Departments</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-white">
+                <a href="{{route('requisitions.index')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none  d-sm-inline">Requisitions</span></a>
             </li>
             <li>

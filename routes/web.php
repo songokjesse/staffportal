@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RequisitionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,13 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
+    //    Requisition
+    Route::get('/requisitions', [RequisitionController::class, 'index'])->name('requisitions.index');
+    Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
+
 //    Admin
+
+//    Departments
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
     Route::post('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'store'])->name('save_assigned_staff_to_department');
 
