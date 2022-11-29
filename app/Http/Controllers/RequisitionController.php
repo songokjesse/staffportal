@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class RequisitionController extends Controller
 
     public function create()
     {
-        return view('requisition.create');
+        $departments = Department::all();
+        return view('requisition.create', compact('departments'));
     }
 }

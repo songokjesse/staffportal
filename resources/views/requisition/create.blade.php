@@ -31,7 +31,28 @@
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                    adadsdsd
+                                    <form>
+                                        @csrf
+                                        @method('POST')
+                                        <div class="form-group mt-3">
+                                            <label>From Department:  </label>
+                                            <select class="form-control">
+                                                @foreach($departments as $department)
+                                                <option value="{{$department->id}}">{{$department->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label>Description:  </label>
+                                            <textarea class="form-control">
+
+                                            </textarea>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
                                 <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
