@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Requisition;
 
+use App\Http\Controllers\Controller;
 use App\Models\Department;
-use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,5 +25,18 @@ class RequisitionController extends Controller
     {
         $departments = Department::all();
         return view('requisition.create', compact('departments'));
+    }
+
+    public function store(Request $request){
+        $request->validate([
+           'description' => 'required',
+           'department_id' => 'required',
+           'title' => 'required',
+        ]);
+
+        dd($request->all());
+
+        return redirect()->route('requisitions.create')
+            ->with('status','General Information Captured successfully.');
     }
 }

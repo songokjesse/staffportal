@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RequisitionController;
+use App\Http\Controllers\Requisition\RequisitionController;
+use App\Http\Controllers\Requisition\RequisitionItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,8 @@ Route::group(['middleware' => [  'auth' ]], function () {
     //    Requisition
     Route::get('/requisitions', [RequisitionController::class, 'index'])->name('requisitions.index');
     Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
+    Route::post('/requisitions/store', [RequisitionController::class, 'store'])->name('requisitions.store');
+    Route::post('/requisition_items/', [RequisitionItemController::class, 'store'])->name('requisition_items');
 
 //    Admin
 

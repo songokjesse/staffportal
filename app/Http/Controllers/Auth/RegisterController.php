@@ -42,10 +42,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function show(){
-        $departments = Department::all();
-        return view('auth.register' ,compact('departments'));
-    }
 
     /**
      * Get a validator for an incoming registration request.

@@ -18,45 +18,97 @@
 
                             <hr/>
 
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">General</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Items</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Assign</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                    <form>
+
+                                    <form action="{{route('requisitions.store')}}" method="POST" class="form">
                                         @csrf
                                         @method('POST')
-                                        <div class="form-group mt-3">
-                                            <label>From Department:  </label>
-                                            <select class="form-control">
-                                                @foreach($departments as $department)
-                                                <option value="{{$department->id}}">{{$department->name}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="row justify-content-between">
+                                        <div class="col-4">
+                                                        <label class="col-form-label">From:  </label>
+                                                        <select class="form-select" name="department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus>
+                                                            @foreach($departments as $department)
+                                                                <option value="{{$department->id}}">{{$department->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('department_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                         </div>
-                                        <div class="form-group mt-3">
-                                            <label>Description:  </label>
-                                            <textarea class="form-control">
+                                          <div class="col-4">
+                                              <label class="col-form-label">To:  </label>
+                                              <select class="form-select" name="department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus>
+                                                  @foreach($departments as $department)
+                                                      <option value="{{$department->id}}">{{$department->name}}</option>
+                                                  @endforeach
+                                              </select>
+                                              @error('department_id')
+                                              <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                              @enderror
+                                          </div>
+                                        </div>
 
-                                            </textarea>
-                                        </div>
 
                                         <div class="mt-3">
-                                            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                                            <label>RE:  </label>
+                                            <input type="text" name="title" class="form-control"/>
+                                            <span style="color:red"> {{ $errors->has('title') ?  $errors->first('title') : '' }} </span>
+
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <label>Description:</label>
+                                            <textarea class="form-control" @error('description') is-invalid @enderror name="description" autocomplete="description" autofocus ></textarea>
+                                            <span style="color:red"> {{ $errors->has('description') ?  $errors->first('description') : '' }} </span>
+                                        </div>
+
+                                        <table class="table table-bordered table-striped mt-3 table-responsive-sm" id="dynamicAddRemove">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Amount</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="item_name[]" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="item_quantity[]" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="unit_cost[]" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="total_cost[]" class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <button type="button"  id="dynamic-ar" class="btn btn-sm btn-outline-secondary">Add More items</button>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>totals</td>
+                                            </tr>
+                                        </table>
+
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-                            </div>
 
                     </div>
                 </div>
@@ -65,3 +117,22 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script type="text/javascript">
+        var i = 0;
+        $("#dynamic-ar").click(function () {
+            console.log('clicked')
+        ++i;
+        $("#dynamicAddRemove").append('<tr><td> <input type="text" name="item_name[]" class="form-control"/></td>' +
+            '<td> <input type="text" name="item_quantity[]" class="form-control"/></td>'+
+            '<td><input type="text" name="unit_cost[]" class="form-control"/></td>' +
+            '<td><input type="text" name="total_cost[]" class="form-control"/></td>' +
+            '<td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
+        );
+        });
+        $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+        });
+
+    </script>
+@endsection
