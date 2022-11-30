@@ -92,17 +92,17 @@
                                                 <td>
                                                     <button type="button"  id="dynamic-ar" class="btn btn-sm btn-outline-secondary">Add More items</button>
                                                 </td>
-
                                             </tr>
                                             </tbody>
-                                        </table>
-                                        <table>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
+                                                <td><b>Totals:</b></td>
                                                 <td></td>
-                                                <td>totals</td>
                                             </tr>
+                                            <tbody>
+
+                                            </tbody>
                                         </table>
 
                                         <div class="mt-3">
