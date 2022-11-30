@@ -38,6 +38,8 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
     //    Requisition
     Route::get('/requisitions', [RequisitionController::class, 'index'])->name('requisitions.index');
+    Route::get('/requisitions/createPDF/{id}', [RequisitionController::class, 'createPDF'])->name('requisitions.pdf');
+    Route::get('/requisitions/show/{id}', [RequisitionController::class, 'show'])->name('requisitions.show');
     Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
     Route::post('/requisitions/store', [RequisitionController::class, 'store'])->name('requisitions.store');
     Route::post('/requisition_items/', [RequisitionItemController::class, 'store'])->name('requisition_items');

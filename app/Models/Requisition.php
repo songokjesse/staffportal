@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Requisition extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'status', 'department_id', 'user_id', 'title'];
+
+    protected $fillable = ['description', 'status', 'department_id', 'user_id', 'title', 'total'];
 
     public function department(): BelongsTo
     {

@@ -22,6 +22,7 @@
                                 <th>#</th>
                                 <th>Description</th>
                                 <th>Department</th>
+                                <th>Total</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -32,11 +33,13 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$requisition->description}}</td>
                                     <td>{{$requisition->name}}</td>
+                                    <td>Ksh {{$requisition->total}}</td>
                                     {{-- TODO--}}
                                     {{-- Include an if statement to check status and change badge color --}}
                                     <td><span class="badge text-bg-warning">{{$requisition->status}}</span></td>
                                     <td>
-                                        <button class="btn btn-info btn-sm">Show</button>
+                                        <a href="{{route('requisitions.show', $requisition->id)}}" class="btn btn-info btn-sm">Show</a>
+                                        <a href="{{route('requisitions.pdf', $requisition->id)}}" class="btn btn-primary btn-sm">Print</a>
                                     </td>
                                 </tr>
                             @endforeach

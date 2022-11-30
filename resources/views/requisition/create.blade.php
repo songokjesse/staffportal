@@ -11,6 +11,15 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         <h2>{{ __('My Requisitions') }}</h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('requisitions.index')}}" class="btn btn-success btn-sm" ><i class="fs-4 bi-journals"></i> Requisitions</a>
@@ -25,7 +34,7 @@
                                         <div class="row justify-content-between">
                                         <div class="col-4">
                                                         <label class="col-form-label">From:  </label>
-                                                        <select class="form-select" name="department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus>
+                                                        <select class="form-select" name="from_department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus required>
                                                             @foreach($departments as $department)
                                                                 <option value="{{$department->id}}">{{$department->name}}</option>
                                                             @endforeach
@@ -38,7 +47,7 @@
                                         </div>
                                           <div class="col-4">
                                               <label class="col-form-label">To:  </label>
-                                              <select class="form-select" name="department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus>
+                                              <select class="form-select" name="to_department_id" @error('department_id') is-invalid @enderror required autocomplete="department_id" autofocus required>
                                                   @foreach($departments as $department)
                                                       <option value="{{$department->id}}">{{$department->name}}</option>
                                                   @endforeach
@@ -54,14 +63,14 @@
 
                                         <div class="mt-3">
                                             <label>RE:  </label>
-                                            <input type="text" name="title" class="form-control"/>
+                                            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required/>
                                             <span style="color:red"> {{ $errors->has('title') ?  $errors->first('title') : '' }} </span>
 
                                         </div>
 
                                         <div class="form-group mt-3">
                                             <label>Description:</label>
-                                            <textarea class="form-control" @error('description') is-invalid @enderror name="description" autocomplete="description" autofocus ></textarea>
+                                            <textarea class="form-control" value="{{ old('description') }}" @error('description') is-invalid @enderror name="description" autocomplete="description" autofocus required></textarea>
                                             <span style="color:red"> {{ $errors->has('description') ?  $errors->first('description') : '' }} </span>
                                         </div>
 
@@ -78,16 +87,16 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" name="item_name[]" class="form-control"/>
+                                                    <input type="text" name="item_name[]" class="form-control" value="{{ old('total_amount') }} " required/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="item_quantity[]" class="form-control"/>
+                                                    <input type="text" name="item_quantity[]" class="form-control" required/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="unit_cost[]" class="form-control"/>
+                                                    <input type="text" name="unit_cost[]" class="form-control" required/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="total_cost[]" class="form-control"/>
+                                                    <input type="text" name="total_cost[]" class="form-control" required/>
                                                 </td>
                                                 <td>
                                                     <button type="button"  id="dynamic-ar" class="btn btn-sm btn-outline-secondary">Add More items</button>
@@ -98,7 +107,11 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td><b>Totals:</b></td>
-                                                <td></td>
+                                                <td>
+                                                    <input type="text" name="total_amount" id="total_amount" class="form-control" value="{{ old('total_amount') }}" required/>
+                                                    <span style="color:red"> {{ $errors->has('total_amount') ?  $errors->first('total_amount') : '' }} </span>
+
+                                                </td>
                                             </tr>
                                             <tbody>
 
@@ -123,10 +136,11 @@
         $("#dynamic-ar").click(function () {
             console.log('clicked')
         ++i;
-        $("#dynamicAddRemove").append('<tr><td> <input type="text" name="item_name[]" class="form-control"/></td>' +
+        $("#dynamicAddRemove").append('<tr><td> <input type="text" name="item_name[]" class="form-control" required/> ' +
+            '</td>' +
             '<td> <input type="text" name="item_quantity[]" class="form-control"/></td>'+
             '<td><input type="text" name="unit_cost[]" class="form-control"/></td>' +
-            '<td><input type="text" name="total_cost[]" class="form-control"/></td>' +
+            '<td><input type="text" id="amount" name="total_cost[]" class="form-control" /></td>' +
             '<td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
         );
         });
