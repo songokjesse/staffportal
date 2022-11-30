@@ -79,7 +79,7 @@ class RequisitionController extends Controller
         $req_assignment->save();
 
 
-        return redirect()->route('requisitions')
+        return redirect()->route('requisitions.index')
             ->with('status','Requisition Created successfully.');
     }
 
