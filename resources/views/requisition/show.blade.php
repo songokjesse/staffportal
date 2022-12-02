@@ -1,7 +1,7 @@
 @extends('layouts.auth_dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -64,6 +64,12 @@
                             </tbody>
 
                         </table>
+
+                            <div class="mt-5">
+                                <u>{{Auth::user()->name}}</u>
+                                <br/>
+                                <strong>{{$requisition[0]->from_department}} </strong>
+                            </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('requisitions.pdf', $requisition[0]->id)}}" class="btn btn-primary btn-sm"><i class="bi bi-printer"></i> Print Requisition</a>
                         </div>

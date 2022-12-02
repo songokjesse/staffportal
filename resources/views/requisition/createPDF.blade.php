@@ -16,6 +16,17 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid;
+        }
+        .department{
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
 </head>
 <body>
 <div id="app" class="bg-white">
@@ -28,30 +39,21 @@
 
     <hr class="mt-6 mb-2"/>
 
-
-    <div class="row">
-        <div class="col">
+    <div class="d-flex justify-content-between department">
+        <div>
             <strong>From: </strong>
             {{$requisition[0]->from_department}}
         </div>
-        <div class="col">
-        </div>
-        <div class="col">
+        <div>
             <strong>To:</strong>
             {{$to_department[0]->to_department_name}}
         </div>
     </div>
-    <table class="table table-borderless  table-responsive-sm">
-        <tr>
-            <td colspan="4"><strong>RE:</strong> <u>{{$requisition[0]->title}}</u></td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                {{$requisition[0]->description}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+    <p><strong>RE:</strong> <u>{{$requisition[0]->title}}</u></p>
+
+    <p>{{$requisition[0]->description}}</p>
+
 
     <table class="table table-responsive table-striped table-bordered">
         <thead>
@@ -83,6 +85,14 @@
         </tbody>
 
     </table>
+<br/>
+<br/>
+<br/>
+    <div class="mt-5">
+        <u>{{Auth::user()->name}}</u>
+        <br/>
+        <strong>{{$requisition[0]->from_department}} </strong>
+    </div>
 </div>
 </body>
 </html>
