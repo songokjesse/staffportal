@@ -20,8 +20,16 @@
                             <table class="table table-borderless">
                                 <tr>
                                     <td> <strong>From: </strong>{{$requisition[0]->from_department}}</td>
-                                    <td class="align-content-end"><strong>To:</strong>
-                                        {{$to_department[0]->to_department_name}}</td>
+                                    <td class="align-content-end">
+                                        <strong>Date:</strong>
+                                        {{Carbon\Carbon::parse($requisition[0]->created_at)->format('d-m-Y')}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>To:</strong>
+                                        {{$to_department[0]->to_department_name}}
+                                    </td>
                                 </tr>
                                 <tr>
                                    <td><strong>RE:</strong> <u>{{$requisition[0]->title}}</u></td>
@@ -65,7 +73,7 @@
 
                         </table>
 
-                            <div class="mt-5">
+                            <div class="mt-4">
                                 <u>{{Auth::user()->name}}</u>
                                 <br/>
                                 <strong>{{$requisition[0]->from_department}} </strong>

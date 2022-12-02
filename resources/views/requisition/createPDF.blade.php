@@ -30,8 +30,9 @@
 </head>
 <body>
 <div id="app" class="bg-white">
-    <div class="align-content-center">
-        <img src="{{public_path('pdf_logo.png')}}" class="rounded mx-auto d-block mt-2" alt="..." width="100" height="100">
+    <div style="text-align: center;" class="align-content-center">
+
+            <img src="{{public_path('pdf_logo.png')}}" class="rounded mx-auto d-block mt-2" alt="..." width="100" height="100">
         <h3 class="text-center mt-2">KOITALEL SAMOEI UNIVERSITY COLLEGE</h3>
         <h6 class="text-center mt-2">(A CONSTITUENT COLLEGE OF THE UNIVERSITY OF NAIROBI)</h6>
 
@@ -45,11 +46,14 @@
             {{$requisition[0]->from_department}}
         </div>
         <div>
-            <strong>To:</strong>
-            {{$to_department[0]->to_department_name}}
+            <strong> Date: </strong>{{Carbon\Carbon::parse($requisition[0]->created_at)->format('d-m-Y')}}
         </div>
-    </div>
 
+    </div>
+    <div>
+        <strong>To:</strong>
+        {{$to_department[0]->to_department_name}}
+    </div>
     <p><strong>RE:</strong> <u>{{$requisition[0]->title}}</u></p>
 
     <p>{{$requisition[0]->description}}</p>
@@ -86,8 +90,7 @@
 
     </table>
 <br/>
-<br/>
-<br/>
+<br>
     <div class="mt-5">
         <u>{{Auth::user()->name}}</u>
         <br/>

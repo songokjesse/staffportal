@@ -92,6 +92,7 @@ class RequisitionController extends Controller
                 'requisitions.title',
                 'requisitions.status',
                 'requisitions.id',
+                'requisitions.created_at',
                 'departments.name as from_department',
             )
             ->where('requisitions.id', '=', $id)
