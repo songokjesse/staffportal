@@ -30,7 +30,7 @@
 </head>
 <body>
 <div id="app" class="bg-white">
-    <div style="text-align: center;" class="align-content-center">
+    <div style="text-align: center;" >
 
             <img src="{{public_path('pdf_logo.png')}}" class="rounded mx-auto d-block mt-2" alt="..." width="100" height="100">
         <h3 class="text-center mt-2">KOITALEL SAMOEI UNIVERSITY COLLEGE</h3>
@@ -90,8 +90,7 @@
 
     </table>
 <br/>
-<br>
-    <div class="mt-5">
+    <div class="mt-3">
         <u>{{Auth::user()->name}}</u>
         <br/>
         <strong>{{$requisition[0]->from_department}} </strong>
