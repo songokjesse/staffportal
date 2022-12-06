@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
+use App\Http\Livewire\MakeRequisition;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,4 +55,6 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('/admin/users',  UserController::class);
     Route::resource('/admin/roles',  RolesController::class);
     Route::resource('/admin/permissions',  PermissionsController::class);
+
+//    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
 });

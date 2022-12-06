@@ -156,6 +156,9 @@ class RequisitionController extends Controller
         return $pdf->download('pdf_file.pdf');
     }
 
-
+    public function make_requisition(){
+        $departments = Department::all();
+        return view('requisition.make_requisition', compact('departments'));
+    }
 
 }
