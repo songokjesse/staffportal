@@ -56,5 +56,10 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('/admin/roles',  RolesController::class);
     Route::resource('/admin/permissions',  PermissionsController::class);
 
+    //site wide notification
+    Route::get('/admin/site-notification',function () {
+    return view('notification.index');
+    })->name('sitewide-notification');
+
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
 });

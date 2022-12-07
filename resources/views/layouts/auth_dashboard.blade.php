@@ -13,6 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('vendor/megaphone/css/megaphone.css') }}">
     @livewireStyles
 
     <!-- Scripts -->
@@ -40,6 +41,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"> <livewire:megaphone/></li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

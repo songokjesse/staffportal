@@ -65,6 +65,10 @@
                 <a href="{{route('permissions.index')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Permissions</span></a>
             </li>
+            <li>
+                <a href="{{route('sitewide-notification')}}" class="nav-link px-0 align-middle text-white">
+                    <i class="fs-4 bi-bell"></i> <span class="ms-1 d-none  d-sm-inline">Site Wide Notifications</span></a>
+            </li>
         </ul>
         <hr>
 

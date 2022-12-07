@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c8d890ee835225f598318d4012c9058",
+    "content-hash": "a42aa55457299ad10dd644219f9b9e6b",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2362,6 +2362,72 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.7.6"
             },
             "time": "2022-08-18T16:18:26+00:00"
+        },
+        {
+            "name": "mbarlow/megaphone",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikebarlow/megaphone.git",
+                "reference": "fca72b087e49ed0fbb3c403535317e61be3aa4c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikebarlow/megaphone/zipball/fca72b087e49ed0fbb3c403535317e61be3aa4c0",
+                "reference": "fca72b087e49ed0fbb3c403535317e61be3aa4c0",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^2.0",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "pestphp/pest-plugin-faker": "^1.0",
+                "pestphp/pest-plugin-livewire": "^1.0",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MBarlow\\Megaphone\\MegaphoneServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "MBarlow\\Megaphone\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Barlow",
+                    "email": "mike@mikebarlow.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "UI and admin for Laravel Notifications.",
+            "homepage": "https://github.com/mikebarlow/megaphone",
+            "keywords": [
+                "Bell Icon",
+                "announcements",
+                "laravel",
+                "livewire",
+                "notifications"
+            ],
+            "support": {
+                "issues": "https://github.com/mikebarlow/megaphone/issues",
+                "source": "https://github.com/mikebarlow/megaphone/tree/1.0.2"
+            },
+            "time": "2022-11-15T21:26:24+00:00"
         },
         {
             "name": "monolog/monolog",
