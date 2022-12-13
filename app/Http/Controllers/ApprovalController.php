@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Requisition;
+use App\Models\RequisitionAssignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApprovalController extends Controller
 {
     public function index()
     {
-//      get logged in user_id
-        $user_id = Auth::user()->id;
-//      get user department
-        $department_id = Profile::select('department_id')
-            ->where('user_id', $user_id )
-            ->first();
-        dd($department_id->department_id);
+        $assignment = DB::table('requisition_assignments')
+            ->join('profiles', 'requisition_assignments.department_id', '=', 'profiles.department_id')
+            ->where('profiles.user_id', Auth::user()->id)
+            ->pluck('requisition_id');
+
+        $requisitions = Requisition::with('department', 'user')->whereIn('id', $assignment )->get();
+       return view('requisition.approval.index', compact('requisitions'));
 
     }
 }

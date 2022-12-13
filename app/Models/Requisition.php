@@ -16,4 +16,12 @@ class Requisition extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function requisition_items(){
+        return $this->hasMany(RequisitionItem::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

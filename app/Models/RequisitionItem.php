@@ -9,4 +9,9 @@ class RequisitionItem extends Model
 {
     use HasFactory;
     protected $fillable = ['item_name', 'item_quantity','unit_cost','total_cost','requisition_id'];
+
+    public function requisition()
+    {
+        return $this->belongsTo(Requisition::class);
+    }
 }
