@@ -44,7 +44,9 @@
 
                                 </table>
                             @else
-                                I don't have any records!
+                                <h2 class="mt-3">
+                                    <span class="alert alert-info">No Requisitions Posted for Approval </span>
+                                </h2>
                             @endif
                     </div>
                 </div>
