@@ -22,4 +22,10 @@ class ApprovalController extends Controller
        return view('requisition.approval.index', compact('requisitions'));
 
     }
+
+    public function show($id)
+    {
+        $requisitions = Requisition::with('department', 'user', 'requisition_items')->where('id', $id )->get();
+        dd($requisitions);
+    }
 }
