@@ -47,7 +47,7 @@
                                 <hr>
                                 <div class="mt-3">
                                 <h2>
-                                    <span class="alert alert-warning alert-heading">No Requisitions Posted for Approval </span>
+                                    <span class="alert alert-warning">No Requisitions Posted for Approval </span>
                                 </h2>
                                 </div>
                             @endif
