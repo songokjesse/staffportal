@@ -46,7 +46,6 @@
                             @else
                                 <hr class="mb-3">
                             <br>
-                            <br>
                                 <div class="mt-3">
                                 <h2>
                                     <span class="alert alert-warning">No Requisitions Posted for Approval </span>
