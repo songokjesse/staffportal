@@ -46,8 +46,18 @@
                     <i class="fs-4 bi-house-gear"></i> <span class="ms-1 d-none  d-sm-inline">Departments</span></a>
             </li>
             <li>
-                <a href="{{route('requisitions.index')}}" class="nav-link px-0 align-middle text-white">
-                    <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none  d-sm-inline">Requisitions</span></a>
+{{--                <a href="{{route('requisitions.index')}}" class="nav-link px-0 align-middle text-white">--}}
+{{--                    <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none  d-sm-inline"></span></a>--}}
+                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+                    <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none text-white d-sm-inline text-white"> Requisitions</span> </a>
+                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="{{route('requisitions.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Requisitions </span> </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Approvals</span></a>
+                                    </li>
+                                </ul>
             </li>
             <li>
                 <a href="#" class="nav-link px-0 align-middle text-white">

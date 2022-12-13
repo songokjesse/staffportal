@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
@@ -44,6 +45,7 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/requisitions/create', [RequisitionController::class, 'create'])->name('requisitions.create');
     Route::post('/requisitions/store', [RequisitionController::class, 'store'])->name('requisitions.store');
     Route::post('/requisition_items/', [RequisitionItemController::class, 'store'])->name('requisition_items');
+    Route::get('/approvals', [ApprovalController::class, 'index'])->name('approvals.index');
 
 //    Admin
 
