@@ -44,8 +44,8 @@
 
                                 </table>
                             @else
-                                <h2 class="mt-6">
-                                    <span class="alert alert-warning alert-heading">No Requisitions Posted for Approval </span>
+                                <h2>
+                                    <span class="alert alert-warning alert-heading mt-6">No Requisitions Posted for Approval </span>
                                 </h2>
                             @endif
                     </div>
