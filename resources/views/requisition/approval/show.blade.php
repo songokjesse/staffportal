@@ -17,7 +17,7 @@
                                 <a href="{{route('approvals.index')}}"class="btn btn-warning btn-sm"><i class="bi bi-backspace"></i> Back</a>
                                 <button x-on:click="open = ! open" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> Show Requisition</button>
                                 <a href="{{route('requisitions.pdf', $requisitions[0]->id)}}" class="btn btn-success btn-sm"><i class="bi bi-printer"></i> Print</a>
-                                <hr class="mt-3 mb-3"/>
+                                <hr class="mt-3"/>
 
                                 <div x-show="open">
 
@@ -78,7 +78,22 @@
                                     </table>
                                 </div>
                             </div>
-                            <h3>Approval Comments</h3>
+                            <p>Comments</p>
+                            <form>
+                                <div class="mb-2">
+                                        <textarea class="form-control"></textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Assign: </label>
+                                        <select >
+                                            <option></option>
+                                        </select>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success btn-sm">Approve</button>
+                                    <button class="btn btn-danger btn-sm">Deny</button>
+                                </div>
+                            </form>
 
 
                     </div>
