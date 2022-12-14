@@ -40,7 +40,7 @@
                                     <td>
                                         <a href="{{route('requisitions.show', $requisition->id)}}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Show</a>
                                         <a href="{{route('requisitions.pdf', $requisition->id)}}" class="btn btn-success btn-sm"><i class="bi bi-printer"></i> Print</a>
-                                        <a href="{{route('requisitions.show', $requisition->id)}}" class="btn btn-primary btn-sm"><i class="bi bi-list-check"></i> Approvals </a>
+                                        <a href="{{route('approvals.show', $requisition->id)}}" class="btn btn-primary btn-sm"><i class="bi bi-list-check"></i> Approvals </a>
                                     </td>
                                 </tr>
                             @endforeach

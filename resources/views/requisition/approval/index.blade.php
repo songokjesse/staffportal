@@ -36,7 +36,7 @@
                                             <td>{{$requisition->user->name}}</td>
                                             <td><span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> {{$requisition->status}}</span></td>
                                             <td>
-                                                <a href="{{route('requisitions.show', $requisition->id)}}" class="btn btn-primary btn-sm"><i class="bi bi-list-check"></i> Approvals </a>
+                                                <a href="{{route('approvals.show', $requisition->id)}}" class="btn btn-primary btn-sm"><i class="bi bi-list-check"></i> Approvals </a>
                                             </td>
                                         </tr>
                                     @endforeach
