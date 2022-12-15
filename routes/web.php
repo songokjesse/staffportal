@@ -47,6 +47,7 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::post('/requisition_items/', [RequisitionItemController::class, 'store'])->name('requisition_items');
     Route::get('/approvals', [ApprovalController::class, 'index'])->name('approvals.index');
     Route::get('/approvals/{id}', [ApprovalController::class, 'show'])->name('approvals.show');
+    Route::post('/approvals/', [ApprovalController::class, 'store'])->name('approvals.store');
 
 //    Admin
 

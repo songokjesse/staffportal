@@ -79,21 +79,43 @@
                                 </div>
                             </div>
                             <p>Comments</p>
-                            <form>
+                            <form action="{{route('approvals.store')}}" method="POST">
+                                @csrf
+                                @method('POST')
                                 <div class="mb-2">
-                                        <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Assign: </label>
-                                        <select >
-                                            <option></option>
-                                        </select>
+                                    <input type="hidden" name="requisition_id" value="{{$requisitions[0]->id}}">
+                                        <textarea class="form-control" name="comment"></textarea>
                                 </div>
                                 <div>
-                                    <button class="btn btn-success btn-sm">Approve</button>
-                                    <button class="btn btn-danger btn-sm">Deny</button>
+                                    <button class="btn btn-success btn-sm" name="status" type="submit" value="Approved">Approve</button>
+                                    <button class="btn btn-danger btn-sm" name="status" type="submit" value="Rejected">Reject</button>
                                 </div>
                             </form>
+
+                        <table class="table table-borderless table-striped mt-3">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Comments</th>
+                                <th>By</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($comments as $comment)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$comment->comment}}</td>
+                                    <td></td>
+                                    <td>{{$comment->created_at}}</td>
+                                    <td></td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
 
 
                     </div>
