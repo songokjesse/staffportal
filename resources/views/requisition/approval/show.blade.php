@@ -79,20 +79,9 @@
                                 </div>
                             </div>
                             <p>Comments</p>
-                            <form action="{{route('approvals.store')}}" method="POST">
-                                @csrf
-                                @method('POST')
-                                <div class="mb-2">
-                                    <input type="hidden" name="requisition_id" value="{{$requisitions[0]->id}}">
-                                        <textarea class="form-control" name="comment"></textarea>
-                                </div>
-                                <div>
-                                    <button class="btn btn-success btn-sm" name="status" type="submit" value="Approved">Approve</button>
-                                    <button class="btn btn-danger btn-sm" name="status" type="submit" value="Rejected">Reject</button>
-                                </div>
-                            </form>
 
-                        <table class="table table-borderless table-striped mt-3">
+
+                        <table class="table table-borderless table-striped mt-1 ">
                             <thead>
                             <tr>
                                 <th></th>
@@ -107,7 +96,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$comment->comment}}</td>
-                                    <td></td>
+                                    <td>{{$comment->user->name}}</td>
                                     <td>{{$comment->created_at}}</td>
                                     <td></td>
 
@@ -116,6 +105,18 @@
                             </tbody>
                         </table>
 
+                            <form action="{{route('approvals.store')}}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <div class="mb-2">
+                                    <input type="hidden" name="requisition_id" value="{{$requisitions[0]->id}}">
+                                    <textarea class="form-control" name="comment"></textarea>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success btn-sm" name="status" type="submit" value="Approved">Approve</button>
+                                    <button class="btn btn-danger btn-sm" name="status" type="submit" value="Rejected">Reject</button>
+                                </div>
+                            </form>
 
 
                     </div>

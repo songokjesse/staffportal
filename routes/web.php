@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\LeaveCategoryController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
@@ -48,8 +49,12 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/approvals', [ApprovalController::class, 'index'])->name('approvals.index');
     Route::get('/approvals/{id}', [ApprovalController::class, 'show'])->name('approvals.show');
     Route::post('/approvals/', [ApprovalController::class, 'store'])->name('approvals.store');
-
 //    Admin
+
+    //leave Category
+    Route::get('/leave_category', [LeaveCategoryController::class, 'index'])->name('leaveCategory.index');
+    Route::get('/leave_category/create', [LeaveCategoryController::class, 'create'])->name('leaveCategory.create');
+    Route::post('/leave_category/store', [LeaveCategoryController::class, 'store'])->name('leaveCategory.store');
 
 //    Departments
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');

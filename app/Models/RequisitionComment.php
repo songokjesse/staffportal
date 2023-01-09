@@ -9,4 +9,9 @@ class RequisitionComment extends Model
 {
     use HasFactory;
     protected $fillable = ['comment', 'requisition_id', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

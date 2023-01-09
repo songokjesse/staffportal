@@ -50,7 +50,7 @@
 {{--                    <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none  d-sm-inline"></span></a>--}}
                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-journals"></i> <span class="ms-1 d-none text-white d-sm-inline text-white"> Requisitions</span> </a>
-                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li class="w-100">
                                         <a href="{{route('requisitions.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Requisitions </span> </a>
                                     </li>
@@ -60,8 +60,19 @@
                                 </ul>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-white">
+                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Leave</span></a>
+                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                    <li class="w-100">
+                        <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
+                    </li>
+                    <li>
+                        <a href="{{route('approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Leave</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Leave Approvals</span></a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
