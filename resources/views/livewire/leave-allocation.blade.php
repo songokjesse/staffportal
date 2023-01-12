@@ -1,7 +1,7 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 
-    <div class="mt-2">
+    <div class="mt-2 mb-3">
         <div class="row g-3">
             <div class="col-sm-7">
                 <div class="input-group">
@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-    <hr>
 
     <table class="table table-bordered table-striped">
         <thead>
