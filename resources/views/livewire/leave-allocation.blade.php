@@ -19,6 +19,7 @@
                     <div class="input-group-text">Year</div>
                     <select wire:model="year" class="form-control">
                         <option disabled></option>
+                        <option>2023</option>
                         <option>2022</option>
                         <option>2021</option>
                         <option>2020</option>
@@ -40,11 +41,12 @@
         </tr>
         </thead>
         <tbody>
+
         @foreach($leave_allocations as $leave_allocation)
         <tr>
-            <td>{{$loop->iterations}}</td>
-            <td>{{$leave_allocation->user_id}}</td>
-            <td>{{$leave_allocation->leave_categories_is}}</td>
+            <td>{{$loop->iteration}}</td>
+            <td>{{$leave_allocation->user->name}}</td>
+            <td>{{$leave_allocation->leaveType->name}}</td>
             <td>{{$leave_allocation->days}}</td>
             <td>{{$leave_allocation->year}}</td>
             <td></td>

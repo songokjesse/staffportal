@@ -9,4 +9,9 @@ class LeaveCategory extends Model
 {
     use HasFactory;
     protected $fillable =['name', 'days'];
+
+    public function leave_allocations()
+    {
+        return $this->hasMany(LeaveAllocation::class);
+    }
 }

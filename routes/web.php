@@ -59,7 +59,8 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
     //leave Allocation
     Route::get('/leave_allocation', [LeaveAllocationController::class, 'index'])->name('leave_allocation.index');
-    Route::get('/leave_allocation/create', [LeaveAllocationController::class, 'index'])->name('leave_allocation.create');
+    Route::get('/leave_allocation/create', [LeaveAllocationController::class, 'create'])->name('leave_allocation.create');
+    Route::post('/leave_allocation/', [LeaveAllocationController::class, 'store'])->name('leave_allocation.store');
 
 //    Departments
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
