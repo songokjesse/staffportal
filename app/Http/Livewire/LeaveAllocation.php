@@ -18,7 +18,7 @@ class LeaveAllocation extends Component
     public function render(): Factory|View|Application
     {
         return view('livewire.leave-allocation', [
-            'leave_allocations' => \App\Models\LeaveAllocation::search('user_id', $this->name)
+            'leave_allocations' => \App\Models\LeaveAllocation::search('user_id', $this->name)->with('user', 'leaveType')
                 ->search('year', $this->year)->paginate(15),
             'users' => User::all()
         ]);
