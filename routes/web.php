@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\LeaveAllocationController;
 use App\Http\Controllers\Admin\LeaveCategoryController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
-use App\Http\Livewire\MakeRequisition;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,10 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_category', [LeaveCategoryController::class, 'index'])->name('leaveCategory.index');
     Route::get('/leave_category/create', [LeaveCategoryController::class, 'create'])->name('leaveCategory.create');
     Route::post('/leave_category/store', [LeaveCategoryController::class, 'store'])->name('leaveCategory.store');
+
+    //leave Allocation
+    Route::get('/leave_allocation', [LeaveAllocationController::class, 'index'])->name('leave_allocation.index');
+    Route::get('/leave_allocation/create', [LeaveAllocationController::class, 'index'])->name('leave_allocation.create');
 
 //    Departments
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
