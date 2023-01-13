@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
@@ -61,7 +62,10 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_allocation', [LeaveAllocationController::class, 'index'])->name('leave_allocation.index');
     Route::get('/leave_allocation/create', [LeaveAllocationController::class, 'create'])->name('leave_allocation.create');
     Route::post('/leave_allocation/', [LeaveAllocationController::class, 'store'])->name('leave_allocation.store');
-
+//    leave Apllication
+    Route::get('/leave_application', [LeaveApplicationController::class, 'index'])->name('leave_application.index');
+    Route::get('/leave_application/create', [LeaveApplicationController::class, 'create'])->name('leave_application.create');
+    Route::post('/leave_application', [LeaveApplicationController::class, 'store'])->name('leave_application.store');
 //    Departments
     Route::get('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'index'])->name('assign_staff_to_department');
     Route::post('/admin/assign_staff_to_department',  [StaffDepartmentController::class, 'store'])->name('save_assigned_staff_to_department');

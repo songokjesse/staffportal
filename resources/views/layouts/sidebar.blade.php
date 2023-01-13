@@ -65,7 +65,7 @@
                 <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 
                     <li>
-                        <a href="{{route('approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Leave</span></a>
+                        <a href="{{route('leave_application.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Leave</span></a>
                     </li>
                     <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
