@@ -67,6 +67,9 @@
                     <li>
                         <a href="{{route('leave_application.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> My Leave</span></a>
                     </li>
+                    <li>
+                        <a href="{{route('leave_recommendation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Recommendation</span></a>
+                    </li>
                     <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
                     </li>
