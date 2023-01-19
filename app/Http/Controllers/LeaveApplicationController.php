@@ -26,5 +26,16 @@ class LeaveApplicationController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'leave_categories_id' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'days' => 'required',
+            'duties_by_user_id' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'recommend_user_id' => 'required'
+        ]);
+        dd($request->all());
     }
 }
