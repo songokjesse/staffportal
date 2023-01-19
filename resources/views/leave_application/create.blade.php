@@ -75,7 +75,7 @@
                                             <option value="{{$user->id}}"> {{$user->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('title')
+                                    @error('recommend_user_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

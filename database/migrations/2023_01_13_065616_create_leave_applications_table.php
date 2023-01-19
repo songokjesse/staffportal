@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->bigInteger('days');
             $table->boolean('status');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->unsignedBigInteger('duties_by_user_id');
             $table->string('phone');
             $table->string('email');
