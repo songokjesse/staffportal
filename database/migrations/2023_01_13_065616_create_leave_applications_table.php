@@ -22,6 +22,10 @@ return new class extends Migration
             $table->bigInteger('days');
             $table->boolean('status');
             $table->text('comments');
+            $table->unsignedBigInteger('duties_by_user_id');
+            $table->string('phone');
+            $table->string('email');
+            $table->foreign('duties_by_user_id')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('leave_categories_id')->references('id')->on('leave_categories');
             $table->timestamps();
