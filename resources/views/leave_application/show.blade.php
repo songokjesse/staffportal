@@ -16,36 +16,50 @@
                             <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
                         </div>
 
-{{--                        <table class="mt-2 mt-3 table table-striped table-bordered">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th>#</th>--}}
-{{--                                <th>Leave</th>--}}
-{{--                                <th>Start Date</th>--}}
-{{--                                <th>End Date</th>--}}
-{{--                                <th>Days</th>--}}
-{{--                                <th>Status</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-{{--                            @foreach($leaves as $leave )--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$loop->iteration}}</td>--}}
-{{--                                    <td>{{$leave->leave_category->name}}</td>--}}
-{{--                                    <td>{{$leave->start_date}}</td>--}}
-{{--                                    <td>{{$leave->end_date}}</td>--}}
-{{--                                    <td>{{$leave->days}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @if($leave->status === True)--}}
-{{--                                            '<span class="badge text-bg-success"><i class="bi bi-arrow-repeat"></i> Successfull </span>--}}
-{{--                                        @endif--}}
-{{--                                        @if($leave->status === False)--}}
-{{--                                            <span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> Pending </span>--}}
-{{--                                    @endif--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-{{--                            </tbody>--}}
-{{--                        </table>--}}
+                            <h1>Leave Application Details</h1>
+                        <table class="mt-2 mt-3 table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Leave</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Days</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{$leaves[0]->leave_category}}</td>
+                                    <td>{{$leaves[0]->start_date}}</td>
+                                    <td>{{$leaves[0]->end_date}}</td>
+                                    <td>{{$leaves[0]->days}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                            <h1>HOD Recommendation</h1>
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Recommended By</th>
+                                <th>Recommendation</th>
+                                <th>Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{$leaves[0]->hod}}</td>
+                                <td>
+                                    @if($leaves[0]->recommendation === True)<span class="badge text-bg-success"> Recommended </span>@endif
+                                    @if($leaves[0]->not_recommended === True)<span class="badge text-bg-warning"> Not Recommended </span>@endif
+                                </td>
+                                <td>{{$leaves[0]->date_recommended}}</td>
+                                <td>{{$leaves[0]->recommendation_comments}}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
 
                     </div>
                 </div>

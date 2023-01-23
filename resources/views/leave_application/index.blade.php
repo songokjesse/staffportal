@@ -42,6 +42,10 @@
                                     @if($leave->status === False)
                                         <span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> Pending </span>
                                     @endif
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-dark" href="{{route('leave_application.show', $leave->id)}}">Show</a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

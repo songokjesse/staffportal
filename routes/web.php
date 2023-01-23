@@ -67,7 +67,7 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_application', [LeaveApplicationController::class, 'index'])->name('leave_application.index');
     Route::get('/leave_application/create', [LeaveApplicationController::class, 'create'])->name('leave_application.create');
     Route::post('/leave_application', [LeaveApplicationController::class, 'store'])->name('leave_application.store');
-    Route::post('/leave_application/{id}', [LeaveApplicationController::class, 'show'])->name('leave_application.show');
+    Route::get('/leave_application/{id}', [LeaveApplicationController::class, 'show'])->name('leave_application.show');
 
 
 //    leave Recommendation
