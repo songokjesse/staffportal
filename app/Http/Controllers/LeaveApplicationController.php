@@ -83,6 +83,7 @@ class LeaveApplicationController extends Controller
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
             ->where('leave_recommendations.user_id','=' ,Auth::user()->id)
+            ->where('leave_applications.id','=' ,$id)
             ->select(
                 'leave_categories.name as leave_category',
                 'leave_applications.start_date',
