@@ -29,12 +29,12 @@
                             @foreach($recommendations as $recommendation )
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$recommendation->user->name}}</td>
-                                    <td>{{$recommendation->leave_application->leave_category->name}}</td>
-                                    <td>{{$recommendation->leave_application->days}}</td>
-                                    <td>{{$recommendation->leave_application->user->name}}</td>
-                                    <td>{{$recommendation->leave_application->start_date}}</td>
-                                    <td>{{$recommendation->leave_application->end_date}}</td>
+                                    <td>{{$recommendation->applicant_name}}</td>
+                                    <td>{{$recommendation->leave_category}}</td>
+                                    <td>{{$recommendation->days}}</td>
+                                    <td>{{$recommendation->left_in_charge}}</td>
+                                    <td>{{$recommendation->start_date}}</td>
+                                    <td>{{$recommendation->end_date}}</td>
                                     <td>
                                         <a href="{{route('leave_recommendation.recommended', $recommendation->id)}}" class="btn btn-sm btn-primary">Recommend</a>
                                         <a href="{{route('leave_recommendation.not_recommended', $recommendation->id)}}" class="btn btn-sm btn-danger">Not Recommended</a>
