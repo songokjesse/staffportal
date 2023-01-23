@@ -28,11 +28,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    {{dd($leaves)}}
-{{--                                    <td>{{$leaves->leave_category}}</td>--}}
-{{--                                    <td>{{$leaves[0]->start_date}}</td>--}}
-{{--                                    <td>{{$leaves[0]->end_date}}</td>--}}
-{{--                                    <td>{{$leaves[0]->days}}</td>--}}
+                                    <td>{{$leaves[0]->leave_category}}</td>
+                                    <td>{{$leaves[0]->start_date}}</td>
+                                    <td>{{$leaves[0]->end_date}}</td>
+                                    <td>{{$leaves[0]->days}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -49,15 +48,15 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            <tr>--}}
-{{--                                <td>{{$leaves[0]->hod}}</td>--}}
-{{--                                <td>--}}
-{{--                                    @if($leaves[0]->recommendation === True)<span class="badge text-bg-success"> Recommended </span>@endif--}}
-{{--                                    @if($leaves[0]->not_recommended === True)<span class="badge text-bg-warning"> Not Recommended </span>@endif--}}
-{{--                                </td>--}}
-{{--                                <td>{{$leaves[0]->date_recommended}}</td>--}}
-{{--                                <td>{{$leaves[0]->recommendation_comments}}</td>--}}
-{{--                            </tr>--}}
+                            <tr>
+                                <td>{{$leaves[0]->hod}}</td>
+                                <td>
+                                    @if($leaves[0]->recommendation === True)<span class="badge text-bg-success"> Recommended </span>@endif
+                                    @if($leaves[0]->not_recommended === True)<span class="badge text-bg-warning"> Not Recommended </span>@endif
+                                </td>
+                                <td>{{$leaves[0]->date_recommended}}</td>
+                                <td>{{$leaves[0]->recommendation_comments}}</td>
+                            </tr>
                             </tbody>
 
                         </table>
