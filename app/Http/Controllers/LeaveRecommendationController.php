@@ -53,7 +53,7 @@ class LeaveRecommendationController extends Controller
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
             'Your Leave Application has been recommended by '.Auth::user()->name, // Notification Body
-            env('APP_URL', 'http://localhost').'/leave_application/'.$id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            env('APP_URL', 'http://localhost').'/leave_application/'.$recommendation->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
@@ -67,21 +67,21 @@ class LeaveRecommendationController extends Controller
     public function not_recommended(Request $request,$id):  RedirectResponse
     {
         $recommendation = LeaveRecommendation::find($id);
-        $recommendation->not_recommended = True;
-        $recommendation->save();
-
-        $notification = new Important(
-            'Leave Application Recommendation', // Notification Title
-            'Your Leave Application has been rejected by '.Auth::user()->name, // Notification Body
-            env('APP_URL', 'http://localhost').'/leave_application/'.$id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
-//            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
-        );
-
-        $user = User::find(1);
-        $user->notify($notification);
-
-        return redirect()->route('leave_recommendation.index')
-            ->with('status','Leave Recommendation Submitted (Not Recommended) successfully.');
+//        $recommendation->not_recommended = True;
+//        $recommendation->save();
+//
+//        $notification = new Important(
+//            'Leave Application Recommendation', // Notification Title
+//            'Your Leave Application has been rejected by '.Auth::user()->name, // Notification Body
+//            env('APP_URL', 'http://localhost').'/leave_application/'.$recommendation->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+////            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
+//        );
+//
+//        $user = User::find(1);
+//        $user->notify($notification);
+//
+//        return redirect()->route('leave_recommendation.index')
+//            ->with('status','Leave Recommendation Submitted (Not Recommended) successfully.');
     }
 
 }
