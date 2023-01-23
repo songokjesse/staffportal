@@ -17,8 +17,12 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>User</th>
+                                <th>Name</th>
                                 <th>Leave</th>
+                                <th>Days Applied</th>
+                                <th>Left In-charge</th>
+                                <th>From</th>
+                                <th>To</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -27,8 +31,13 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$recommendation->user->name}}</td>
                                     <td>{{$recommendation->leave_application->leave_category->name}}</td>
+                                    <td>{{$recommendation->leave_application->days}}</td>
+                                    <td>{{$recommendation->leave_application->user->name}}</td>
+                                    <td>{{$recommendation->leave_application->start_date}}</td>
+                                    <td>{{$recommendation->leave_application->end_date}}</td>
                                     <td>
-                                        <a href="{{route('leave_recommendation.show', $recommendation->id)}}" class="btn btn-sm btn-primary">Recommend</a>
+                                        <a href="{{route('leave_recommendation.recommended', $recommendation->id)}}" class="btn btn-sm btn-primary">Recommend</a>
+                                        <a href="{{route('leave_recommendation.not_recommended', $recommendation->id)}}" class="btn btn-sm btn-danger">Not Recommended</a>
                                     </td>
                                 </tr>
                             @endforeach
