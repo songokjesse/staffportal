@@ -51,8 +51,9 @@
                             <tr>
                                 <td>{{$leaves[0]->hod}}</td>
                                 <td>
-                                    @if($leaves[0]->recommendation === True)<span class="badge text-bg-success"> Recommended </span>@endif
-                                    @if($leaves[0]->not_recommended === True)<span class="badge text-bg-warning"> Not Recommended </span>@endif
+                                    @if($leaves[0]->recommendation === True and $leaves[0]->not_recommended === False )<span class="badge text-bg-success"> Recommended </span>@endif
+                                    @if($leaves[0]->not_recommended === True and $leaves[0]->recommendation === False )<span class="badge text-bg-danger"> Not Recommended </span>@endif
+                                    @if($leaves[0]->not_recommended === False and $leaves[0]->recommendation === False )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
                                 </td>
                                 <td>{{$leaves[0]->date_recommended}}</td>
                                 <td>{{$leaves[0]->recommendation_comments}}</td>
