@@ -9,6 +9,7 @@ use App\Models\LeaveRecommendation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use MBarlow\Megaphone\Types\Important;
 use SebastianBergmann\Type\FalseType;
 
 class LeaveApplicationController extends Controller
@@ -56,6 +57,17 @@ class LeaveApplicationController extends Controller
         $recommendation->leave_application_id = $leave_applicaiton->id;
         $recommendation->recommendation = False;
         $recommendation->save();
+
+        $notification = new Important(
+            'Leave Application', // Notification Title
+            'An application for Leave has been made by '.Auth::user()->name. 'You have been selected as the HOD to recommend or Not recommend the Leave Application ', // Notification Body
+            'http://'. env('APP_URL', 'http://localhost').'/leave_recommendation/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+//            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
+        );
+
+        $user = User::find(1);
+        $user->notify($notification);
+
         return redirect()->route('leave_application.index')
             ->with('status','Leave Application Submitted successfully.');
     }
