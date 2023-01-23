@@ -36,7 +36,7 @@
                                     <td>{{$recommendation->start_date}}</td>
                                     <td>{{$recommendation->end_date}}</td>
                                     <td>
-                                        <a href="{{route('leave_recommendation.recommended', $recommendation->id)}}" class="btn btn-sm btn-primary">Recommend</a>
+                                        <a href="{{route('leave_recommendation.recommended', $recommendation->id)}}" class="btn btn-sm btn-success">Recommended</a>
                                         <a href="{{route('leave_recommendation.not_recommended', $recommendation->id)}}" class="btn btn-sm btn-danger">Not Recommended</a>
                                     </td>
                                 </tr>
