@@ -59,4 +59,9 @@ class LeaveApplicationController extends Controller
         return redirect()->route('leave_application.index')
             ->with('status','Leave Application Submitted successfully.');
     }
+
+    public function show($id)
+    {
+
+    }
 }

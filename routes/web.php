@@ -67,12 +67,13 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_application', [LeaveApplicationController::class, 'index'])->name('leave_application.index');
     Route::get('/leave_application/create', [LeaveApplicationController::class, 'create'])->name('leave_application.create');
     Route::post('/leave_application', [LeaveApplicationController::class, 'store'])->name('leave_application.store');
+    Route::post('/leave_application/{id}', [LeaveApplicationController::class, 'show'])->name('leave_application.show');
 
 
 //    leave Recommendation
     Route::get('/leave_recommendation', [LeaveRecommendationController::class, 'index'])->name('leave_recommendation.index');
-    Route::get('/leave_recommendation/recommend/{id}', [LeaveRecommendationController::class, 'recommended'])->name('leave_recommendation.recommended');
-    Route::get('/leave_recommendation/not_recommended/{id}', [LeaveRecommendationController::class, 'not_recommended'])->name('leave_recommendation.not_recommended');
+    Route::post('/leave_recommendation/recommend/{id}', [LeaveRecommendationController::class, 'recommended'])->name('leave_recommendation.recommended');
+    Route::post('/leave_recommendation/not_recommended/{id}', [LeaveRecommendationController::class, 'not_recommended'])->name('leave_recommendation.not_recommended');
 
 
 //    Departments

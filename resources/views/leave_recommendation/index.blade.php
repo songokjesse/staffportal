@@ -23,6 +23,7 @@
                                 <th>Left In-charge</th>
                                 <th>From</th>
                                 <th>To</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,8 +37,15 @@
                                     <td>{{$recommendation->start_date}}</td>
                                     <td>{{$recommendation->end_date}}</td>
                                     <td>
-                                        <a href="{{route('leave_recommendation.recommended', $recommendation->id)}}" class="btn btn-sm btn-success">Recommended</a>
-                                        <a href="{{route('leave_recommendation.not_recommended', $recommendation->id)}}" class="btn btn-sm btn-danger">Not Recommended</a>
+                                        <form action="{{ route('leave_recommendation.recommended',$recommendation->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <button class="btn btn-sm btn-success">Recommended</button>
+                                        </form>
+
+                                        <form action="{{ route('leave_recommendation.not_recommended',$recommendation->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger">Not Recommended</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,3 +59,23 @@
     </div>
 @endsection
 
+{{--@section('scripts')--}}
+{{--    <script type="text/javascript">--}}
+{{--        import swal from 'sweetalert';--}}
+{{--        window.deleteConfirm = function (e) {--}}
+{{--            e.preventDefault();--}}
+{{--            var form = e.target.form;--}}
+{{--            swal({--}}
+{{--                title: "Are you sure you want to delete?",--}}
+{{--                icon: "warning",--}}
+{{--                buttons: true,--}}
+{{--                dangerMode: true,--}}
+{{--            })--}}
+{{--                .then((willDelete) => {--}}
+{{--                    if (willDelete) {--}}
+{{--                        form.submit();--}}
+{{--                    }--}}
+{{--                });--}}
+{{--        }--}}
+{{--    </script>--}}
+{{--@endsection--}}
