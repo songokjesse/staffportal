@@ -22,7 +22,7 @@
                                     <th>#</th>
                                     <th>Name</th>
 {{--                                    <th>Days</th>--}}
-                                    <th></th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,7 +31,9 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$category->name}}</td>
 {{--                                        <td>{{$category->days}}</td>--}}
-                                        <td></td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

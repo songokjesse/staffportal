@@ -31,15 +31,17 @@
                                             </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label>Days</label>
-                                            <input type="number" name="days" class="form-control" placeholder="Leave Days"  @error('days') is-invalid @enderror  value="{{ old('days') }}" required autocomplete="days">
-                                            @error('days')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>Days</label>--}}
+{{--                                            <input type="number" name="days" class="form-control" placeholder="Leave Days"  @error('days') is-invalid @enderror  value="{{ old('days') }}" required autocomplete="days">--}}
+{{--                                            @error('days')--}}
+{{--                                            <span class="invalid-feedback" role="alert">--}}
+{{--                                                <strong>{{ $message }}</strong>--}}
+{{--                                            </span>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
+                                      <input type="hidden" name="days" class="form-control" placeholder="Leave Days" value="1">
+
                                     </div>
 
                                 <div class="card-footer">

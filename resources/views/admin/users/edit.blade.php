@@ -54,6 +54,17 @@
                                     @endif
                                 </div>
                                 <div >
+                                    <label for="username" class="form-label">PF Number</label>
+                                    <input value="{{ $user->pf }}"
+                                           type="text"
+                                           class="form-control"
+                                           name="pf"
+                                           placeholder="PF Number" required>
+                                    @if ($errors->has('pf'))
+                                        <span class="text-danger text-left">{{ $errors->first('pf') }}</span>
+                                    @endif
+                                </div>
+                                <div >
                                     <label for="role" class="form-label">Role</label>
                                     <select class="form-control"
                                             name="role" required>

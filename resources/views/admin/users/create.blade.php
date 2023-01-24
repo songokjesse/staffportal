@@ -53,6 +53,33 @@
                                         <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
                                     @endif
                                 </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">PF Number</label>
+                                    <input value="{{ old('pf') }}"
+                                           type="text"
+                                           class="form-control"
+                                           name="pf"
+                                           placeholder="PF Number" required>
+                                    @if ($errors->has('pf'))
+                                        <span class="text-danger text-left">{{ $errors->first('pf') }}</span>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Department</label>
+                                    <select
+                                           class="form-control"
+                                           name="department_id"
+                                          required
+                                    >
+                                        <option selected disabled> Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}"> {{$department->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('department_id'))
+                                        <span class="text-danger text-left">{{ $errors->first('department_id') }}</span>
+                                    @endif
+                                </div>
 
                                 <button type="submit" class="btn btn-primary">Save user</button>
                                 <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>

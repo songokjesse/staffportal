@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -31,15 +33,14 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $departments = Department::all();
+        return view('admin.users.create', compact('departments'));
     }
 
     /**
      * Store a newly created user
      *
      * @param User $user
-     * @param StoreUserRequest $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(User $user, Request $request)
@@ -48,14 +49,20 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'pf' => ['required', 'unique:profiles'],
+            'department_id' => ['required'],
         ]);
 
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
-        $user->create(array_merge($request->all(), [
+        $profile = $user->create(array_merge($request->all(), [
             'password' => 'staff2022'
         ]));
-
+        Profile::create([
+            'user_id' => $profile->id,
+            'pf' => $request['pf'],
+            'department_id' => $request['department_id'],
+        ]);
         return redirect()->route('users.index')
             ->withSuccess(__('User created successfully.'));
     }
