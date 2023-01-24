@@ -64,7 +64,7 @@ class LeaveApplicationController extends Controller
 
         $notification = new Important(
             'Leave Application', // Notification Title
-            'An application for Leave has been made by '.Auth::user()->name. 'You have been selected as the HOD to recommend or Not recommend the Leave Application ', // Notification Body
+            'An application for Leave has been made by '.Auth::user()->name, // Notification Body
             'http://'. env('APP_URL', 'http://localhost').'/leave_recommendation/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );

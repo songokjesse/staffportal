@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LeaveApplication;
 use App\Models\LeaveRecommendation;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -69,6 +70,9 @@ class LeaveRecommendationController extends Controller
         $recommendation = LeaveRecommendation::find($id);
         $recommendation->not_recommended = True;
         $recommendation->save();
+
+        $leave_application = LeaveApplication::find($recommendation->leave_application_id);
+        $leave_application->
 
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
