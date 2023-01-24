@@ -33,6 +33,7 @@
                     <li>
                         <a href="{{route('leave_recommendation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Recommendation</span></a>
                     </li>
+                    @hasrole('Registrar Administration')
                     <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
                     </li>
@@ -45,9 +46,10 @@
                     <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Reports </span> </a>
                     </li>
+                    @endhasrole()
                 </ul>
             </li>
-{{--            @role('Admin')--}}
+            @role('Admin')
             <li>
                 <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Users</span></a>
@@ -64,7 +66,7 @@
                 <a href="{{route('sitewide-notification')}}" class="nav-link px-0 align-middle text-white">
                     <i class="fs-4 bi-bell"></i> <span class="ms-1 d-none  d-sm-inline">Site Wide Notifications</span></a>
             </li>
-{{--            @endrole()--}}
+            @endrole()
         </ul>
         <hr>
 
