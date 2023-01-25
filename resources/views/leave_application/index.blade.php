@@ -36,11 +36,14 @@
                                 <td>{{$leave->end_date}}</td>
                                 <td>{{$leave->days}}</td>
                                 <td>
-                                    @if($leave->status === True)
-                                        '<span class="badge text-bg-success"><i class="bi bi-arrow-repeat"></i> Successfull </span>
+                                    @if($leave->state === "Application")
+                                        <span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> Application </span>
                                     @endif
-                                    @if($leave->status === False)
-                                        <span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> Pending </span>
+                                    @if($leave->state === "Recommended")
+                                        <span class="badge text-bg-success"><i class="bi bi-arrow-repeat"></i> Recommended</span>
+                                    @endif
+                                    @if($leave->state === "Not Recommended")
+                                        <span class="badge text-bg-danger"><i class="bi bi-sign-stop"></i> Not Recommended</span>
                                     @endif
                                 </td>
                                 <td>

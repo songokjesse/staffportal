@@ -51,6 +51,10 @@ class LeaveRecommendationController extends Controller
       $recommendation->recommendation = True;
       $recommendation->save();
 
+        $leave_application = LeaveApplication::find($recommendation->leave_application_id);
+        $leave_application->state = "Recommended";
+        $leave_application->save();
+
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
             'Your Leave Application has been recommended by '.Auth::user()->name, // Notification Body
@@ -72,7 +76,8 @@ class LeaveRecommendationController extends Controller
         $recommendation->save();
 
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);
-        $leave_application->
+        $leave_application->state = "Not Recommended";
+        $leave_application->save();
 
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
