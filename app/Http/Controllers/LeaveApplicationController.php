@@ -20,7 +20,7 @@ class LeaveApplicationController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $leaves = LeaveApplication::where('user_id', Auth::user()->id)->get();
+        $leaves = LeaveApplication::where('user_id', Auth::user()->id)->orderBy('state','asc')->get();
         return view('leave_application.index', compact('leaves'));
     }
 
@@ -54,6 +54,7 @@ class LeaveApplicationController extends Controller
         $leave_applicaiton->phone = $request->phone;
         $leave_applicaiton->email = $request->email;
         $leave_applicaiton->status = False;
+        $leave_applicaiton->state = "Application";
         $leave_applicaiton->save();
 
         $recommendation = new LeaveRecommendation();
@@ -89,6 +90,8 @@ class LeaveApplicationController extends Controller
                 'leave_applications.start_date',
                 'leave_applications.end_date',
                 'leave_applications.days',
+                'leave_applications.phone',
+                'leave_applications.email',
                 'leave_recommendations.recommendation',
                 'leave_recommendations.not_recommended',
                 'leave_recommendations.updated_at as date_recommended',

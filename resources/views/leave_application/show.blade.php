@@ -15,8 +15,9 @@
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
                         </div>
+                            <hr class="mt-2 mb-3"/>
 
-                            <h1>Leave Application Details</h1>
+                            <h2>Leave Application Details</h2>
                         <table class="mt-2 mt-3 table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -36,7 +37,30 @@
                             </tbody>
                         </table>
 
-                            <h1>HOD Recommendation</h1>
+
+                            <h2>Left In Charge</h2>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Name</th>
+                                </tr>
+                                <tr>
+                                    <td>{{$leaves[0]->left_in_charge}}</td>
+                                </tr>
+                            </table>
+                            <h2>Contacts</h2>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>Email</td>
+                                </tr>
+                                <tr>
+                                    <th>{{$leaves[0]->phone}}</th>
+                                    <td>{{$leaves[0]->email}}</td>
+                                </tr>
+                            </table>
+
+
+                            <h2>HOD Recommendation</h2>
 
                         <table class="table table-bordered table-striped">
                             <thead>
