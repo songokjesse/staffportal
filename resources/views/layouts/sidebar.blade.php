@@ -38,7 +38,7 @@
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
                     </li>
                     <li>
-                        <a href="{{route('approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Leave Approvals</span></a>
+                        <a href="{{route('leave_approvals.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Leave Approvals</span></a>
                     </li>
                     <li class="w-100">
                         <a href="{{route('leave_allocation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Allocation </span> </a>

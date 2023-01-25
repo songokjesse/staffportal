@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaveApplicationController;
+use App\Http\Controllers\LeaveApprovalController;
 use App\Http\Controllers\LeaveRecommendationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
@@ -63,11 +64,14 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_allocation', [LeaveAllocationController::class, 'index'])->name('leave_allocation.index');
     Route::get('/leave_allocation/create', [LeaveAllocationController::class, 'create'])->name('leave_allocation.create');
     Route::post('/leave_allocation/', [LeaveAllocationController::class, 'store'])->name('leave_allocation.store');
-//    leave Apllication
+//    leave Application
     Route::get('/leave_application', [LeaveApplicationController::class, 'index'])->name('leave_application.index');
     Route::get('/leave_application/create', [LeaveApplicationController::class, 'create'])->name('leave_application.create');
     Route::post('/leave_application', [LeaveApplicationController::class, 'store'])->name('leave_application.store');
     Route::get('/leave_application/{id}', [LeaveApplicationController::class, 'show'])->name('leave_application.show');
+
+    //leave Approval
+    Route::get('/leave_approvals', [LeaveApprovalController::class, 'index'])->name('leave_approvals.index');
 
 
 //    leave Recommendation
