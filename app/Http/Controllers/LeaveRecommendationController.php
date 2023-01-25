@@ -47,14 +47,18 @@ class LeaveRecommendationController extends Controller
 
     public function recommended(Request $request, $id): RedirectResponse
     {
+        //        Add update recommendation to true
       $recommendation = LeaveRecommendation::find($id);
       $recommendation->recommendation = True;
       $recommendation->save();
-
+        //  Update the Leave Application state to Recommended
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);
         $leave_application->state = "Recommended";
         $leave_application->save();
 
+        // Update the Leave Approval Table (To start the Approval Process)
+
+        //Send notification to the Applicant on the Status of the Leave Application
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
             'Your Leave Application has been recommended by '.Auth::user()->name, // Notification Body
