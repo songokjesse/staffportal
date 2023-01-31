@@ -11,7 +11,9 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\LeaveApprovalController;
+use App\Http\Controllers\LeaveCalendarController;
 use App\Http\Controllers\LeaveRecommendationController;
+use App\Http\Controllers\LeaveReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
@@ -72,6 +74,10 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
     //leave Approval
     Route::get('/leave_approvals', [LeaveApprovalController::class, 'index'])->name('leave_approvals.index');
+
+    //leave Report
+    Route::get('/leave_reports', [LeaveReportController::class, 'index'])->name('leave_reports.index');
+    Route::get('/leave_calendar', LeaveCalendarController::class)->name('leave_calendar');
 
 
 //    leave Recommendation
