@@ -33,6 +33,7 @@ class LeaveRecommendationController extends Controller
             ->where('leave_recommendations.not_recommended', False)
             ->select(
                 'leave_recommendations.id',
+                'leave_applications.user_id',
                 'leave_categories.name as leave_category',
                 'leave_applications.start_date',
                 'leave_applications.end_date',
@@ -41,7 +42,11 @@ class LeaveRecommendationController extends Controller
                 DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
             )
             ->get();
-        return view('leave_recommendation.index', compact('recommendations'));
+        $users = DB::table('users')
+            ->select('name','id')
+            ->whereNotIn('id', [Auth::user()->id,])
+            ->get();
+        return view('leave_recommendation.index', compact('recommendations', 'users'));
 
     }
 
@@ -66,7 +71,7 @@ class LeaveRecommendationController extends Controller
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
-        $user = User::find(1);
+        $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
 
@@ -90,7 +95,7 @@ class LeaveRecommendationController extends Controller
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
-        $user = User::find(1);
+        $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
         return redirect()->route('leave_recommendation.index')

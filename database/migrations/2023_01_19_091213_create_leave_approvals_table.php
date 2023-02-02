@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('leave_application_id');
-            $table->boolean('approval');
+            $table->boolean('approved')->default(false);
+            $table->boolean('not_approved')->default(false);
             $table->text('comments');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('leave_application_id')->references('id')->on('leave_applications');

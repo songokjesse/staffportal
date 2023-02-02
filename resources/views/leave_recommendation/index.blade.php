@@ -23,7 +23,8 @@
                                 <th>Left In-charge</th>
                                 <th>From</th>
                                 <th>To</th>
-                                <th>Action</th>
+                                <th></th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -39,9 +40,21 @@
                                     <td>
                                         <form action="{{ route('leave_recommendation.recommended',$recommendation->id) }}" method="Post" style='display:inline'>
                                             @csrf
-                                            <button class="btn btn-sm btn-success">Recommended</button>
+                                            <div>
+                                                <label>To be Approved By : </label>
+                                                <select name="user_id" required>
+                                                    <option selected disabled></option>
+                                                    @foreach($users as $user)
+                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mt-2">
+                                                <button class="btn btn-sm btn-success">Recommended</button>
+                                            </div>
                                         </form>
-
+                                    </td>
+                                    <td>
                                         <form action="{{ route('leave_recommendation.not_recommended',$recommendation->id) }}" method="Post" style='display:inline'>
                                             @csrf
                                             <button class="btn btn-sm btn-danger">Not Recommended</button>
