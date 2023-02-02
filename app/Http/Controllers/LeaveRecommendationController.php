@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LeaveApplication;
+use App\Models\LeaveApproval;
 use App\Models\LeaveRecommendation;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -16,14 +17,6 @@ class LeaveRecommendationController extends Controller
     //
     public function index()
     {
-//
-//        $recommendations = LeaveRecommendation::where('user_id',Auth::user()->id)
-//            ->where('recommendation', False)
-//            ->where('not_recommended', False)
-//            ->orderBy('recommendation')
-//            ->with('user', 'leave_application')
-//            ->get();
-
         $recommendations = DB::table('leave_applications')
             ->join('leave_recommendations', 'leave_applications.id', '=', 'leave_recommendations.leave_application_id')
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
@@ -53,15 +46,24 @@ class LeaveRecommendationController extends Controller
     public function recommended(Request $request, $id): RedirectResponse
     {
         //        Add update recommendation to true
-      $recommendation = LeaveRecommendation::find($id);
-      $recommendation->recommendation = True;
-      $recommendation->save();
+        $recommendation = LeaveRecommendation::find($id);
+        $recommendation->recommendation = True;
+        if($request['comments'])
+        {
+            $recommendation->comments = $request['comments'];
+        }
+        $recommendation->save();
+
         //  Update the Leave Application state to Recommended
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);
         $leave_application->state = "Recommended";
         $leave_application->save();
 
         // Update the Leave Approval Table (To start the Approval Process)
+        $leave_approval = new LeaveApproval();
+        $leave_approval->user_id = $request->user_id;
+        $leave_approval->leave_application_id = $recommendation->leave_application_id;
+        $leave_approval->save();
 
         //Send notification to the Applicant on the Status of the Leave Application
         $notification = new Important(
@@ -82,6 +84,10 @@ class LeaveRecommendationController extends Controller
     {
         $recommendation = LeaveRecommendation::find($id);
         $recommendation->not_recommended = True;
+        if($request['comments'])
+        {
+            $recommendation->comments = $request['comments'];
+        }
         $recommendation->save();
 
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);

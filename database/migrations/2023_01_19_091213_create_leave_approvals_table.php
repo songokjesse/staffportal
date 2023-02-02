@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('leave_application_id');
             $table->boolean('approved')->default(false);
             $table->boolean('not_approved')->default(false);
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('leave_application_id')->references('id')->on('leave_applications');
             $table->timestamps();
