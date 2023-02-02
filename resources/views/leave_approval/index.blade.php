@@ -27,28 +27,28 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @foreach($recommendations as $recommendation )--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$loop->iteration}}</td>--}}
-{{--                                    <td>{{$recommendation->applicant_name}}</td>--}}
-{{--                                    <td>{{$recommendation->leave_category}}</td>--}}
-{{--                                    <td>{{$recommendation->days}}</td>--}}
-{{--                                    <td>{{$recommendation->left_in_charge}}</td>--}}
-{{--                                    <td>{{$recommendation->start_date}}</td>--}}
-{{--                                    <td>{{$recommendation->end_date}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        <form action="{{ route('leave_recommendation.recommended',$recommendation->id) }}" method="Post" style='display:inline'>--}}
-{{--                                            @csrf--}}
-{{--                                            <button class="btn btn-sm btn-success">Recommended</button>--}}
-{{--                                        </form>--}}
+                            @foreach($approvals as $approval )
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$approval->applicant_name}}</td>
+                                    <td>{{$approval->leave_category}}</td>
+                                    <td>{{$approval->days}}</td>
+                                    <td>{{$approval->left_in_charge}}</td>
+                                    <td>{{$approval->start_date}}</td>
+                                    <td>{{$approval->end_date}}</td>
+                                    <td>
+                                        <form action="{{ route('leave_recommendation.recommended',$approval->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <button class="btn btn-sm btn-success">Approved</button>
+                                        </form>
 
-{{--                                        <form action="{{ route('leave_recommendation.not_recommended',$recommendation->id) }}" method="Post" style='display:inline'>--}}
-{{--                                            @csrf--}}
-{{--                                            <button class="btn btn-sm btn-danger">Not Recommended</button>--}}
-{{--                                        </form>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
+                                        <form action="{{ route('leave_recommendation.not_recommended',$approval->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger">Not Approved</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 

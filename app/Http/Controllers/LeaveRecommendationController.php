@@ -22,8 +22,8 @@ class LeaveRecommendationController extends Controller
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
             ->where('leave_recommendations.user_id','=' ,Auth::user()->id)
-            ->where('leave_recommendations.recommendation', False)
-            ->where('leave_recommendations.not_recommended', False)
+            ->where('leave_recommendations.recommendation', '=',false)
+            ->where('leave_recommendations.not_recommended', '=',false)
             ->select(
                 'leave_recommendations.id',
                 'leave_applications.user_id',
