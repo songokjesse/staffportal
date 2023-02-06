@@ -34,4 +34,14 @@ class LeaveApprovalController extends Controller
             ->get();
         return view('leave_approval.index', compact('approvals'));
     }
+
+    public function approval(Request $request)
+    {
+
+    }
+
+    public function not_approved(Request $request)
+    {
+
+    }
 }

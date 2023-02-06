@@ -74,6 +74,9 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
     //leave Approval
     Route::get('/leave_approvals', [LeaveApprovalController::class, 'index'])->name('leave_approvals.index');
+    Route::post('/leave_approvals/approved/{id}', [LeaveApprovalController::class, 'approved'])->name('leave_approvals.approved');
+    Route::post('/leave_approvals/not_approved/{id}', [LeaveApprovalController::class, 'not_approved'])->name('leave_approvals.not_approved');
+
 
     //leave Report
     Route::get('/leave_reports', [LeaveReportController::class, 'index'])->name('leave_reports.index');

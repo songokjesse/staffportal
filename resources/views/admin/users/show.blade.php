@@ -11,7 +11,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h2>{{ __('Roles') }}</h2>
+                        <h2>{{ __('User') }}</h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('users.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-house-add"></i> Users</a>
                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a>
