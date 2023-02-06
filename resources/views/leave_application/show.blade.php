@@ -73,14 +73,39 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{$leaves[0]->hod}}</td>
+                                <td>{{$recommendations[0]->hod}}</td>
                                 <td>
-                                    @if($leaves[0]->recommendation === True and $leaves[0]->not_recommended === False )<span class="badge text-bg-success"> Recommended </span>@endif
-                                    @if($leaves[0]->not_recommended === True and $leaves[0]->recommendation === False )<span class="badge text-bg-danger"> Not Recommended </span>@endif
-                                    @if($leaves[0]->not_recommended === False and $leaves[0]->recommendation === False )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
+                                    @if($recommendations[0]->recommendation === True and $recommendations[0]->not_recommended === False )<span class="badge text-bg-success"> Recommended </span>@endif
+                                    @if($recommendations[0]->not_recommended === True and $recommendations[0]->recommendation === False )<span class="badge text-bg-danger"> Not Recommended </span>@endif
+                                    @if($recommendations[0]->not_recommended === False and $recommendations[0]->recommendation === False )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
                                 </td>
-                                <td>{{$leaves[0]->date_recommended}}</td>
-                                <td>{{$leaves[0]->recommendation_comments}}</td>
+                                <td>{{$recommendations[0]->date_recommended}}</td>
+                                <td>{{$recommendations[0]->recommendation_comments}}</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                         <h2>Approvals</h2> (<i>Principal/Registrar,Administration/Deputy Registrar, HR</i>)
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Approved By</th>
+                                <th>Approved/Not Approved</th>
+                                <th>Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{$approvals[0]->approved_by}}</td>
+                                <td>
+                                    @if($approvals[0]->approved === True and $approvals[0]->not_approved === False )<span class="badge text-bg-success"> Approved </span>@endif
+                                    @if($approvals[0]->not_approved === True and $approvals[0]->approved === False )<span class="badge text-bg-danger"> Not Approved </span>@endif
+                                    @if($approvals[0]->not_approved === False and $approvals[0]->approved === False )<span class="badge text-bg-warning"> Pending Approval </span>@endif
+                                </td>
+                                <td>{{$approvals[0]->date_approved}}</td>
+                                <td>{{$approvals[0]->approval_comments}}</td>
                             </tr>
                             </tbody>
 

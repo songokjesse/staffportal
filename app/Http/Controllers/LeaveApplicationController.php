@@ -83,11 +83,10 @@ class LeaveApplicationController extends Controller
     public function show($id): Factory|View|Application
     {
         $leaves = DB::table('leave_applications')
-            ->join('leave_recommendations', 'leave_applications.id', '=', 'leave_recommendations.leave_application_id')
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
             ->where('leave_applications.id','=' ,$id)
-            ->where('leave_applications.user_id','=' ,Auth::user()->id)
+//            ->where('leave_applications.user_id','=' ,Auth::user()->id)
             ->select(
                 'leave_categories.name as leave_category',
                 'leave_applications.start_date',
@@ -95,15 +94,32 @@ class LeaveApplicationController extends Controller
                 'leave_applications.days',
                 'leave_applications.phone',
                 'leave_applications.email',
-                'leave_recommendations.recommendation',
-                'leave_recommendations.not_recommended',
-                'leave_recommendations.updated_at as date_recommended',
-                'leave_recommendations.comments as recommendation_comments',
                 DB::raw("(Select name from users where id = leave_applications.user_id) as applicant_name"),
                 DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
-                DB::raw("(Select name from users where id = leave_recommendations.user_id) as hod"),
             )
             ->get();
-        return view('leave_application.show', compact('leaves'));
+        $recommendations = DB::table('leave_recommendations')
+            ->select(
+                'updated_at as date_recommended',
+                'comments as recommendation_comments',
+                'recommendation',
+                'not_recommended',
+                DB::raw("(Select name from users where id = user_id) as hod"),
+
+            )
+            ->where('leave_application_id', '=', $id)
+            ->get();
+        $approvals = DB::table('leave_approvals')
+            ->select(
+                'updated_at as date_approved',
+                'comments as approval_comments',
+                'approved',
+                'not_approved',
+                DB::raw("(Select name from users where id = user_id) as approved_by"),
+
+            )
+            ->where('leave_application_id', '=', $id)
+            ->get();
+        return view('leave_application.show', compact('leaves', 'recommendations','approvals'));
     }
 }
