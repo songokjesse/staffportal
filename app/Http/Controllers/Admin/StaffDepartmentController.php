@@ -5,11 +5,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class StaffDepartmentController extends Controller
 {
-    public function index(){
+    public function index(): Factory|View|Application
+    {
         $users = User::all();
         $departments = Department::all();
         $profiles = Profile::latest()->paginate(20);
@@ -17,7 +21,7 @@ class StaffDepartmentController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'user_id' => 'required|unique:profiles',
+            'user_id' => 'required',
             'department_id' => 'required'
         ]);
         $staff = new Profile;

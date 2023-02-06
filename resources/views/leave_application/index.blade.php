@@ -40,10 +40,16 @@
                                         <span class="badge text-bg-warning"><i class="bi bi-arrow-repeat"></i> Application </span>
                                     @endif
                                     @if($leave->state === "Recommended")
-                                        <span class="badge text-bg-success"><i class="bi bi-arrow-repeat"></i> Recommended</span>
+                                        <span class="badge text-bg-success"><i class="bi bi-check-circle"></i>  Recommended</span>
                                     @endif
                                     @if($leave->state === "Not Recommended")
                                         <span class="badge text-bg-danger"><i class="bi bi-sign-stop"></i> Not Recommended</span>
+                                    @endif
+                                    @if($leave->state === "Approved")
+                                            <span class="badge text-bg-success"><i class="bi bi-check-circle"></i> Approved</span>
+                                    @endif
+                                    @if($leave->state === "Not_Approved")
+                                        <span class="badge text-bg-danger"><i class="bi bi-sign-stop"></i> Not Approved</span>
                                     @endif
                                 </td>
                                 <td>

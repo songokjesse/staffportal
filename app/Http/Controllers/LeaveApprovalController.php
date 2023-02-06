@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LeaveApplication;
+use App\Models\LeaveApproval;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use MBarlow\Megaphone\Types\Important;
 
 class LeaveApprovalController extends Controller
 {
@@ -35,13 +40,66 @@ class LeaveApprovalController extends Controller
         return view('leave_approval.index', compact('approvals'));
     }
 
-    public function approval(Request $request)
+    public function approved(Request $request, $id): RedirectResponse
     {
+        $leave_approval = LeaveApproval::find($id);
+        $leave_approval->approved = True;
+        if($request['comments'])
+        {
+            $leave_approval->comments = $request['comments'];
+        }
+        $leave_approval->save();
+
+        $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
+        $leave_application->state = "Approved";
+        $leave_application->save();
+
+        //send email notification
+        //Send notification to the Applicant on the Status of the Leave Application
+        $notification = new Important(
+            'Leave Application Approval', // Notification Title
+            'Your Leave Application has been Approved by '.Auth::user()->name, // Notification Body
+            env('APP_URL', 'http://localhost').'/leave_application/'.$leave_application->id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+//            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
+        );
+
+        $user = User::find($leave_application->user_id);
+        $user->notify($notification);
+
+
+        return redirect()->route('leave_approvals.index')
+            ->with('status','Leave Approval Submitted (Approved) successfully.');
 
     }
 
-    public function not_approved(Request $request)
+    public function not_approved(Request $request,$id): RedirectResponse
     {
+        $leave_approval = LeaveApproval::find($id);
+        $leave_approval->not_approved = True;
+        if($request['comments'])
+        {
+            $leave_approval->comments = $request['comments'];
+        }
+        $leave_approval->save();
 
+        $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
+        $leave_application->state = "Not_Approved";
+        $leave_application->save();
+
+        //send email notification
+        //Send notification to the Applicant on the Status of the Leave Application
+        $notification = new Important(
+            'Leave Application Approval', // Notification Title
+            'Your Leave Application has Not been Approved by '.Auth::user()->name, // Notification Body
+            env('APP_URL', 'http://localhost').'/leave_application/'.$leave_application->id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+//            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
+        );
+
+        $user = User::find($leave_application->user_id);
+        $user->notify($notification);
+
+
+        return redirect()->route('leave_approvals.index')
+            ->with('status','Leave Approval Submitted (Not Approved) successfully.');
     }
 }
