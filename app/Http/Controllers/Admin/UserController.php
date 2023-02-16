@@ -98,9 +98,7 @@ class UserController extends Controller
     /**
      * Update user data
      *
-     * @param User $user
-     * @param UpdateUserRequest $request
-     *
+     * @param User $user*
      * @return \Illuminate\Http\Response
      */
     public function update(User $user, Request $request)
