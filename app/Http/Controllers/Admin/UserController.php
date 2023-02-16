@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -56,7 +57,7 @@ class UserController extends Controller
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
         $profile = $user->create(array_merge($request->all(), [
-            'password' => 'staff2022'
+            'password' => Hash::make('staff2022')
         ]));
         Profile::create([
             'user_id' => $profile->id,
