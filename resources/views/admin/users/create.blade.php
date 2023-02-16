@@ -16,7 +16,7 @@
                             <a href="{{route('users.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-person-add"></i> Users</a>
                         </div>
 
-                            <form method="POST" action="{{route('users.create')}}">
+                            <form method="POST" action="{{route('users.store')}}">
                                 @csrf
                                 @method('POST')
                                 <div class="mb-3">
