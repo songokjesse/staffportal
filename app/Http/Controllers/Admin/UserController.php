@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->paginate(50);
 
         return view('admin.users.index', compact('users'));
     }
