@@ -78,7 +78,7 @@
                     @yield('content')
                 </main>
     </div>
-
+    @stack('script')
     @livewireScripts
 </body>
 </html>

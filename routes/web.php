@@ -15,6 +15,7 @@ use App\Http\Controllers\LeaveCalendarController;
 use App\Http\Controllers\LeaveRecommendationController;
 use App\Http\Controllers\LeaveReportController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicHolidayController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
 use Illuminate\Support\Facades\Auth;
@@ -104,4 +105,5 @@ Route::group(['middleware' => [  'auth' ]], function () {
     })->name('sitewide-notification');
 
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
+    Route::resource('holidays', PublicHolidayController::class);
 });

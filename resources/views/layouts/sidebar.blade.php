@@ -37,6 +37,9 @@
                     </li>
                @hasrole('Registrar Administration')
                     <li class="w-100">
+                        <a href="{{route('holidays.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Pubic Holidays</span> </a>
+                    </li>
+                    <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
                     </li>
                     <li>

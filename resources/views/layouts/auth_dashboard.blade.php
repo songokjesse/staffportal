@@ -91,6 +91,7 @@
     @section("scripts")
 
     @show
+    @stack('script')
     @livewireScripts
 </body>
 </html>
