@@ -16,7 +16,7 @@
                             <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leave</a>
                         </div>
 
-                        <form action="{{route('leave_application.store')}}" method="POST">
+                        <form action="{{route('leave_application.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                         <div class="card mt-2 mb-3">
                             <div class="card-body">
@@ -76,6 +76,15 @@
                                         @endforeach
                                     </select>
                                     @error('recommend_user_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <hr class="mt-2">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Upload Documents or Evidence to Support your Leave Application:</label>
+                                    <input  name="leave_document"  type="file" class="form-control @error('leave_document') is-invalid @enderror ">
+
+                                    @error('leave_document')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

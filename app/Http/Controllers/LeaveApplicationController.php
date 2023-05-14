@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\AssignedDuty;
 use App\Models\LeaveAllocation;
 use App\Models\LeaveApplication;
 use App\Models\LeaveRecommendation;
@@ -58,27 +59,33 @@ class LeaveApplicationController extends Controller
         $leave_applicaiton->days = $request->days;
         $leave_applicaiton->start_date = $request->start_date;
         $leave_applicaiton->end_date = $request->end_date;
-        $leave_applicaiton->duties_by_user_id = $request->duties_by_user_id;
+        $leave_applicaiton->recommend_user_id = $request->recommend_user_id;
         $leave_applicaiton->phone = $request->phone;
         $leave_applicaiton->email = $request->email;
         $leave_applicaiton->status = False;
         $leave_applicaiton->state = "Application";
         $leave_applicaiton->save();
 
-        $recommendation = new LeaveRecommendation();
-        $recommendation->user_id = $request->recommend_user_id;
+        $recommendation = new AssignedDuty();
+        $recommendation->user_id = $request->duties_by_user_id;
         $recommendation->leave_application_id = $leave_applicaiton->id;
         $recommendation->recommendation = False;
         $recommendation->save();
 
+//        $recommendation = new LeaveRecommendation();
+//        $recommendation->user_id = $request->recommend_user_id;
+//        $recommendation->leave_application_id = $leave_applicaiton->id;
+//        $recommendation->recommendation = False;
+//        $recommendation->save();
+
         $notification = new Important(
             'Leave Application', // Notification Title
-            'An application for Leave has been made by '.Auth::user()->name, // Notification Body
+            'An application for Leave has been made by '.Auth::user()->name . ', Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
             'http://'. env('APP_URL', 'http://localhost').'/leave_recommendation/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
-        $user = User::find(1);
+        $user = User::find($request->duties_by_user_id);
         $user->notify($notification);
 
         return redirect()->route('leave_application.index')
