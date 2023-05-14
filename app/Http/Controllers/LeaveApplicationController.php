@@ -72,12 +72,6 @@ class LeaveApplicationController extends Controller
         $recommendation->recommendation = False;
         $recommendation->save();
 
-//        $recommendation = new LeaveRecommendation();
-//        $recommendation->user_id = $request->recommend_user_id;
-//        $recommendation->leave_application_id = $leave_applicaiton->id;
-//        $recommendation->recommendation = False;
-//        $recommendation->save();
-
         $notification = new Important(
             'Leave Application', // Notification Title
             'An application for Leave has been made by '.Auth::user()->name . ', Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
@@ -107,9 +101,9 @@ class LeaveApplicationController extends Controller
                 'leave_applications.phone',
                 'leave_applications.email',
                 DB::raw("(Select name from users where id = leave_applications.user_id) as applicant_name"),
-                DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
+//                DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
             )
-            ->get();
+            ->first();
         $recommendations = DB::table('leave_recommendations')
             ->select(
                 'updated_at as date_recommended',
@@ -120,7 +114,7 @@ class LeaveApplicationController extends Controller
 
             )
             ->where('leave_application_id', '=', $id)
-            ->get();
+            ->first();
         $approvals = DB::table('leave_approvals')
             ->select(
                 'updated_at as date_approved',
@@ -131,7 +125,7 @@ class LeaveApplicationController extends Controller
 
             )
             ->where('leave_application_id', '=', $id)
-            ->get();
+            ->first();
         return view('leave_application.show', compact('leaves', 'recommendations','approvals'));
     }
 }

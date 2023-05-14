@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\AssignedDutiesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\LeaveApprovalController;
@@ -88,6 +89,11 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/leave_recommendation', [LeaveRecommendationController::class, 'index'])->name('leave_recommendation.index');
     Route::post('/leave_recommendation/recommend/{id}', [LeaveRecommendationController::class, 'recommended'])->name('leave_recommendation.recommended');
     Route::post('/leave_recommendation/not_recommended/{id}', [LeaveRecommendationController::class, 'not_recommended'])->name('leave_recommendation.not_recommended');
+
+    //    Assigned Duties
+    Route::get('/assigned_duties', [AssignedDutiesController::class, 'index'])->name('assigned_duties.index');
+    Route::post('/assigned_duties/agree/{id}', [AssignedDutiesController::class, 'agree'])->name('assigned_duties.agree');
+    Route::post('/assigned_duties/dont_agree/{id}', [AssignedDutiesController::class, 'dont_agree'])->name('assigned_duties.dont_agree');
 
 
 //    Departments
