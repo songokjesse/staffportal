@@ -29,10 +29,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{$leaves[0]->leave_category}}</td>
-                                    <td>{{$leaves[0]->start_date}}</td>
-                                    <td>{{$leaves[0]->end_date}}</td>
-                                    <td>{{$leaves[0]->days}}</td>
+                                    <td>{{$leaves->leave_category}}</td>
+                                    <td>{{$leaves->start_date}}</td>
+                                    <td>{{$leaves->end_date}}</td>
+                                    <td>{{$leaves->days}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -44,7 +44,13 @@
                                     <th>Name</th>
                                 </tr>
                                 <tr>
-                                    <td>{{$leaves[0]->left_in_charge}}</td>
+                                    @if($assigned_duty == null)
+                                        <td>
+                                            <span class="badge bg-danger">   Yet to be assigned </span>
+                                        </td>
+                                    @else
+                                        <td>{{$assigned_duty->left_in_charge}}</td>
+                                    @endif
                                 </tr>
                             </table>
                             <h2>Contacts</h2>
@@ -54,8 +60,8 @@
                                     <td>Email</td>
                                 </tr>
                                 <tr>
-                                    <th>{{$leaves[0]->phone}}</th>
-                                    <td>{{$leaves[0]->email}}</td>
+                                    <th>{{$leaves->phone}}</th>
+                                    <td>{{$leaves->email}}</td>
                                 </tr>
                             </table>
 
@@ -73,14 +79,22 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{$recommendations[0]->hod}}</td>
-                                <td>
-                                    @if($recommendations[0]->recommendation === True and $recommendations[0]->not_recommended === False )<span class="badge text-bg-success"> Recommended </span>@endif
-                                    @if($recommendations[0]->not_recommended === True and $recommendations[0]->recommendation === False )<span class="badge text-bg-danger"> Not Recommended </span>@endif
-                                    @if($recommendations[0]->not_recommended === False and $recommendations[0]->recommendation === False )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
-                                </td>
-                                <td>{{$recommendations[0]->date_recommended}}</td>
-                                <td>{{$recommendations[0]->recommendation_comments}}</td>
+                                @if(empty($recommendations))
+                                    <td colspan="5" >
+                                        <span class="badge bg-danger">  Yet to be Recommended </span>
+                                    </td>
+                                @else
+{{--                                    {{dd($recommendations)}}--}}
+                                    <td>{{$recommendations->hod}}</td>
+                                    <td>
+                                        @if($recommendations->recommendation === 1 and $recommendations->not_recommended === 0 )<span class="badge text-bg-success"> Recommended </span>@endif
+                                        @if($recommendations->not_recommended === 1 and $recommendations->recommendation === 0)<span class="badge text-bg-danger"> Not Recommended </span>@endif
+                                        @if($recommendations->not_recommended === 0 and $recommendations->recommendation === 0 )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
+                                    </td>
+                                    <td>{{$recommendations->date_recommended}}</td>
+                                    <td>{{$recommendations->recommendation_comments}}</td>
+                                @endif
+
                             </tr>
                             </tbody>
 
@@ -98,18 +112,28 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{$approvals[0]->approved_by}}</td>
-                                <td>
-                                    @if($approvals[0]->approved === True and $approvals[0]->not_approved === False )<span class="badge text-bg-success"> Approved </span>@endif
-                                    @if($approvals[0]->not_approved === True and $approvals[0]->approved === False )<span class="badge text-bg-danger"> Not Approved </span>@endif
-                                    @if($approvals[0]->not_approved === False and $approvals[0]->approved === False )<span class="badge text-bg-warning"> Pending Approval </span>@endif
-                                </td>
-                                <td>{{$approvals[0]->date_approved}}</td>
-                                <td>{{$approvals[0]->approval_comments}}</td>
+
+                                @if($approvals == null)
+                                    <td colspan="5" >
+                                        <span class="badge bg-danger"> Yet to be Approved </span>
+                                    </td>
+                                @else
+                                    <td>{{$approvals->approved_by}}</td>
+                                    <td>
+                                        @if($approvals->approved === 1 and $approvals->not_approved === 0 )<span class="badge text-bg-success"> Approved </span>@endif
+                                        @if($approvals->not_approved === 1 and $approvals->approved === 0 )<span class="badge text-bg-danger"> Not Approved </span>@endif
+                                        @if($approvals->not_approved === 0 and $approvals->approved === 0 )<span class="badge text-bg-warning"> Pending Approval </span>@endif
+                                    </td>
+                                    <td>{{$approvals->date_approved}}</td>
+                                    <td>{{$approvals->approval_comments}}</td>
+                                @endif
                             </tr>
                             </tbody>
 
                         </table>
+
+                            <h2>Leave Documents</h2>
+                            <hr class="mt-2 mb-3">
 
                     </div>
                 </div>

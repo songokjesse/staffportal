@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('dont_agree')->default(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('leave_application_id')->references('id')->on('leave_applications');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

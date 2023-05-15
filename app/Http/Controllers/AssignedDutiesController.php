@@ -18,7 +18,11 @@ class AssignedDutiesController extends Controller
     //
     public function index(): Factory|View|Application
     {
-        $assigned_duties = AssignedDuty::where('user_id', Auth::user()->id)->with('leave_application')->get();
+        $assigned_duties = AssignedDuty::where('user_id', Auth::user()->id)
+            ->where('agree', '=', 0)
+            ->Where('dont_agree', '=', 0)
+            ->with('leave_application')
+            ->get();
         return view('assigned_duties.index', compact('assigned_duties'));
     }
 
@@ -36,9 +40,6 @@ class AssignedDutiesController extends Controller
 
         //  Update the Leave Application state to Recommended
         $leave_application = LeaveApplication::find($assigned_duties->leave_application_id);
-        $leave_application->state = "Recommended";
-        $leave_application->save();
-
 
         $recommendation = new LeaveRecommendation();
         $recommendation->user_id = $leave_application->recommend_user_id;
@@ -50,7 +51,7 @@ class AssignedDutiesController extends Controller
         $notification = new Important(
             'Leave Application', // Notification Title
             'Your Duties Will be Performed By '.Auth::user()->name, // Notification Body
-            env('APP_URL', 'http://localhost').'/leave_application/'.$recommendation->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            env('APP_URL', 'http://localhost').'/leave_application/'.$leave_application->id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
@@ -58,12 +59,12 @@ class AssignedDutiesController extends Controller
         $user->notify($notification);
 
 
-        return redirect()->route('leave_recommendation.index')
-            ->with('status','Leave Recommendation Submitted (Recommended) successfully.');
+        return redirect()->route('assigned_duties.index')
+            ->with('status','Leave Application Duty Assignment successfully.');
     }
     public function dont_agree(Request $request,$id):  \Illuminate\Http\RedirectResponse
     {
-        $assigned_duties  = LeaveRecommendation::find($id);
+        $assigned_duties  = AssignedDuty::find($id);
         $assigned_duties->dont_agree = True;
         if($request['comments'])
         {
@@ -77,7 +78,7 @@ class AssignedDutiesController extends Controller
 
         $notification = new Important(
             'Leave Application Duties Assignment', // Notification Title
-            Auth::user()->name. "Has refused to be assigned your duties when on Leave", // Notification Body
+            Auth::user()->name. " Has refused to be assigned your duties when on Leave", // Notification Body
             env('APP_URL', 'http://localhost').'/leave_application/'. $assigned_duties->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
@@ -85,7 +86,7 @@ class AssignedDutiesController extends Controller
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
-        return redirect()->route(' assigned_duties.index')
+        return redirect()->route('assigned_duties.index')
             ->with('status','Offer to Help with Duties Rejection is successful.');
     }
 }

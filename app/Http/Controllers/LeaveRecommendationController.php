@@ -32,7 +32,6 @@ class LeaveRecommendationController extends Controller
                 'leave_applications.end_date',
                 'leave_applications.days',
                 DB::raw("(Select name from users where id = leave_applications.user_id) as applicant_name"),
-                DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
             )
             ->get();
         $users = DB::table('users')

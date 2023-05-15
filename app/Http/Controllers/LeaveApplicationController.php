@@ -69,13 +69,12 @@ class LeaveApplicationController extends Controller
         $recommendation = new AssignedDuty();
         $recommendation->user_id = $request->duties_by_user_id;
         $recommendation->leave_application_id = $leave_applicaiton->id;
-        $recommendation->recommendation = False;
         $recommendation->save();
 
         $notification = new Important(
             'Leave Application', // Notification Title
-            'An application for Leave has been made by '.Auth::user()->name . ', Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
-            'http://'. env('APP_URL', 'http://localhost').'/leave_recommendation/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            'An application for Leave has been made by '.Auth::user()->name . '. Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
+            'http://'. env('APP_URL', 'http://localhost').'/assigned_duties/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
@@ -104,6 +103,13 @@ class LeaveApplicationController extends Controller
 //                DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
             )
             ->first();
+        $assigned_duty = DB::table('assigned_duties')
+            ->join('users', 'assigned_duties.user_id', '=', 'users.id')
+            ->where('leave_application_id', '=', $id)
+            ->Where('agree', '=' , 1)
+            ->select('users.name as left_in_charge')
+            ->first();
+
         $recommendations = DB::table('leave_recommendations')
             ->select(
                 'updated_at as date_recommended',
@@ -126,6 +132,6 @@ class LeaveApplicationController extends Controller
             )
             ->where('leave_application_id', '=', $id)
             ->first();
-        return view('leave_application.show', compact('leaves', 'recommendations','approvals'));
+        return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty'));
     }
 }

@@ -12,8 +12,6 @@
                             </div>
                         @endif
                         <h2>{{ __('Leave Application Assigned Duties') }}</h2>
-                            {{dd($assigned_duties)}}
-
                         <table class="mt-2 mt-3 table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -21,85 +19,84 @@
                                 <th>Name</th>
                                 <th>Leave</th>
                                 <th>Days Applied</th>
-                                <th>Left In-charge</th>
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @foreach($approvals as $approval )--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$loop->iteration}}</td>--}}
-{{--                                    <td>{{$approval->applicant_name}}</td>--}}
-{{--                                    <td>{{$approval->leave_category}}</td>--}}
-{{--                                    <td>{{$approval->days}}</td>--}}
-{{--                                    <td>{{$approval->left_in_charge}}</td>--}}
-{{--                                    <td>{{$approval->start_date}}</td>--}}
-{{--                                    <td>{{$approval->end_date}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#ApprovedModal">Approved</button>--}}
+                            @foreach($assigned_duties as $duty )
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$duty->leave_application->user->name}}</td>
+                                    <td>{{$duty->leave_application->leave_category->name}}</td>
+                                    <td>{{$duty->leave_application->days}}</td>
+                                    <td>{{$duty->leave_application->start_date}}</td>
+                                    <td>{{$duty->leave_application->end_date}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#ApprovedModal">Agree</button>
 
-{{--                                        <form action="{{ route('leave_approvals.approved',$approval->id) }}" method="Post" style='display:inline'>--}}
-{{--                                            @csrf--}}
-{{--                                            <!-- Modal -->--}}
-{{--                                            <div class="modal fade" id="ApprovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-{{--                                                <div class="modal-dialog">--}}
-{{--                                                    <div class="modal-content">--}}
-{{--                                                        <div class="modal-header">--}}
-{{--                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Leave Approved</h1>--}}
-{{--                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="modal-body">--}}
+                                        <form action="{{ route('assigned_duties.agree',$duty->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="ApprovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"> I Agree ! </h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>I Agree to Perform Duties for {{$duty->leave_application->user->name}} while on Leave </p>
 
-{{--                                                            <label class="col-form-label">--}}
-{{--                                                                Comments--}}
-{{--                                                            </label>--}}
-{{--                                                            <textarea class="form-control" name="comments">--}}
+                                                            <label class="col-form-label">
+                                                                Comments
+                                                            </label>
+                                                            <textarea class="form-control" name="comments">
 
-{{--                                                                </textarea>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="modal-footer">--}}
-{{--                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--}}
-{{--                                                            <button type="submit" class="btn btn-success">Approved</button>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+                                                                </textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-success">Agree</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-{{--                                        </form>--}}
+                                        </form>
 
-{{--                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#NotApprovedModal">Not Approved</button>--}}
-{{--                                        <form action="{{ route('leave_approvals.not_approved',$approval->id) }}" method="Post" style='display:inline'>--}}
-{{--                                            @csrf--}}
-{{--                                            <!-- Modal -->--}}
-{{--                                            <div class="modal fade" id="NotApprovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-{{--                                                <div class="modal-dialog">--}}
-{{--                                                    <div class="modal-content">--}}
-{{--                                                        <div class="modal-header">--}}
-{{--                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Leave Not Approved</h1>--}}
-{{--                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="modal-body">--}}
-{{--                                                            <label class="col-form-label">--}}
-{{--                                                                Comments--}}
-{{--                                                            </label>--}}
-{{--                                                            <textarea class="form-control" name="comments">--}}
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#NotApprovedModal">Dont Agree</button>
+                                        <form action="{{ route('assigned_duties.dont_agree',$duty->id) }}" method="Post" style='display:inline'>
+                                            @csrf
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="NotApprovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">I Don't Agree to Perform Duties for {{$duty->leave_application->user->name}} while on Leave</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <label class="col-form-label">
+                                                                Comments
+                                                            </label>
+                                                            <textarea class="form-control" name="comments">
 
-{{--                                                          </textarea>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="modal-footer">--}}
-{{--                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--}}
-{{--                                                            <button type="submit" class="btn btn-danger">Not Approved</button>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+                                                          </textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">Dont Agree</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-{{--                                        </form>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 
