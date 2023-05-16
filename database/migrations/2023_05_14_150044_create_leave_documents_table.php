@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('leave_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('leave_application_id');
-            $table->string('doc_name');
+            $table->string('doc_name')->nullable();
             $table->string('file_name');
             $table->foreign('leave_application_id')->references('id')->on('leave_applications');
             $table->timestamps();

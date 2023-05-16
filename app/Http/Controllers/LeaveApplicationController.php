@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\AssignedDuty;
 use App\Models\LeaveAllocation;
 use App\Models\LeaveApplication;
+use App\Models\LeaveDocument;
 use App\Models\LeaveRecommendation;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -50,7 +51,8 @@ class LeaveApplicationController extends Controller
             'duties_by_user_id' => 'required',
             'phone' => 'required',
             'email' => 'required|email',
-            'recommend_user_id' => 'required'
+            'recommend_user_id' => 'required',
+            'leave_document' => 'nullable|mimes:pdf,jpeg,png,jpg|max:2048',
         ]);
 
         $leave_applicaiton = New LeaveApplication();
@@ -65,6 +67,18 @@ class LeaveApplicationController extends Controller
         $leave_applicaiton->status = False;
         $leave_applicaiton->state = "Application";
         $leave_applicaiton->save();
+
+        //upload documents
+        if($request->leave_document){
+
+            $fileName = time().'.'.$request->file->extension();
+            $request->file->storeAs('uploads', $fileName);
+
+            $upload_doc = New LeaveDocument();
+            $upload_doc->leave_application_id = $request->leave_application_id;
+            $upload_doc->file_name = $fileName;
+            $upload_doc->save();
+        }
 
         $recommendation = new AssignedDuty();
         $recommendation->user_id = $request->duties_by_user_id;
