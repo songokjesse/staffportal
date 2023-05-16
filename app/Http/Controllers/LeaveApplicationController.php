@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\AssignDuty;
 use App\Models\AssignedDuty;
 use App\Models\LeaveAllocation;
 use App\Models\LeaveApplication;
@@ -16,6 +17,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use MBarlow\Megaphone\Types\Important;
 
 class LeaveApplicationController extends Controller
@@ -91,6 +93,10 @@ class LeaveApplicationController extends Controller
             'http://'. env('APP_URL', 'http://localhost').'/assigned_duties/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
+
+//        send email to college to be assigned your duty
+        $assigned_duty_email = User::find($request->duties_by_user_id);
+        Mail::to($assigned_duty_email->email)->send(new AssignDuty($assigned_duty_email->name, Auth::user()->name));
 
         $user = User::find($request->duties_by_user_id);
         $user->notify($notification);

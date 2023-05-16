@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\AssignedDuty;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -18,10 +19,11 @@ class AssignDuty extends Mailable
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public $assigned_name,
+        public $applicant_name
+    )
+    {}
 
     /**
      * Get the message envelope.
@@ -43,7 +45,7 @@ class AssignDuty extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.assign_duty',
         );
     }
 
