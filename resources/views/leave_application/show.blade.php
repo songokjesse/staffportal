@@ -11,12 +11,11 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h2>{{ __('Leave') }}</h2>
+                        <h2>{{ __($leaves->applicant_name) }}</h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
                         </div>
                             <hr class="mt-2 mb-3"/>
-
                             <h2>Leave Application Details</h2>
                         <table class="mt-2 mt-3 table table-striped table-bordered">
                             <thead>
