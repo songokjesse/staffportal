@@ -91,6 +91,7 @@ class LeaveRecommendationController extends Controller
 
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);
         $leave_application->state = "Not Recommended";
+        $leave_application->status = "REJECTED";
         $leave_application->save();
 
         $notification = new Important(

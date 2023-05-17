@@ -11,6 +11,11 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            @if (session('warning'))
+                            <div class="alert alert-warning" role="alert">
+                                {{ session('warning') }}
+                            </div>
+                        @endif
                         <h2>{{ __('Leave') }}</h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                             <a href="{{route('leave_application.create')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> Apply for Leave</a>

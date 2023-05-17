@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->bigInteger('days');
-            $table->boolean('status');
+            $table->string('status');
             $table->string('state');
             $table->text('comments')->nullable();
             $table->unsignedBigInteger('duties_by_user_id');

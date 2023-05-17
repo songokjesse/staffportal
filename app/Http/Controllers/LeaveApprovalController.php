@@ -52,7 +52,7 @@ class LeaveApprovalController extends Controller
 
         $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
         $leave_application->state = "Approved";
-        $leave_application->status = True;
+        $leave_application->status = "ACTIVE";
         $leave_application->save();
 
         //send email notification
@@ -85,6 +85,7 @@ class LeaveApprovalController extends Controller
 
         $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
         $leave_application->state = "Not_Approved";
+        $leave_application->status = "REJECTED";
         $leave_application->save();
 
         //send email notification

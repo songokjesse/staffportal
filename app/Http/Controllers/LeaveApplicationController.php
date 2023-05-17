@@ -8,8 +8,8 @@ use App\Models\AssignedDuty;
 use App\Models\LeaveAllocation;
 use App\Models\LeaveApplication;
 use App\Models\LeaveDocument;
-use App\Models\LeaveRecommendation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,18 +24,30 @@ class LeaveApplicationController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $leaves = LeaveApplication::where('user_id', Auth::user()->id)->orderBy('state','asc')->get();
+        $leaves = LeaveApplication::where('user_id', Auth::id())->orderBy('state','asc')->get();
         return view('leave_application.index', compact('leaves'));
     }
 
     public function create()
     {
+        $current_date = Carbon::now()->format('d/m/Y');
+
+        $active_or_pending_leave = DB::table('leave_applications')
+            ->where('leave_applications.status', '=', "ACTIVE")
+            ->orWhere('leave_applications.status', '=', "PENDING")
+            ->where('leave_applications.user_id', '=', Auth::id())
+            ->get();
+
+        if ($active_or_pending_leave->count() > 0)
+        {
+            return redirect()->route('leave_application.index')->with('warning', 'You are already on Leave or have a pending Application! Kindly Consult HR');
+        }
 
         $users = DB::table('users')
             ->select('name', 'id')
-            ->whereNotIn('id', [Auth::user()->id])
+            ->whereNotIn('id', [Auth::id()])
             ->get();
-        $leave_allocation = LeaveAllocation::where('user_id', Auth::user()->id)->with('leaveType')->get();
+        $leave_allocation = LeaveAllocation::where('user_id', Auth::id())->with('leaveType')->get();
         return view('leave_application.create', compact('leave_allocation', 'users'));
     }
 
@@ -62,7 +74,7 @@ class LeaveApplicationController extends Controller
         $leave_applicaiton->recommend_user_id = $request->recommend_user_id;
         $leave_applicaiton->phone = $request->phone;
         $leave_applicaiton->email = $request->email;
-        $leave_applicaiton->status = False;
+        $leave_applicaiton->status = "PENDING";
         $leave_applicaiton->state = "Application";
         $leave_applicaiton->save();
 
