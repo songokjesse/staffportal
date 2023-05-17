@@ -132,6 +132,7 @@
             $('.datepicker').datepicker({
                 format: 'dd-mm-yyyy',
                 todayHighlight: true,
+                startDate: new Date(),
                 autoclose: true,
                 daysOfWeekDisabled: '06',
                 clearBtn: true
