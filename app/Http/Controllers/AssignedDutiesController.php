@@ -60,13 +60,13 @@ class AssignedDutiesController extends Controller
 
         //Send notification to HOD for Recommendation
         $recommendation_notification = new Important(
-            'Recommendation for Leave Application', // Notification Title
+            'Assignment of Duties', // Notification Title
             'Your Duties Will be Performed By '.Auth::user()->name, // Notification Body
             env('APP_URL', 'http://localhost').'/leave_application/'.$leave_application->id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
-        $hod = User::find($leave_application->recommend_user_id);
+        $hod = User::find($leave_application->user_id);
         $hod->notify($recommendation_notification);
 
 
