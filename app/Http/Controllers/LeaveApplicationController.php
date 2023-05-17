@@ -30,16 +30,12 @@ class LeaveApplicationController extends Controller
 
     public function create()
     {
+
         $users = DB::table('users')
             ->select('name', 'id')
             ->whereNotIn('id', [Auth::user()->id])
             ->get();
         $leave_allocation = LeaveAllocation::where('user_id', Auth::user()->id)->with('leaveType')->get();
-//        dd($leave_allocation);
-
-        // get the days
-
-
         return view('leave_application.create', compact('leave_allocation', 'users'));
     }
 
