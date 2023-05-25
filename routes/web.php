@@ -112,4 +112,5 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
     Route::resource('holidays', PublicHolidayController::class);
+
 });

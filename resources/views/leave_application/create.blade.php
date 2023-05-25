@@ -43,20 +43,6 @@
                                         </div>
                                     </div>
 
-                                    {{--                                    <div class="col">--}}
-{{--                                        <label for="exampleInputEmail1" class="form-label">From Date :</label>--}}
-{{--                                        <input type="text" class="form-control datepicker @error('start_date') is-invalid @enderror " name="start_date">--}}
-{{--                                        @error('start_date')--}}
-{{--                                        <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--                                        @enderror--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col">--}}
-{{--                                        <label for="exampleInputEmail1" class="form-label">To Date :</label>--}}
-{{--                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" >--}}
-{{--                                        @error('end_date')--}}
-{{--                                        <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--                                        @enderror--}}
-{{--                                    </div>--}}
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">My Duties Will be performed by :</label>
@@ -126,7 +112,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker({
@@ -139,5 +124,6 @@
             });
         });
     </script>
+
 @endsection
 
