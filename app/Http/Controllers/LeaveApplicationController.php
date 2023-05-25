@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use MBarlow\Megaphone\Types\Important;
 
 class LeaveApplicationController extends Controller
@@ -62,15 +63,15 @@ class LeaveApplicationController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
             'recommend_user_id' => 'required',
-            'leave_document' => 'nullable|mimes:pdf,jpeg,png,jpg|max:2048',
+            'leave_document' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
         ]);
 
         $leave_applicaiton = New LeaveApplication();
         $leave_applicaiton->leave_categories_id = strtok($request->leave_categories_id, '.');
         $leave_applicaiton->user_id = Auth::user()->id;
         $leave_applicaiton->days = $request->days;
-        $leave_applicaiton->start_date = $request->start_date;
-        $leave_applicaiton->end_date = $request->end_date;
+        $leave_applicaiton->start_date = trim($request->start_date, '');
+        $leave_applicaiton->end_date = trim($request->end_date, '');
         $leave_applicaiton->recommend_user_id = $request->recommend_user_id;
         $leave_applicaiton->phone = $request->phone;
         $leave_applicaiton->email = $request->email;
@@ -81,12 +82,19 @@ class LeaveApplicationController extends Controller
         //upload documents
         if($request->leave_document){
 
-            $fileName = time().'.'.$request->file->extension();
-            $request->file->storeAs('uploads', $fileName);
+            $file = $request->file('leave_document');
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // File upload location
+            $location = 'uploads';
+
+            // Upload file
+//            $file->move($location,$filename);
+            Storage::put('uploads', $file);
 
             $upload_doc = New LeaveDocument();
-            $upload_doc->leave_application_id = $request->leave_application_id;
-            $upload_doc->file_name = $fileName;
+            $upload_doc->leave_application_id = $leave_applicaiton->id;
+            $upload_doc->file_name = $filename;
             $upload_doc->save();
         }
 

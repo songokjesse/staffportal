@@ -26,7 +26,7 @@
                                         <label class="form-label" for="specificSizeInputGroupUsername">Start Date</label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="bi bi-calendar"></i></div>
-                                            <input type="text" class="form-control datepicker @error('start_date') is-invalid @enderror" name="start_date" id="specificSizeInputGroupUsername" >
+                                            <input type="text" class="form-control datepicker @error('start_date') is-invalid @enderror" name="start_date" required >
                                             @error('start_date')--}}
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -36,7 +36,7 @@
                                         <label class="form-label" for="specificSizeInputGroupUsername">End Date</label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="bi bi-calendar"></i></div>
-                                            <input type="text" class="form-control datepicker @error('end_date') is-invalid @enderror" name="end_date" id="specificSizeInputGroupUsername" >
+                                            <input type="text" class="form-control datepicker @error('end_date') is-invalid @enderror" name="end_date" required >
                                             @error('end_date')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -115,7 +115,7 @@
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker({
-                format: 'dd-mm-yyyy',
+                format: 'yyyy/mm/dd',
                 todayHighlight: true,
                 startDate: new Date(),
                 autoclose: true,
