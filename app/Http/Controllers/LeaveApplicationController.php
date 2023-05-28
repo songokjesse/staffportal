@@ -9,6 +9,7 @@ use App\Models\LeaveAllocation;
 use App\Models\LeaveApplication;
 use App\Models\LeaveDocument;
 use App\Models\User;
+use App\Services\LeaveAllocationService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -29,9 +30,11 @@ class LeaveApplicationController extends Controller
         return view('leave_application.index', compact('leaves'));
     }
 
-    public function create()
+    public function create(LeaveAllocationService $allocationService)
     {
-        $current_date = Carbon::now()->format('d/m/Y');
+        if($allocationService->allocated_days(Auth::id()) == 0){
+            return redirect()->route('leave_application.index')->with('warning', 'You have not been allocated any Leave days! Kindly Consult HR');
+        }
 
         $active_or_pending_leave = DB::table('leave_applications')
             ->where('leave_applications.status', '=', "ACTIVE")
