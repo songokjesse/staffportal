@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicHolidayController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
+use App\Services\LeaveHistoryService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +42,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => [  'auth' ]], function () {
-    Route::get('/', function () {
-        return view('home');
+    Route::get('/', function (LeaveHistoryService $historyService) {
+        $history = $historyService->get_history(Auth::id());
+        return view('home', compact('history'));
     });
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

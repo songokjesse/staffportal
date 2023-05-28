@@ -44,7 +44,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         Leave Applications</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{$history['application_count']}}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -63,7 +63,13 @@
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Rejected Leaves
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        @if($history['leave_rejections'] == null)
+                                            0
+                                        @else
+                                            {{$history['leave_rejections']}}
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -82,7 +88,14 @@
                                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                         Approved Leaves
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        @if($history['approved_leaves']== null)
+                                            0
+                                        @else
+                                            {{$history['approved_leaves']}}
+                                        @endif
+
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-comments fa-2x text-gray-300"></i>

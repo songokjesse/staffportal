@@ -30,7 +30,7 @@ class LeaveApplicationController extends Controller
         return view('leave_application.index', compact('leaves'));
     }
 
-    public function create(LeaveAllocationService $allocationService)
+    public function create(LeaveAllocationService $allocationService): Factory|View|RedirectResponse|Application
     {
         if($allocationService->allocated_days(Auth::id()) == 0){
             return redirect()->route('leave_application.index')->with('warning', 'You have not been allocated any Leave days! Kindly Consult HR');
