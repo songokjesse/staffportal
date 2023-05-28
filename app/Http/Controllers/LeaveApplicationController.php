@@ -66,7 +66,7 @@ class LeaveApplicationController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
             'recommend_user_id' => 'required',
-            'leave_document' => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+            'leave_document' => 'sometimes|nullable|file|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
         ]);
 
         $leave_applicaiton = New LeaveApplication();
