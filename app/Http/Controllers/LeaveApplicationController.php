@@ -10,7 +10,6 @@ use App\Models\LeaveApplication;
 use App\Models\LeaveDocument;
 use App\Models\User;
 use App\Services\LeaveAllocationService;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -71,7 +70,7 @@ class LeaveApplicationController extends Controller
 
         $leave_applicaiton = New LeaveApplication();
         $leave_applicaiton->leave_categories_id = strtok($request->leave_categories_id, '.');
-        $leave_applicaiton->user_id = Auth::user()->id;
+        $leave_applicaiton->user_id = Auth::id();
         $leave_applicaiton->days = $request->days;
         $leave_applicaiton->start_date = trim($request->start_date, '');
         $leave_applicaiton->end_date = trim($request->end_date, '');
