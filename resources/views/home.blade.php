@@ -29,7 +29,7 @@
                                         @endif
                                     @foreach($leave_days as $key => $days)
                                             <li class="list-group-item">
-                                                <span>{{$key}} : {{$days}} &nbsp; Days </span>
+                                                <span>{{$key}} : {{$days}}  </span>
                                             </li>
                                     @endforeach
                                     </ul>
