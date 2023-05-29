@@ -91,7 +91,7 @@ class AssignedDutiesController extends Controller
         $notification = new Important(
             'Leave Application Duties Assignment', // Notification Title
             Auth::user()->name. " Has refused to be assigned your duties when on Leave", // Notification Body
-            env('APP_URL', 'http://localhost').'/leave_application/'. $assigned_duties->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            env('APP_URL', 'http://localhost').'/leave_application/'.$assigned_duties->leave_application_id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
