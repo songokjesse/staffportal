@@ -22,7 +22,14 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                        Leave Days Available</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+{{--                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>--}}
+                                    <ul class="list-group">
+                                    @foreach($leave_days as $key => $days)
+                                            <li class="list-group-item">
+                                                <span>{{$key}} : {{$days}} &nbsp; Days </span>
+                                            </li>
+                                    @endforeach
+                                    </ul>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>

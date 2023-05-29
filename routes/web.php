@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicHolidayController;
 use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
+use App\Services\LeaveDaysService;
 use App\Services\LeaveHistoryService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,9 +43,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => [  'auth' ]], function () {
-    Route::get('/', function (LeaveHistoryService $historyService) {
+    Route::get('/', function (LeaveHistoryService $historyService, LeaveDaysService $leaveDaysService) {
         $history = $historyService->get_history(Auth::id());
-        return view('home', compact('history'));
+        $leave_days = $leaveDaysService->get_available_days(Auth::id());
+        return view('home', compact('history', 'leave_days'));
     });
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -114,5 +116,7 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
     Route::resource('holidays', PublicHolidayController::class);
+
+
 
 });
