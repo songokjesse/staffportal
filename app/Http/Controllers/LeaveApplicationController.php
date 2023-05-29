@@ -92,7 +92,8 @@ class LeaveApplicationController extends Controller
 
             // Upload file
 //            $file->move($location,$filename);
-            Storage::put('uploads', $file);
+            $file->storeAs('uploads', $filename);
+//            Storage::put('uploads', $file);
 
             $upload_doc = New LeaveDocument();
             $upload_doc->leave_application_id = $leave_applicaiton->id;
