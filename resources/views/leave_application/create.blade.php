@@ -120,7 +120,8 @@
                 startDate: new Date(),
                 autoclose: true,
                 daysOfWeekDisabled: '06',
-                clearBtn: true
+                clearBtn: true,
+                // multidate: true,
             });
         });
     </script>

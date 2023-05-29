@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                <a href="{{route('leave_application.create')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> Apply for Leave</a>
+            </div>
 
             <h4>Leave Days</h4>
             <hr>
