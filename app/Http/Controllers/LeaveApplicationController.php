@@ -109,7 +109,7 @@ class LeaveApplicationController extends Controller
         $notification = new Important(
             'Leave Application', // Notification Title
             'An application for Leave has been made by '.Auth::user()->name . '. Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
-            'http://'. env('APP_URL', 'http://localhost').'/assigned_duties/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            env('APP_URL', 'http://localhost').'/assigned_duties/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
@@ -171,6 +171,9 @@ class LeaveApplicationController extends Controller
             )
             ->where('leave_application_id', '=', $id)
             ->first();
-        return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty'));
+
+        $attachments = LeaveDocument::where('leave_application_id', $id)->get();
+
+        return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty', 'attachments'));
     }
 }

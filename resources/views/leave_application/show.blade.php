@@ -133,6 +133,11 @@
 
                             <h2>Leave Documents</h2>
                             <hr class="mt-2 mb-3">
+                        <ul class="list-group">
+                            @foreach($attachments as $attachment)
+                            <a href="#" class="list-group-item">{{$attachment->file_name}}</a>
+                            @endforeach
+                        </ul>
 
                     </div>
                 </div>
