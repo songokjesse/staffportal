@@ -24,6 +24,9 @@
                                        Leave Days Available</div>
 {{--                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>--}}
                                     <ul class="list-group">
+                                        @if($leave_days == null)
+                                             <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                        @endif
                                     @foreach($leave_days as $key => $days)
                                             <li class="list-group-item">
                                                 <span>{{$key}} : {{$days}} &nbsp; Days </span>
