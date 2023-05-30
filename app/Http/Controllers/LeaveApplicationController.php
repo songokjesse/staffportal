@@ -59,12 +59,15 @@ class LeaveApplicationController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // Validate the leave application request
         $validator = $this->validateLeaveApplication($request);
+        // Check if validation fails
         if ($validator && $validator->fails()) {
+            // Redirect back with validation errors and input data
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $sate = "Application";
 
+        // Create a new leave application record
         $leaveApplication = LeaveApplication::create([
             'leave_categories_id' => strtok($request->leave_categories_id, '.'),
             'user_id' => $request->user()->id,
@@ -75,18 +78,18 @@ class LeaveApplicationController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'status' => 'PENDING',
-            'state' => $sate,
+            'state' => 'Application',
         ]);
-
+        // Upload any associated documents
         $this->uploadDocuments($request, $leaveApplication);
-
+        // Create an assigned duty for the leave application
         AssignedDuty::create([
             'user_id' => $request->duties_by_user_id,
             'leave_application_id' => $leaveApplication->id,
         ]);
-
+        // Send notification and email
         $this->sendNotificationAndEmail($request, $leaveApplication);
-
+        // Redirect to the leave application index page with a success message
         return redirect()->route('leave_application.index')
             ->with('status', 'Leave Application submitted successfully.');
     }
