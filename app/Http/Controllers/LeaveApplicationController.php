@@ -10,6 +10,7 @@ use App\Models\LeaveApplication;
 use App\Models\LeaveDocument;
 use App\Models\User;
 use App\Services\LeaveAllocationService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use MBarlow\Megaphone\Types\Important;
 
 class LeaveApplicationController extends Controller
@@ -56,17 +59,30 @@ class LeaveApplicationController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validator = Validator::make($request->all(),
+            [
+                'days' => [
+                    'required',
+                    'integer',
+                    'min:1',
+                    Rule::in([$this->calculateNumberOfDays($request->input('start_date'), $request->input('end_date'))])
+                ],
             'leave_categories_id' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'days' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'duties_by_user_id' => 'required',
             'phone' => 'required',
             'email' => 'required|email',
             'recommend_user_id' => 'required',
             'leave_document' => 'sometimes|nullable|file|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
         ]);
+
+        $validator->messages()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 
         $leave_applicaiton = New LeaveApplication();
         $leave_applicaiton->leave_categories_id = strtok($request->leave_categories_id, '.');
@@ -175,5 +191,21 @@ class LeaveApplicationController extends Controller
         $attachments = LeaveDocument::where('leave_application_id', $id)->get();
 
         return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty', 'attachments'));
+    }
+
+    private function calculateNumberOfDays($startDate, $endDate): int
+    {
+        $start = Carbon::parse($startDate);
+        $end = Carbon::parse($endDate);
+
+        $days = 0;
+        while ($start <= $end) {
+            if (!$start->isWeekend()) {
+                $days++;
+            }
+            $start->addDay();
+        }
+
+        return $days;
     }
 }
