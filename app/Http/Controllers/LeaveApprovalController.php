@@ -25,7 +25,7 @@ class LeaveApprovalController extends Controller
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
             ->join('assigned_duties', 'leave_applications.id', '=', 'assigned_duties.leave_application_id')
-            ->where('leave_approvals.user_id','=' ,Auth::user()->id)
+            ->where('leave_approvals.user_id','=' ,Auth::id())
             ->where('leave_approvals.approved', '=',false)
             ->where('leave_approvals.not_approved', '=',false)
             ->select(

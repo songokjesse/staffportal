@@ -14,10 +14,14 @@ class LeaveApplication extends Model
     protected $fillable = [
         'user_id',
         'leave_categories_id',
+        'recommend_user_id',
+        'phone',
+        'email',
         'start_date',
         'end_date',
         'days',
         'status',
+        'state',
         'comments',
     ];
 

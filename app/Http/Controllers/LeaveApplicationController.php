@@ -59,85 +59,36 @@ class LeaveApplicationController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validator = Validator::make($request->all(),
-            [
-                'days' => [
-                    'required',
-                    'integer',
-                    'min:1',
-                    Rule::in([$this->calculateNumberOfDays($request->input('start_date'), $request->input('end_date'))])
-                ],
-            'leave_categories_id' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'duties_by_user_id' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'recommend_user_id' => 'required',
-            'leave_document' => 'sometimes|nullable|file|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
-        ]);
-
-        $validator->messages()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
-
-        if ($validator->fails()) {
+        $validator = $this->validateLeaveApplication($request);
+        if ($validator && $validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $sate = "Application";
 
+        $leaveApplication = LeaveApplication::create([
+            'leave_categories_id' => strtok($request->leave_categories_id, '.'),
+            'user_id' => $request->user()->id,
+            'days' => $request->days,
+            'start_date' => trim($request->start_date),
+            'end_date' => trim($request->end_date),
+            'recommend_user_id' => $request->recommend_user_id,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'status' => 'PENDING',
+            'state' => $sate,
+        ]);
 
-        $leave_applicaiton = New LeaveApplication();
-        $leave_applicaiton->leave_categories_id = strtok($request->leave_categories_id, '.');
-        $leave_applicaiton->user_id = Auth::id();
-        $leave_applicaiton->days = $request->days;
-        $leave_applicaiton->start_date = trim($request->start_date, '');
-        $leave_applicaiton->end_date = trim($request->end_date, '');
-        $leave_applicaiton->recommend_user_id = $request->recommend_user_id;
-        $leave_applicaiton->phone = $request->phone;
-        $leave_applicaiton->email = $request->email;
-        $leave_applicaiton->status = "PENDING";
-        $leave_applicaiton->state = "Application";
-        $leave_applicaiton->save();
+        $this->uploadDocuments($request, $leaveApplication);
 
-        //upload documents
-        if($request->leave_document){
+        AssignedDuty::create([
+            'user_id' => $request->duties_by_user_id,
+            'leave_application_id' => $leaveApplication->id,
+        ]);
 
-            $file = $request->file('leave_document');
-            $filename = time().'_'.$file->getClientOriginalName();
-
-            // File upload location
-            $location = 'uploads';
-
-            // Upload file
-//            $file->move($location,$filename);
-            $file->storeAs('uploads', $filename);
-//            Storage::put('uploads', $file);
-
-            $upload_doc = New LeaveDocument();
-            $upload_doc->leave_application_id = $leave_applicaiton->id;
-            $upload_doc->file_name = $filename;
-            $upload_doc->save();
-        }
-
-        $recommendation = new AssignedDuty();
-        $recommendation->user_id = $request->duties_by_user_id;
-        $recommendation->leave_application_id = $leave_applicaiton->id;
-        $recommendation->save();
-
-        $notification = new Important(
-            'Leave Application', // Notification Title
-            'An application for Leave has been made by '.Auth::user()->name . '. Confirm if you will perform his/her duties while the applicant is on leave.', // Notification Body
-            env('APP_URL', 'http://localhost').'/assigned_duties/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
-//            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
-        );
-
-//        send email to college to be assigned your duty
-        $assigned_duty_email = User::find($request->duties_by_user_id);
-        Mail::to($assigned_duty_email->email)->send(new AssignDuty($assigned_duty_email->name, Auth::user()->name));
-
-        $user = User::find($request->duties_by_user_id);
-        $user->notify($notification);
+        $this->sendNotificationAndEmail($request, $leaveApplication);
 
         return redirect()->route('leave_application.index')
-            ->with('status','Leave Application Submitted successfully.');
+            ->with('status', 'Leave Application submitted successfully.');
     }
 
     public function show($id): Factory|View|Application
@@ -193,6 +144,57 @@ class LeaveApplicationController extends Controller
         return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty', 'attachments'));
     }
 
+
+    private function validateLeaveApplication(Request $request): \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
+    {
+        $validator = Validator::make($request->all(), [
+            'days' => [
+                'required',
+                'integer',
+                'min:1',
+                Rule::in([$this->calculateNumberOfDays($request->input('start_date'), $request->input('end_date'))])
+            ],
+            'leave_categories_id' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'duties_by_user_id' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'recommend_user_id' => 'required',
+            'leave_document' => 'sometimes|nullable|file|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
+        ]);
+
+        $validator->getMessageBag()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
+
+        return $validator;
+    }
+
+    private function uploadDocuments(Request $request, LeaveApplication $leaveApplication): void
+    {
+        if ($request->hasFile('leave_document')) {
+            $file = $request->file('leave_document');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('uploads', $filename);
+            LeaveDocument::create([
+                'leave_application_id' => $leaveApplication->id,
+                'file_name' => $filename,
+            ]);
+        }
+    }
+
+    private function sendNotificationAndEmail(Request $request, LeaveApplication $leaveApplication): void
+    {
+        $notification = new Important(
+            'Leave Application',
+            'An application for Leave has been made by ' . $request->user()->name . '. Confirm if you will perform his/her duties while the applicant is on leave.',
+            env('APP_URL', 'http://localhost') . '/assigned_duties/'
+        );
+
+        $assignedDutyUser = User::find($request->duties_by_user_id);
+        Mail::to($assignedDutyUser->email)->queue(new AssignDuty($assignedDutyUser->name, $request->user()->name));
+
+        $assignedDutyUser->notify($notification);
+    }
     private function calculateNumberOfDays($startDate, $endDate): int
     {
         $start = Carbon::parse($startDate);
