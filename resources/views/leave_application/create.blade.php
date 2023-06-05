@@ -26,21 +26,27 @@
                                         <label class="form-label" for="specificSizeInputGroupUsername">Start Date</label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="bi bi-calendar"></i></div>
-                                            <input type="text" class="form-control datepicker @error('start_date') is-invalid @enderror" name="start_date" required >
-                                            @error('start_date')--}}
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <input type="text" class="form-control datepicker @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date') }}" required >
                                         </div>
+                                        @error('start_date')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        @error('days')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col">
                                         <label class="form-label" for="specificSizeInputGroupUsername">End Date</label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="bi bi-calendar"></i></div>
-                                            <input type="text" class="form-control datepicker @error('end_date') is-invalid @enderror" name="end_date" required >
-                                            @error('end_date')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <input type="text" class="form-control datepicker @error('end_date') is-invalid @enderror" name="end_date" value="{{ old('end_date') }}" required >
                                         </div>
+                                        @error('end_date')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        @error('days')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -49,7 +55,7 @@
                                     <select name="duties_by_user_id" class="form-control @error('duties_by_user_id') is-invalid @enderror">
                                         <option selected disabled></option>
                                         @foreach($users as $user)
-                                        <option value="{{$user->id}}"> {{$user->name}}</option>
+                                            <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('duties_by_user_id')
@@ -60,14 +66,14 @@
                                     <label for="exampleInputEmail1" class="form-label">In Case Required can be reached on :</label>
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Phone</label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror " name="phone" >
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror " name="phone"  value="{{ old('phone') }}">
                                         @error('phone')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                                         @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -79,7 +85,7 @@
                                     <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror ">
                                         <option selected disabled></option>
                                         @foreach($users as $user)
-                                            <option value="{{$user->id}}"> {{$user->name}}</option>
+                                            <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('recommend_user_id')

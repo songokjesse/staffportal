@@ -167,7 +167,8 @@ class LeaveApplicationController extends Controller
             'leave_document' => 'sometimes|nullable|file|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048',
         ]);
 
-        $validator->getMessageBag()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
+//        $validator->getMessageBag()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
+        $validator->messages()->add('days.in', 'The number of days must be equal to the difference between the start and end dates.');
 
         return $validator;
     }

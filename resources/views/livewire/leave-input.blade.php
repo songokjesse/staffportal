@@ -10,6 +10,6 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Leave Period :</label>
-        <input id="num_days" type="number" min="1" max="{{$leave_days}}" name="days" class="form-control @error('days') is-invalid @enderror" required>
+        <input id="num_days" type="number" min="1" max="{{$leave_days}}" name="days" class="form-control @error('days') is-invalid @enderror" value="{{ old('days') }}" required>
     </div>
 </div>
