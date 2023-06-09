@@ -88,9 +88,6 @@
             </div>
         </div>
     </div>
-    @section("scripts")
-
-    @show
     @stack('script')
     @livewireScripts
 </body>

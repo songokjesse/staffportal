@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\AssignedDutiesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobTitleController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\LeaveApprovalController;
 use App\Http\Controllers\LeaveCalendarController;
@@ -108,6 +109,10 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('/admin/users',  UserController::class);
     Route::resource('/admin/roles',  RolesController::class);
     Route::resource('/admin/permissions',  PermissionsController::class);
+
+
+    //Job Title
+    Route::resource('/job_titles', JobTitleController::class);
 
     //site wide notification
     Route::get('/admin/site-notification',function () {
