@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\JobTitle;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -30,21 +33,22 @@ class UserController extends Controller
     /**
      * Show form for creating user
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         $departments = Department::all();
-        return view('admin.users.create', compact('departments'));
+        $job_titles = JobTitle::all();
+        return view('admin.users.create', compact('departments', 'job_titles'));
     }
 
     /**
      * Store a newly created user
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(User $user, Request $request)
+    public function store(User $user, Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -52,6 +56,7 @@ class UserController extends Controller
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'pf' => ['required', 'unique:profiles'],
             'department_id' => ['required'],
+            'job_title_id' => ['required'],
         ]);
 
         //For demo purposes only. When creating user or inviting a user
@@ -63,9 +68,10 @@ class UserController extends Controller
             'user_id' => $profile->id,
             'pf' => $request['pf'],
             'department_id' => $request['department_id'],
+            'job_title_id' => $request['job_title_id'],
         ]);
         return redirect()->route('users.index')
-            ->withSuccess(__('User created successfully.'));
+            ->with('status','User created successfully.');
     }
 
     /**
@@ -100,7 +106,7 @@ class UserController extends Controller
      * Update user data
      *
      * @param User $user*
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(User $user, Request $request)
     {
@@ -114,7 +120,7 @@ class UserController extends Controller
         $user->syncRoles($request->get('role'));
 
         return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
+            ->with('status','User updated successfully.');
     }
 
     /**
@@ -122,13 +128,13 @@ class UserController extends Controller
      *
      * @param User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(User $user)
     {
         $user->delete();
 
         return redirect()->route('users.index')
-            ->withSuccess(__('User deleted successfully.'));
+            ->with('status','User deleted successfully.');
     }
 }

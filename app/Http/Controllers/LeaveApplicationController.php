@@ -50,9 +50,17 @@ class LeaveApplicationController extends Controller
         }
 
         $users = DB::table('users')
-            ->select('name', 'id')
-            ->whereNotIn('id', [Auth::id()])
+            ->join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->select('users.name', 'users.id')
+            ->where('users.id', '!=', Auth::id())
+            ->where('profiles.department_id', function ($query) {
+                $query->select('department_id')
+                    ->from('profiles')
+                    ->where('user_id', Auth::id())
+                    ->limit(1);
+            })
             ->get();
+
         $leave_allocation = LeaveAllocation::where('user_id', Auth::id())->with('leaveType')->get();
         return view('leave_application.create', compact('leave_allocation', 'users'));
     }

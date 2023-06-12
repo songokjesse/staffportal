@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
+            $table->unsignedBigInteger('job_title_id');
+            $table->foreign('job_title_id')->references('id')->on('job_titles');
             $table->timestamps();
         });
     }

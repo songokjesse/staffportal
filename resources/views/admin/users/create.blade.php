@@ -20,6 +20,19 @@
                                 @csrf
                                 @method('POST')
                                 <div class="mb-3">
+                                    <label for="name" class="form-label">Job Title</label>
+                                   <select name="job_title_id" class="form-control" required>
+                                       <option selected disabled> Select Job Title</option>
+                                       @foreach($job_titles as $title)
+                                           <option value="{{$title->id}}">{{$title->name}}</option>
+                                       @endforeach
+                                   </select>
+
+                                    @if ($errors->has('job_title_id'))
+                                        <span class="text-danger text-left">{{ $errors->first('job_title_id') }}</span>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input value="{{ old('name') }}"
                                            type="text"
