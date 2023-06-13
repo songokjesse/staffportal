@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AgreeAssignedDuty;
+use App\Mail\RefuseAssignedDuty;
 use App\Models\AssignedDuty;
 use App\Models\LeaveApplication;
 use App\Models\LeaveRecommendation;
@@ -11,6 +13,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use MBarlow\Megaphone\Types\Important;
 
 class AssignedDutiesController extends Controller
@@ -18,7 +21,7 @@ class AssignedDutiesController extends Controller
     //
     public function index(): Factory|View|Application
     {
-        $assigned_duties = AssignedDuty::where('user_id', Auth::user()->id)
+        $assigned_duties = AssignedDuty::where('user_id', Auth::id())
             ->where('agree', '=', 0)
             ->Where('dont_agree', '=', 0)
             ->with('leave_application')
@@ -57,6 +60,9 @@ class AssignedDutiesController extends Controller
 
         $user = User::find($leave_application->recommend_user_id);
         $user->notify($notification);
+
+        $assignedDutyUser = User::find($id);
+        Mail::to($assignedDutyUser->email)->queue(new AgreeAssignedDuty($assignedDutyUser->name, $applicant_name));
 
         //Send notification to HOD for Recommendation
         $recommendation_notification = new Important(
@@ -97,6 +103,9 @@ class AssignedDutiesController extends Controller
 
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
+
+        $assignedDutyUser = User::find($id);
+        Mail::to($assignedDutyUser->email)->queue(new RefuseAssignedDuty($assignedDutyUser->name, $user->name));
 
         return redirect()->route('assigned_duties.index')
             ->with('status','Offer to Help with Duties Rejection is successful.');

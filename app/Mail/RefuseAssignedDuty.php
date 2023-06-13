@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AgreeAssignedDuty extends Mailable
+class RefuseAssignedDuty extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class AgreeAssignedDuty extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Response to Duty Assignment',
+            subject: 'Refuse Assigned Duty',
         );
     }
 
@@ -44,7 +44,7 @@ class AgreeAssignedDuty extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.agree_assigned_duty',
+            view: 'emails.refuse_assigned_duty',
         );
     }
 
