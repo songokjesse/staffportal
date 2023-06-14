@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\LeaveNotRecommended;
+use App\Mail\LeavePendingApproval;
 use App\Mail\LeaveRecommended;
 use App\Models\LeaveApplication;
 use App\Models\LeaveApproval;
@@ -70,6 +71,7 @@ class LeaveRecommendationController extends Controller
         $leave_approval->leave_application_id = $recommendation->leave_application_id;
         $leave_approval->save();
 
+
         //Send notification to the Applicant on the Status of the Leave Application
         $notification = new Important(
             'Leave Application Recommendation', // Notification Title
@@ -84,7 +86,9 @@ class LeaveRecommendationController extends Controller
         $recommender = User::find(Auth::id());
         Mail::to($user->email)->queue(new LeaveRecommended($recommender->name, $user->name));
 
-
+//        notify approver
+        $approver = User::find($request->user_id);
+        Mail::to($approver->email)->queue(new LeavePendingApproval($approver->name, $user->name));
 
         return redirect()->route('leave_recommendation.index')
             ->with('status','Leave Recommendation Submitted (Recommended) successfully.');

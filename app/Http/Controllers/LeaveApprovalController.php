@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeaveApproved;
+use App\Mail\LeaveNotApproved;
 use App\Models\LeaveApplication;
 use App\Models\LeaveApproval;
 use App\Models\User;
@@ -12,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use MBarlow\Megaphone\Types\Important;
 
 class LeaveApprovalController extends Controller
@@ -68,6 +71,9 @@ class LeaveApprovalController extends Controller
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
+        //send email notification
+        Mail::to($user->email)->queue(new LeaveApproved(Auth::user()->name, $user->name));
+
 
         return redirect()->route('leave_approvals.index')
             ->with('status','Leave Approval Submitted (Approved) successfully.');
@@ -100,6 +106,7 @@ class LeaveApprovalController extends Controller
 
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
+        Mail::to($user->email)->queue(new LeaveNotApproved($user->name));
 
 
         return redirect()->route('leave_approvals.index')

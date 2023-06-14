@@ -16,11 +16,30 @@
                         </div>
                             <hr class="mt-2 mb-3"/>
                             <h2>{{ __($leaves->applicant_name) }}</h2>
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Entitled Leave Days </th>
+                                    <th>Days already Utilized</th>
+                                    <th>Leave Days Requested</th>
+                                    <th>Balance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
                             <h2>Leave Application Details</h2>
                         <table class="mt-2 mt-3 table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>Leave</th>
+                                <th>Leave Category</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Days</th>

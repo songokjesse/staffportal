@@ -4,4 +4,6 @@
 <p> Kindly contact {{$recommender_name}} for more clarification</p>
 
 <p>Best regards,</p>
-<p>Staff Portal</p>
+<p>HOD</p>
+<p>KOITALEEL SAMOEI UNIVERSITY COLLEGE</p>
+

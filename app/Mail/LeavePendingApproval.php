@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class LeaveRecommended extends Mailable
+class LeavePendingApproval extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,10 +19,11 @@ class LeaveRecommended extends Mailable
      * @return void
      */
     public function __construct(
-        public $recommender_name,
+        public $approvers_name,
         public $applicant_name
     )
     {}
+
     /**
      * Get the message envelope.
      *
@@ -31,7 +32,7 @@ class LeaveRecommended extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Leave Application Recommended',
+            subject: 'Leave Application Requiring Approval',
         );
     }
 
@@ -43,7 +44,7 @@ class LeaveRecommended extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.leave_recommended',
+            view: 'emails.approval_pending',
         );
     }
 
