@@ -60,6 +60,8 @@ class AssignedDutiesController extends Controller
 
         $user = User::find($leave_application->recommend_user_id);
         $user->notify($notification);
+        Mail::to($user->email)->queue(new AgreeAssignedDuty($user->name, $applicant_name->name));
+
 
 
         //Send notification to HOD for Recommendation
@@ -74,7 +76,7 @@ class AssignedDutiesController extends Controller
         $hod->notify($recommendation_notification);
 
         $assignedDutyUser = User::find($assigned_duties->user_id);
-        Mail::to($hod->email)->queue(new AgreeAssignedDuty($assignedDutyUser->name, $applicant_name));
+        Mail::to($hod->email)->queue(new AgreeAssignedDuty($assignedDutyUser->name, $applicant_name->name));
 
         return redirect()->route('assigned_duties.index')
             ->with('status','Leave Application Duty Assignment successfully.');
