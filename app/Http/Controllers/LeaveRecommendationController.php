@@ -2,26 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeaveNotRecommended;
+use App\Mail\LeaveRecommended;
 use App\Models\LeaveApplication;
 use App\Models\LeaveApproval;
 use App\Models\LeaveRecommendation;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use MBarlow\Megaphone\Types\Important;
 
 class LeaveRecommendationController extends Controller
 {
     //
-    public function index()
+    public function index(): Factory|View|Application
     {
         $recommendations = DB::table('leave_applications')
             ->join('leave_recommendations', 'leave_applications.id', '=', 'leave_recommendations.leave_application_id')
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
-            ->where('leave_recommendations.user_id','=' ,Auth::user()->id)
+            ->where('leave_recommendations.user_id','=' ,Auth::id())
             ->where('leave_recommendations.recommendation', '=',false)
             ->where('leave_recommendations.not_recommended', '=',false)
             ->select(
@@ -36,7 +42,7 @@ class LeaveRecommendationController extends Controller
             ->get();
         $users = DB::table('users')
             ->select('name','id')
-            ->whereNotIn('id', [Auth::user()->id,])
+            ->whereNotIn('id', [Auth::id(),])
             ->get();
         return view('leave_recommendation.index', compact('recommendations', 'users'));
 
@@ -75,6 +81,10 @@ class LeaveRecommendationController extends Controller
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
+        $recommender = User::find(Auth::id());
+        Mail::to($user->email)->queue(new LeaveRecommended($recommender->name, $user->name));
+
+
 
         return redirect()->route('leave_recommendation.index')
             ->with('status','Leave Recommendation Submitted (Recommended) successfully.');
@@ -103,6 +113,8 @@ class LeaveRecommendationController extends Controller
 
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
+        Mail::to($user->email)->queue(new LeaveNotRecommended( $user->name));
+
 
         return redirect()->route('leave_recommendation.index')
             ->with('status','Leave Recommendation Submitted (Not Recommended) successfully.');
