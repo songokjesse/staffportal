@@ -17,26 +17,22 @@
                             <hr class="mt-2 mb-3"/>
                             <h2>{{ __($leaves->applicant_name) }}</h2>
 
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Entitled Leave Days </th>
-                                    <th>Days already Utilized</th>
-                                    <th>Leave Days Requested</th>
-                                    <th>Balance</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="row">
+                                <div class="col-3">
+                                    <table class=" table table-sm table-bordered ">
+                                        <tr>
+                                            <th>Entitled Leave Days </th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Days already Utilized</th>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                             <h2>Leave Application Details</h2>
-                        <table class="mt-2 mt-3 table table-striped table-bordered">
+                        <table class="mt-2 mt-3 table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>Leave Category</th>
@@ -57,7 +53,7 @@
 
 
                             <h2>Left In Charge</h2>
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-sm table-bordered table-striped">
                                 <tr>
                                     <th>Name</th>
                                 </tr>
@@ -72,7 +68,7 @@
                                 </tr>
                             </table>
                             <h2>Contacts</h2>
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-sm table-bordered table-striped">
                                 <tr>
                                     <th>Phone Number</th>
                                     <td>Email</td>
@@ -86,7 +82,7 @@
 
                             <h2>HOD Recommendation</h2>
 
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-sm table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Recommended By</th>
@@ -119,7 +115,7 @@
                         </table>
                          <h2>Approvals</h2> (<i>Principal/Registrar,Administration/Deputy Registrar, HR</i>)
 
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-sm table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Approved By</th>
@@ -149,19 +145,16 @@
                             </tbody>
 
                         </table>
-
-                            <h2>Leave Documents</h2>
-                            <hr class="mt-2 mb-3">
-                        <ul class="list-group">
-                            @if($attachments == null)
+                            @if($attachments->count() == 0)
                             @else
-                                @foreach($attachments as $attachment)
-                                    <a href="#" class="list-group-item">{{$attachment->file_name}}</a>
-                                @endforeach
+                                <h2>Leave Documents</h2>
+                                <hr class="mt-2 mb-3">
+                                <ul class="list-group">
+                                    @foreach($attachments as $attachment)
+                                        <a href="#" class="list-group-item">{{$attachment->file_name}}</a>
+                                    @endforeach
+                                </ul>
                             @endif
-
-                        </ul>
-
                     </div>
                 </div>
             </div>
