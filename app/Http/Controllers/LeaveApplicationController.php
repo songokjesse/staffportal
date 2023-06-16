@@ -10,6 +10,7 @@ use App\Models\LeaveApplication;
 use App\Models\LeaveDocument;
 use App\Models\User;
 use App\Services\LeaveAllocationService;
+use App\Services\LeaveEntitlementService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -102,7 +103,7 @@ class LeaveApplicationController extends Controller
             ->with('status', 'Leave Application submitted successfully.');
     }
 
-    public function show($id): Factory|View|Application
+    public function show($id, LeaveEntitlementService $leaveEntitlementService): Factory|View|Application
     {
         $leaves = DB::table('leave_applications')
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
@@ -152,7 +153,9 @@ class LeaveApplicationController extends Controller
 
         $attachments = LeaveDocument::where('leave_application_id', $id)->get();
 
-        return view('leave_application.show', compact('leaves', 'recommendations','approvals', 'assigned_duty', 'attachments'));
+        $leave_days_utilized = $leaveEntitlementService->get_utilized_days($id);
+        $current_allocation = $leaveEntitlementService->get_current_allocation($id);
+        return view('leave_application.show', compact('leave_days_utilized','current_allocation','leaves', 'recommendations','approvals', 'assigned_duty', 'attachments'));
     }
 
 

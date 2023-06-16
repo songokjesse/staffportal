@@ -21,12 +21,12 @@
                                 <div class="col-3">
                                     <table class=" table table-sm table-bordered ">
                                         <tr>
-                                            <th>Entitled Leave Days </th>
-                                            <td></td>
+                                            <th>Entitled Days </th>
+                                            <td><strong>{{$current_allocation[0]->days}}</strong></td>
                                         </tr>
                                         <tr>
-                                            <th>Days already Utilized</th>
-                                            <td></td>
+                                            <th>Days Utilized</th>
+                                            <td><strong>{{ $leave_days_utilized->days_utilized ?? 0}}</strong></td>
                                         </tr>
                                     </table>
                                 </div>
