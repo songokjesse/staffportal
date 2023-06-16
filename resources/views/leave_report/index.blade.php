@@ -13,7 +13,7 @@
                         @endif
                         <h2>{{ __('Leave Report') }}</h2>
 
-                        <a href="{{route('leave_calendar')}}" class="btn btn-primary btn-sm"> <i class="bi bi-calendar"></i> Calendar View</a>
+{{--                        <a href="{{route('leave_calendar')}}" class="btn btn-primary btn-sm"> <i class="bi bi-calendar"></i> Calendar View</a>--}}
                         <a href="#" class="btn btn-primary btn-sm"> <i class="bi bi-person"></i> Individual Report</a>
 
 
@@ -72,7 +72,7 @@
                                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                         Pending Recommendations
                                                     </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{$pending_recommendation}}</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -91,7 +91,7 @@
                                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         Pending Approvals
                                                     </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{$pending_approval}}</div>
 
                                                 </div>
                                                 <div class="col-auto">

@@ -23,7 +23,25 @@ class LeaveCountService
     {
         return DB::table('leave_applications')
             ->select('user_id')
-            ->where('status', 'PENDING')
+            ->where('status', '=', 'PENDING')
+            ->count();
+    }
+
+    public function count_application_pending_recommendation(): int
+    {
+        return DB::table('leave_recommendations')
+            ->select('user_id')
+            ->where('recommendation', '=' ,false)
+            ->where('not_recommended', '=' ,false)
+            ->count();
+    }
+
+    public function count_application_pending_approval(): int
+    {
+        return DB::table('leave_approvals')
+            ->select('user_id')
+            ->where('approved', '=' ,false)
+            ->where('not_approved', '=' ,false)
             ->count();
     }
 }
