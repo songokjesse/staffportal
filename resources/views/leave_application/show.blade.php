@@ -19,7 +19,7 @@
 
                             <div class="row">
                                 <div class="col-3">
-                                    <table class=" table table-sm table-bordered ">
+                                    <table class=" table table-sm table-bordered table-striped-columns ">
                                         <tr>
                                             <th>Entitled Days </th>
                                             <td><strong>{{$current_allocation[0]->days}}</strong></td>
