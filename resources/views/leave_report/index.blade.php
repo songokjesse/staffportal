@@ -14,7 +14,7 @@
                         <h2>{{ __('Leave Report') }}</h2>
 
 {{--                        <a href="{{route('leave_calendar')}}" class="btn btn-primary btn-sm"> <i class="bi bi-calendar"></i> Calendar View</a>--}}
-                        <a href="#" class="btn btn-primary btn-sm"> <i class="bi bi-person"></i> Individual Report</a>
+                        <a href="{{route('individual_report')}}" class="btn btn-primary btn-sm"> <i class="bi bi-bar-chart"></i> Individual Report</a>
 
 
                             <hr>

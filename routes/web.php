@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\AssignedDutiesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndividualReportController;
 use App\Http\Controllers\JobTitleController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\LeaveApprovalController;
@@ -121,5 +122,6 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
     Route::resource('holidays', PublicHolidayController::class);
+    Route::get('/individual_report', [IndividualReportController::class, 'index'])->name('individual_report');
 
 });
