@@ -24,10 +24,10 @@ class StaffDepartmentController extends Controller
             'user_id' => 'required',
             'department_id' => 'required'
         ]);
-        $staff = new Profile;
-        $staff->user_id = $request->user_id;
-        $staff->department_id = $request->department_id;
-        $staff->save();
+
+          Profile::updateOrCreate([
+              "user_id" => $request->user_id,
+          ], $request->all());
 
         return redirect()->route('assign_staff_to_department')
             ->with('status','Staff assigned Department successfully.');
