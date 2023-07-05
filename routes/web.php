@@ -17,6 +17,8 @@ use App\Http\Controllers\LeaveApprovalController;
 use App\Http\Controllers\LeaveCalendarController;
 use App\Http\Controllers\LeaveRecommendationController;
 use App\Http\Controllers\LeaveReportController;
+use App\Http\Controllers\ManagementCategoryController;
+use App\Http\Controllers\ManagementStaffController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicHolidayController;
 use App\Http\Controllers\Requisition\RequisitionController;
@@ -110,6 +112,11 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('/admin/users',  UserController::class);
     Route::resource('/admin/roles',  RolesController::class);
     Route::resource('/admin/permissions',  PermissionsController::class);
+
+    //management Categories
+    Route::resource('/management_categories', ManagementCategoryController::class);
+    Route::get('/management_staff', [ManagementStaffController::class, 'index'])->name('management_staff.index');
+    Route::post('/management_staff', [ManagementStaffController::class, 'store'])->name('management_staff.store');
 
 
     //Job Title

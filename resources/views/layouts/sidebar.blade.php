@@ -13,6 +13,11 @@
                         </a>
                     </li>
                     <li>
+                                <a href="/management_categories" class="nav-link px-3">
+                                    <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Management</span>
+                                </a>
+                    </li>
+                    <li>
                         <a href="{{route('job_titles.index')}}" class="nav-link px-3">
                             <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Job Titles</span>
                         </a>
