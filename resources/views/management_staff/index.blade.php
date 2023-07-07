@@ -74,7 +74,6 @@
                                 <th>Staff Name</th>
                                 <th>Management Category</th>
                                 <th>Department</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -84,7 +83,6 @@
                                     <td>{{$man_staff->user->name}}</td>
                                     <td>{{$man_staff->management_category->name}}</td>
                                     <td>{{$man_staff->department->name}}</td>
-                                    <td></td>
                                 </tr>
                             @endforeach
                             </tbody>

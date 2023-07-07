@@ -6,6 +6,7 @@ use App\Models\ManagementCategory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ManagementCategoryController extends Controller
@@ -34,10 +35,10 @@ class ManagementCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required'
@@ -65,23 +66,30 @@ class ManagementCategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit($id): View|Factory|Application
     {
-        //
+        $management_category = ManagementCategory::find($id);
+        return view('management_categories.edit', compact('management_category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $management_category = ManagementCategory::findOrFail($id);
+        $management_category->name = $request['name'];
+        $management_category->save();
+        return redirect()->route('management_categories.index')->with('status', 'Management Category Updated Successfully');
     }
 
     /**
