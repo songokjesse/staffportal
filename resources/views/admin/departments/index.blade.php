@@ -30,7 +30,9 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$department->name}}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{route('departments.edit', $department->id)}}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>
