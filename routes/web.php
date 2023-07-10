@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\LeaveAllocationController;
 use App\Http\Controllers\Admin\LeaveCategoryController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\RecommenderController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\StaffDepartmentController;
 use App\Http\Controllers\Admin\UserController;
@@ -118,6 +119,9 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::get('/management_staff', [ManagementStaffController::class, 'index'])->name('management_staff.index');
     Route::post('/management_staff', [ManagementStaffController::class, 'store'])->name('management_staff.store');
 
+    //leave_recommender
+    Route::get('/recommender',[RecommenderController::class, 'index'])->name('recommenders.index');
+    Route::post('/recommender', [RecommenderController::class, 'store'])->name('recommenders.store');
 
     //Job Title
     Route::resource('/job_titles', JobTitleController::class);

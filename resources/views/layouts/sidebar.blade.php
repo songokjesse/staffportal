@@ -41,9 +41,15 @@
                     <li>
                         <a href="{{route('leave_recommendation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Recommendation</span></a>
                     </li>
-               @hasrole('Registrar Administration')
+{{--               @hasrole('Registrar Administration')--}}
                     <li class="w-100">
                         <a href="{{route('holidays.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Pubic Holidays</span> </a>
+                    </li>
+                    <li class="w-100">
+                        <a href="{{route('recommenders.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Recommenders</span> </a>
+                    </li>
+                    <li class="w-100">
+                        <a href="{{route('holidays.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Approvers</span> </a>
                     </li>
                     <li class="w-100">
                         <a href="{{route('leaveCategory.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Category </span> </a>
@@ -57,7 +63,7 @@
                     <li class="w-100">
                         <a href="{{route('leave_reports.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Reports </span> </a>
                     </li>
-                @endhasrole()
+{{--                @endhasrole()--}}
                 </ul>
             </li>
             @role('Admin')
