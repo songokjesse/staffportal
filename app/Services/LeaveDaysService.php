@@ -29,20 +29,21 @@ class LeaveDaysService
                 ->get();
 
             $remaining_days = [];
-
+            $leave_id  = 0;
             foreach ($allocated_days as $allocated) {
                 $category = $allocated->name;
                 $allocated_days = $allocated->days;
                 $days_taken = 0;
 
                 foreach ($days_on_leave as $on_leave) {
+                    $leave_id = $on_leave->id;
                     if ($on_leave->name == $category) {
                         $days_taken = $on_leave->total_days;
                         break;
                     }
                 }
 
-                $remaining_days[$category] = [$allocated_days - $days_taken, $on_leave->id];
+                $remaining_days[$category] = [$allocated_days - $days_taken, $leave_id];
             }
 
             return $remaining_days;
