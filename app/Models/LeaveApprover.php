@@ -9,4 +9,15 @@ class LeaveApprover extends Model
 {
     use HasFactory;
     protected $fillable = ['staff_category', 'approver'];
+
+
+    public function staffCategory()
+    {
+        return $this->belongsTo(ManagementCategory::class, 'staff_category');
+    }
+
+    public function approverCategory()
+    {
+        return $this->belongsTo(ManagementCategory::class, 'approver');
+    }
 }

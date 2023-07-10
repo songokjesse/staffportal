@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApproverController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\LeaveAllocationController;
 use App\Http\Controllers\Admin\LeaveCategoryController;
@@ -122,6 +123,9 @@ Route::group(['middleware' => [  'auth' ]], function () {
     //leave_recommender
     Route::get('/recommender',[RecommenderController::class, 'index'])->name('recommenders.index');
     Route::post('/recommender', [RecommenderController::class, 'store'])->name('recommenders.store');
+    //leave_approver
+    Route::get('/approver',[ApproverController::class, 'index'])->name('approvers.index');
+    Route::post('/approver', [ApproverController::class, 'store'])->name('approvers.store');
 
     //Job Title
     Route::resource('/job_titles', JobTitleController::class);
