@@ -3,16 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Models\LeaveAllocation;
+use App\Services\LeaveDaysService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LeaveInput extends Component
 {
     public string|int $leave_days = '1';
-    public function render()
+    public function render(LeaveDaysService $leaveDaysService)
     {
         return view('livewire.leave-input', [
-            'leave_allocation' => LeaveAllocation::where('user_id', Auth::user()->id)->with('leaveType')->get()
+            'leave_allocation' => $leaveDaysService->get_available_days(Auth::id())
 
         ]);
     }

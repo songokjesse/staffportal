@@ -24,8 +24,8 @@ class LeaveDaysService
                 ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
                 ->where('user_id', '=', $user_id)
                 ->where('state', '=', 'Approved')
-                ->select('leave_categories.name', DB::raw('SUM(leave_applications.days) as total_days'))
-                ->groupBy('leave_categories.name')
+                ->select('leave_categories.id','leave_categories.name', DB::raw('SUM(leave_applications.days) as total_days'))
+                ->groupBy('leave_categories.name', 'leave_categories.id')
                 ->get();
 
             $remaining_days = [];
@@ -42,7 +42,7 @@ class LeaveDaysService
                     }
                 }
 
-                $remaining_days[$category] = $allocated_days - $days_taken;
+                $remaining_days[$category] = [$allocated_days - $days_taken, $on_leave->id];
             }
 
             return $remaining_days;

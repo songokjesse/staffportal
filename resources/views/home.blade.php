@@ -27,9 +27,10 @@
                                         @if($leave_days == null)
                                              <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                                         @endif
-                                    @foreach($leave_days as $key => $days)
+                                    @foreach($leave_days as $key => $innerArray )
+
                                             <li class="list-group-item">
-                                                <span>{{$key}} : {{$days}}  </span>
+                                                <span>{{$key}} : {{$innerArray[0]}} </span>
                                             </li>
                                     @endforeach
                                     </ul>
