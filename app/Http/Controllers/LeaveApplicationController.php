@@ -11,6 +11,7 @@ use App\Models\LeaveDocument;
 use App\Models\User;
 use App\Services\LeaveAllocationService;
 use App\Services\LeaveEntitlementService;
+use App\Services\RecommenderService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -33,7 +34,7 @@ class LeaveApplicationController extends Controller
         return view('leave_application.index', compact('leaves'));
     }
 
-    public function create(LeaveAllocationService $allocationService): Factory|View|RedirectResponse|Application
+    public function create(LeaveAllocationService $allocationService, RecommenderService $recommenderService): Factory|View|RedirectResponse|Application
     {
 
         if($allocationService->allocated_days(Auth::id()) == 0){
@@ -63,7 +64,9 @@ class LeaveApplicationController extends Controller
             })
             ->get();
 
-        return view('leave_application.create', compact('users'));
+        $recommenders = $recommenderService->determineManagementLevel(Auth::id());
+
+        return view('leave_application.create', compact('users', 'recommenders'));
     }
 
     public function store(Request $request): RedirectResponse

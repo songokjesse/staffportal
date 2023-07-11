@@ -82,12 +82,22 @@
 
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">To be Recommended By (HOD) :</label>
-                                    <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror ">
-                                        <option selected disabled></option>
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    @if($recommenders == null)
+                                        <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror ">
+                                            <option selected disabled></option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror ">
+                                            <option selected disabled></option>
+                                            @foreach($recommenders as $user)
+                                                <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
                                     @error('recommend_user_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
