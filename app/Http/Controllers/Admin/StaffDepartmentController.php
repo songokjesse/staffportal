@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StaffDepartmentController extends Controller
 {
@@ -16,7 +17,14 @@ class StaffDepartmentController extends Controller
     {
         $users = User::all();
         $departments = Department::all();
-        $profiles = Profile::latest()->paginate(20);
+        $profiles = DB::table('profiles')
+            ->join('users', 'profiles.user_id', '=', 'users.id')
+            ->join('departments', 'profiles.department_id', '=', 'departments.id')
+            ->select(
+                'departments.name as department_name',
+                'users.name as user_name'
+            )
+            ->paginate(20);
         return view('admin.departments.staff_department', compact('users', 'departments', 'profiles'));
     }
     public function store(Request $request){

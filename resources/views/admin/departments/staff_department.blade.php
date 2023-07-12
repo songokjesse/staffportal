@@ -77,8 +77,8 @@
                             @foreach($profiles as $profile)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$profile->user->name}}</td>
-                                    <td>{{$profile->department->name}}</td>
+                                    <td>{{$profile->user_name}}</td>
+                                    <td>{{$profile->department_name}}</td>
                                     <td></td>
                                 </tr>
                             @endforeach
