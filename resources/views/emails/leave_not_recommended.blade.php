@@ -4,6 +4,8 @@
 <p> Kindly contact {{$recommender_name}} for more clarification</p>
 
 <p>Best regards,</p>
-<p>HOD</p>
-<p>KOITALEEL SAMOEI UNIVERSITY COLLEGE</p>
+<p><b>HOD </b></p>
+<p><b>KOITALEEL SAMOEI UNIVERSITY COLLEGE</b></p>
+<p><b>Please do not reply to this email!</b></p>
+
 

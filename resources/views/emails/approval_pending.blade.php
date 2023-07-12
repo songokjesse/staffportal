@@ -8,4 +8,4 @@
 
 <p>Best regards,</p>
 <p>{{$applicant_name}}.</p>
-<p>Please do not reply to this email</p>
+<p><b>Please do not reply to this email</b></p>

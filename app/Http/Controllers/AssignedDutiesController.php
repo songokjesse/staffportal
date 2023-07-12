@@ -50,11 +50,11 @@ class AssignedDutiesController extends Controller
         $recommendation->save();
 
         $applicant_name = User::find($leave_application->user_id);
-        //Send notification to the Applicant on the Status of the Leave Application
+        //Send notification to HOD for Recommendation
         $notification = new Important(
             'Leave Application', // Notification Title
             $applicant_name->name. ' has applied for Leave and was requesting for your recommendation', // Notification Body
-            env('APP_URL', 'http://localhost:8000').'/leave_application/'.$leave_application->id, // Optional: URL. Megaphone will add a link to this URL within the Notification display.
+            env('APP_URL', 'http://localhost:8000').'/leave_recommendation/', // Optional: URL. Megaphone will add a link to this URL within the Notification display.
 //            'Read More...' // Optional: Link Text. The text that will be shown on the link button.
         );
 
@@ -64,7 +64,7 @@ class AssignedDutiesController extends Controller
 
 
 
-        //Send notification to HOD for Recommendation
+        //Send notification to the Applicant on the Status of the Leave Application
         $recommendation_notification = new Important(
             'Assignment of Duties', // Notification Title
             'Your Duties Will be Performed By '.Auth::user()->name, // Notification Body

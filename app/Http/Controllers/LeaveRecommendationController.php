@@ -9,6 +9,7 @@ use App\Models\LeaveApplication;
 use App\Models\LeaveApproval;
 use App\Models\LeaveRecommendation;
 use App\Models\User;
+use App\Services\ApproverService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,10 +23,11 @@ use MBarlow\Megaphone\Types\Important;
 class LeaveRecommendationController extends Controller
 {
     //
-    public function index(): Factory|View|Application
+    public function index(ApproverService $approverService): Factory|View|Application
     {
         $recommendations = DB::table('leave_applications')
             ->join('leave_recommendations', 'leave_applications.id', '=', 'leave_recommendations.leave_application_id')
+            ->join('assigned_duties', 'leave_applications.id', '=', 'assigned_duties.leave_application_id')
             ->join('users', 'leave_applications.user_id', '=', 'users.id')
             ->join('leave_categories', 'leave_applications.leave_categories_id', '=', 'leave_categories.id')
             ->where('leave_recommendations.user_id','=' ,Auth::id())
@@ -33,26 +35,37 @@ class LeaveRecommendationController extends Controller
             ->where('leave_recommendations.not_recommended', '=',false)
             ->select(
                 'leave_recommendations.id',
+                'leave_recommendations.leave_application_id',
                 'leave_applications.user_id',
                 'leave_categories.name as leave_category',
                 'leave_applications.start_date',
                 'leave_applications.end_date',
                 'leave_applications.days',
                 DB::raw("(Select name from users where id = leave_applications.user_id) as applicant_name"),
+                DB::raw("(Select name from users where id = assigned_duties.user_id) as user_assigned_duties"),
             )
             ->get();
-        $users = DB::table('users')
-            ->select('name','id')
-            ->whereNotIn('id', [Auth::id(),])
-            ->get();
-        return view('leave_recommendation.index', compact('recommendations', 'users'));
 
+        return view('leave_recommendation.index', compact('recommendations'));
+
+    }
+
+    public function recommended_view(ApproverService $approverService, $id): Factory|View|Application
+    {
+        $application = LeaveApplication::find($id);
+        $users = $approverService->determineManagementLevel($application->user_id);
+        return view('leave_recommendation.recommended', compact('application', 'users'));
+    }
+    public function not_recommended_view($id)
+    {
+        $application = LeaveApplication::find($id);
+        return view('leave_recommendation.not_recommended', compact('application'));
     }
 
     public function recommended(Request $request, $id): RedirectResponse
     {
         //        Add update recommendation to true
-        $recommendation = LeaveRecommendation::find($id);
+        $recommendation = LeaveRecommendation::where('leave_application_id', $id)->first();
         $recommendation->recommendation = True;
         if($request['comments'])
         {
@@ -95,7 +108,7 @@ class LeaveRecommendationController extends Controller
     }
     public function not_recommended(Request $request,$id):  RedirectResponse
     {
-        $recommendation = LeaveRecommendation::find($id);
+        $recommendation = LeaveRecommendation::where('leave_application_id', $id)->first();
         $recommendation->not_recommended = True;
         if($request['comments'])
         {
@@ -116,8 +129,9 @@ class LeaveRecommendationController extends Controller
         );
 
         $user = User::find($leave_application->user_id);
+        $recommender_user = User::find($recommendation->user_id);
         $user->notify($notification);
-        Mail::to($user->email)->queue(new LeaveNotRecommended( $user->name));
+        Mail::to($user->email)->queue(new LeaveNotRecommended($recommender_user->name, $user->name));
 
 
         return redirect()->route('leave_recommendation.index')

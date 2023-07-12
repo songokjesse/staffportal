@@ -19,6 +19,7 @@ class LeaveNotRecommended extends Mailable
      * @return void
      */
     public function __construct(
+        public $recommender_name ,
         public $applicant_name
     )
     {}

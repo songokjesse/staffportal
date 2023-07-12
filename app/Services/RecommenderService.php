@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\LeaveRecommender;
 use App\Models\ManagementStaff;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RecommenderService
@@ -25,6 +26,7 @@ class RecommenderService
 
             return DB::table('users')
                 ->whereIn('id', $users)
+                ->whereNotIn('id', [$user_id])
                 ->select('id', 'name')
                 ->get();
         }

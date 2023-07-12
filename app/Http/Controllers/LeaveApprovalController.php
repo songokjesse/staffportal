@@ -44,6 +44,7 @@ class LeaveApprovalController extends Controller
         return view('leave_approval.index', compact('approvals'));
     }
 
+
     public function approved(Request $request, $id): RedirectResponse
     {
         $leave_approval = LeaveApproval::find($id);
