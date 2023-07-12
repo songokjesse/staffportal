@@ -86,7 +86,7 @@
 
                         </table>
 
-                            <div class="d-flex">
+                            <div class="mt-2 mb-2">
                                 {!! $profiles->links() !!}
                             </div>
 
