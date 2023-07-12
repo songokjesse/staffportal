@@ -97,6 +97,8 @@ Route::group(['middleware' => [  'auth' ]], function () {
 
 //    leave Recommendation
     Route::get('/leave_recommendation', [LeaveRecommendationController::class, 'index'])->name('leave_recommendation.index');
+    Route::get('/leave_recommendation/recommend_view/{id}', [LeaveRecommendationController::class, 'recommended_view'])->name('leave_recommendation.recommend_view');
+    Route::get('/leave_recommendation/not_recommended_view/{id}', [LeaveRecommendationController::class, 'not_recommended_view'])->name('leave_recommendation.not_recommended_view');
     Route::post('/leave_recommendation/recommend/{id}', [LeaveRecommendationController::class, 'recommended'])->name('leave_recommendation.recommended');
     Route::post('/leave_recommendation/not_recommended/{id}', [LeaveRecommendationController::class, 'not_recommended'])->name('leave_recommendation.not_recommended');
 
@@ -138,5 +140,4 @@ Route::group(['middleware' => [  'auth' ]], function () {
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
     Route::resource('holidays', PublicHolidayController::class);
     Route::get('/individual_report', [IndividualReportController::class, 'index'])->name('individual_report');
-
 });
