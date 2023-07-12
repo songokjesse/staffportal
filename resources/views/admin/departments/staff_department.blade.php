@@ -85,6 +85,11 @@
                             </tbody>
 
                         </table>
+
+                            <div class="d-flex">
+                                {!! $profiles->links() !!}
+                            </div>
+
                     </div>
                 </div>
             </div>
