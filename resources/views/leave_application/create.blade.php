@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">My Duties Will be performed by :</label>
-                                    <select name="duties_by_user_id" class="form-control @error('duties_by_user_id') is-invalid @enderror">
+                                    <select name="duties_by_user_id" class="form-control @error('duties_by_user_id') is-invalid @enderror js-example-basic-single">
                                         <option selected disabled></option>
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
@@ -83,7 +83,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">To be Recommended By (HOD) :</label>
                                     @if($recommenders == null)
-                                        <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror ">
+                                        <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror hod">
                                             <option selected disabled></option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
@@ -127,7 +127,9 @@
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker({
@@ -139,7 +141,14 @@
                 clearBtn: true,
                 // multidate: true,
             });
+            $('.js-example-basic-single').select2({
+                theme: "classic"
+            });
+            $('.hod').select2({
+                theme: "classic"
+            });
         });
+
     </script>
 
 @endsection

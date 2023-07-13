@@ -14,12 +14,17 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('vendor/megaphone/css/megaphone.css') }}">
+
     @livewireStyles
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-
+    <style>
+        span.select2.select2-container.select2-container--classic{
+            width: 100% !important;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -92,5 +97,6 @@
     @show
     @stack('script')
     @livewireScripts
+
 </body>
 </html>
