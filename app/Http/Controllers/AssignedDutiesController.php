@@ -106,7 +106,7 @@ class AssignedDutiesController extends Controller
         $user = User::find($leave_application->user_id);
         $user->notify($notification);
 
-        $assignedDutyUser = User::find($id);
+        $assignedDutyUser = User::find($assigned_duties->user_id);
         Mail::to($user->email)->queue(new RefuseAssignedDuty($assignedDutyUser->name, $user->name));
 
         return redirect()->route('assigned_duties.index')
