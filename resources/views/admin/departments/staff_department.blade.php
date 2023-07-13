@@ -31,8 +31,8 @@
                                 @method('POST')
                                 <div class="form-group">
                                 <label> Users</label>
-                                    <select name="user_id" class="form-control" required @error('user_id') is-invalid @enderror>
-                                        <option selected disabled>--- Select User ---- </option>
+                                    <select name="user_id" class="form-control @error('user_id') is-invalid @enderror users" required >
+                                        <option selected disabled> Select User </option>
                                     @foreach($users as $user)
                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
@@ -45,8 +45,8 @@
                                 </div>
                                 <div class="form-group">
                                 <label>Departments</label>
-                                    <select name="department_id" class="form-control" required @error('department_id') is-invalid @enderror>
-                                        <option selected disabled>--- Choose Department --- </option>
+                                    <select name="department_id" class="form-control @error('department_id') is-invalid @enderror departments" required >
+                                        <option selected disabled> Select Department </option>
                                         @foreach($departments as $department)
                                             <option value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
@@ -96,4 +96,20 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />    <script>
+        $(document).ready(function () {
+            $('.users').select2({
+                theme: "bootstrap-5"
+            });
+            $('.departments').select2({
+                theme: "bootstrap-5"
+            });
+        });
 
+    </script>
+
+@endsection
