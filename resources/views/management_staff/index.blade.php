@@ -25,8 +25,8 @@
                                     <div class="card-body">
                                     <div class="mb-2">
                                         <label>User</label>
-                                        <select class="form-control" name="user_id">
-                                            <option selected disabled></option>
+                                        <select class="form-control users" name="user_id">
+                                            <option selected disabled> Select User</option>
                                             @foreach($users as $id => $name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
@@ -41,8 +41,8 @@
                                         <label>
                                         Management Category
                                         </label>
-                                        <select class="form-control" name="management_category_id">
-                                            <option selected disabled></option>
+                                        <select class="form-control management" name="management_category_id">
+                                            <option selected disabled> Select Management Category</option>
                                         @foreach($management_categories as $id => $name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
@@ -52,8 +52,8 @@
                                         <label>
                                             Department
                                         </label>
-                                        <select class="form-control" name="department_id">
-                                            <option selected disabled></option>
+                                        <select class="form-control departments" name="department_id">
+                                            <option selected disabled> Select Department </option>
                                                     @foreach($departments as $id => $name)
                                                         <option value="{{ $id }}">{{ $name }}</option>
                                                     @endforeach
@@ -95,3 +95,24 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />    <script>
+        $(document).ready(function () {
+
+            $('.departments').select2({
+                theme: "bootstrap-5"
+            });
+            $('.management').select2({
+                theme: "bootstrap-5"
+            });
+            $('.users').select2({
+                theme: "bootstrap-5"
+            });
+        });
+
+    </script>
+
+@endsection
