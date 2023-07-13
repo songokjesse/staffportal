@@ -53,7 +53,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">My Duties Will be performed by :</label>
                                     <select name="duties_by_user_id" class="form-control @error('duties_by_user_id') is-invalid @enderror js-example-basic-single">
-                                        <option selected disabled></option>
+                                        <option selected disabled> Select User </option>
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                                         @endforeach
@@ -84,7 +84,7 @@
                                     <label for="exampleInputEmail1" class="form-label">To be Recommended By (HOD) :</label>
                                     @if($recommenders == null)
                                         <select name="recommend_user_id" class="form-control @error('recommend_user_id') is-invalid @enderror hod">
-                                            <option selected disabled></option>
+                                            <option selected disabled> Select HOD </option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}" {{ old('recommend_user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                                             @endforeach
