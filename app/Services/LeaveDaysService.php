@@ -17,7 +17,7 @@ class LeaveDaysService
                 ->join('leave_categories', 'leave_allocations.leave_categories_id', '=', 'leave_categories.id')
                 ->where('user_id', '=', $user_id)
                 ->where('year', '=', $this->current_year())
-                ->select('leave_allocations.days', 'leave_categories.name')
+                ->select('leave_allocations.days', 'leave_categories.name', 'leave_categories.id')
                 ->get();
 
             $days_on_leave = DB::table('leave_applications')
@@ -34,7 +34,7 @@ class LeaveDaysService
                 $category = $allocated->name;
                 $allocated_days = $allocated->days;
                 $days_taken = 0;
-
+                $leave_id = $allocated->id;
                 foreach ($days_on_leave as $on_leave) {
                     $leave_id = $on_leave->id;
                     if ($on_leave->name == $category) {
