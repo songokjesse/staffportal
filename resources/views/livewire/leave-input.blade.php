@@ -1,8 +1,8 @@
 <div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Type of Leave :</label>
-        <select name='leave_categories_id' class="form-control @error('leave_categories_id') is-invalid @enderror " id="exampleInputEmail1" aria-describedby="emailHelp" wire:click="change_value($event.target.value)" required>
-            <option selected disabled></option>
+        <select name='leave_categories_id' class="form-control days @error('leave_categories_id') is-invalid @enderror " id="exampleInputEmail1" aria-describedby="emailHelp" wire:click="change_value($event.target.value)" required>
+            <option selected disabled> Select Leave Category</option>
             @foreach($leave_allocation as $key  => $innerArray )
 {{--                <option value="{{$allocation->leaveType->id}}.{{$allocation->days}}">{{$allocation->leaveType->name}} ----  &nbsp; Days Available: {{$allocation->days}}</option>--}}
                 <option value="{{$innerArray[1]}}.{{$innerArray[0]}}" {{ old('leave_categories_id') == $innerArray[1] ? 'selected' : '' }}>{{$key}} ----  &nbsp; Days Available: {{$innerArray[0]}}</option>
