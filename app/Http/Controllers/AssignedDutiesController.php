@@ -107,7 +107,7 @@ class AssignedDutiesController extends Controller
         $user->notify($notification);
 
         $assignedDutyUser = User::find($id);
-        Mail::to($assignedDutyUser->email)->queue(new RefuseAssignedDuty($assignedDutyUser->name, $user->name));
+        Mail::to($user->email)->queue(new RefuseAssignedDuty($assignedDutyUser->name, $user->name));
 
         return redirect()->route('assigned_duties.index')
             ->with('status','Offer to Help with Duties Rejection is successful.');
