@@ -14,6 +14,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Status</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                     <td>{{$application->start_date}}</td>
                     <td>{{$application->end_date}}</td>
                     <td>{{$application->status}}</td>
+                    <td><a href="{{route('individual_report_show', $application->id)}}">Show</a></td>
                 </tr>
             @endforeach
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndividualReportController;
 use App\Http\Controllers\JobTitleController;
 use App\Http\Controllers\LeaveApplicationController;
+use App\Http\Controllers\LeaveApplicationViewController;
 use App\Http\Controllers\LeaveApprovalController;
 use App\Http\Controllers\LeaveCalendarController;
 use App\Http\Controllers\LeaveRecommendationController;
@@ -140,4 +141,5 @@ Route::group(['middleware' => [  'auth' ]], function () {
 //    Route::get('/make_requisition', [RequisitionController::class, 'make_requisition'])->name('make_requisitions');
     Route::resource('holidays', PublicHolidayController::class);
     Route::get('/individual_report', [IndividualReportController::class, 'index'])->name('individual_report');
+    Route::get('/individual_report/{id}', LeaveApplicationViewController::class )->name('individual_report_show');
 });
