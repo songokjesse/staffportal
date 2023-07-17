@@ -28,12 +28,11 @@ class AgreeAssignedDuty extends Mailable
     /**
      * Get the message envelope.
      *
-     * @return \Illuminate\Mail\Mailables\Envelope
+     * @return Envelope
      */
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no-reply@ksu.ac.ke', 'Staff Portal'),
             subject: 'Response to Duty Assignment',
         );
     }

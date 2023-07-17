@@ -33,7 +33,6 @@ class LeavePendingApproval extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('no-reply@ksu.ac.ke', 'Staff Portal'),
             subject: 'Leave Application Requiring Approval',
         );
     }
