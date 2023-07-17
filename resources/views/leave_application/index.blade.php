@@ -50,6 +50,9 @@
                                     @if($leave->state === "Not Recommended")
                                         <span class="badge text-bg-danger"><i class="bi bi-sign-stop"></i> Not Recommended</span>
                                     @endif
+                                        @if($leave->state === "Refused Duty Assignment")
+                                        <span class="badge text-bg-danger"><i class="bi bi-sign-stop"></i> Duty Not Assigned</span>
+                                    @endif
                                     @if($leave->state === "Approved")
                                             <span class="badge text-bg-success"><i class="bi bi-check-circle"></i> Approved</span>
                                     @endif
