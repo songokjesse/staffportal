@@ -15,9 +15,13 @@ class IndividualReport extends Component
 
     public function render()
     {
+//        $users = User::with('leave_applications')
+//            ->where('name', 'LIKE', "%{$this->search}%")
+//            ->orWhere('email', 'LIKE', "%{$this->search}%")
+//            ->get();
         $users = User::with('leave_applications')
-            ->where('name', 'LIKE', "%{$this->search}%")
-            ->orWhere('email', 'LIKE', "%{$this->search}%")
+            ->where('name', 'ILIKE', "%{$this->search}%")
+            ->orWhere('email', 'ILIKE', "%{$this->search}%")
             ->get();
 
         return view('livewire.individual-report', [
