@@ -11,23 +11,17 @@ use Livewire\Component;
 
 class IndividualReport extends Component
 {
-    protected string $paginationTheme = 'bootstrap';
-    public $name ="";
+    public $search = '';
 
-    public function render(): Factory|View|Application
+    public function render()
     {
-          $user =  User::where('name', 'like', "%{$this->name}%")
-               ->orWhere('email', 'like', "%{$this->name}%")
-               ->with('leave_applications')
-               ->first();
-
-//        $user = User::whereRaw('lower(name) like ?', ["%{$this->name}%"])
-//            ->orWhereRaw('lower(email) like ?', ["%{$this->name}%"])
-//            ->with('leave_applications')
-//            ->first();
+        $users = User::with('leave_applications')
+            ->where('name', 'LIKE', "%{$this->search}%")
+            ->orWhere('email', 'LIKE', "%{$this->search}%")
+            ->get();
 
         return view('livewire.individual-report', [
-            'leave_applications' => $user ? $user->leave_applications : null
+            'users' => $users,
         ]);
     }
 }
