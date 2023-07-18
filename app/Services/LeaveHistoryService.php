@@ -11,16 +11,16 @@ class LeaveHistoryService
 
         $leave_history = DB::table('leave_applications')
             ->where('user_id', '=', $user_id)
-            ->select(
-                DB::raw('COUNT(*) as application_count'),
-                DB::raw('SUM(CASE WHEN status IN ("ACTIVE", "ENDED") THEN 1 ELSE 0 END) as approved_leaves'),
-                DB::raw('SUM(CASE WHEN status = "REJECTED" THEN 1 ELSE 0 END) as leave_rejections')
-            )
 //            ->select(
 //                DB::raw('COUNT(*) as application_count'),
-//                DB::raw('SUM(CASE WHEN status IN (\'ACTIVE\', \'ENDED\') THEN 1 ELSE 0 END) as approved_leaves'),
-//                DB::raw('SUM(CASE WHEN status = \'REJECTED\' THEN 1 ELSE 0 END) as leave_rejections')
+//                DB::raw('SUM(CASE WHEN status IN ("ACTIVE", "ENDED") THEN 1 ELSE 0 END) as approved_leaves'),
+//                DB::raw('SUM(CASE WHEN status = "REJECTED" THEN 1 ELSE 0 END) as leave_rejections')
 //            )
+            ->select(
+                DB::raw('COUNT(*) as application_count'),
+                DB::raw('SUM(CASE WHEN status IN (\'ACTIVE\', \'ENDED\') THEN 1 ELSE 0 END) as approved_leaves'),
+                DB::raw('SUM(CASE WHEN status = \'REJECTED\' THEN 1 ELSE 0 END) as leave_rejections')
+            )
             ->first();
 
         return [
