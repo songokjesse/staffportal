@@ -60,11 +60,22 @@
                     <li class="w-100">
                         <a href="{{route('leave_allocation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Allocation </span> </a>
                     </li>
-                    <li class="w-100">
-                        <a href="{{route('leave_reports.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Reports </span> </a>
-                    </li>
                 @endhasrole()
                 </ul>
+            </li>
+            <li>
+                <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+                    <i class="bi bi-card-list"></i><span class="ms-1 d-none d-sm-inline">Reports</span></a>
+                <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                    @hasrole('Registrar Administration')
+                    <li>
+                        <a href="{{route('leave_reports.index')}}" class="nav-link px-3">
+                            <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Leave Reports </span>
+                        </a>
+                    </li>
+                    @endhasrole()
+                </ul>
+
             </li>
             @role('Admin')
             <li>
