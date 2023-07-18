@@ -16,8 +16,8 @@ class IndividualReport extends Component
 
     public function render(): Factory|View|Application
     {
-          $user =  User::where('name', 'ilike', $this->name)
-               ->orWhere('email', 'ilike',$this->name)
+          $user =  User::where('name', 'ilike', '%{$this->name}%')
+               ->orWhere('email', 'ilike','%{$this->name}%')
                ->with('leave_applications')
                ->first();
 //
