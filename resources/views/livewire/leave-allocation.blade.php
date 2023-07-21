@@ -6,8 +6,8 @@
             <div class="col-sm-7">
                 <div class="input-group">
                     <div class="input-group-text">Name</div>
-                    <select wire:model="name"    class="form-control">
-                        <option disabled></option>
+                    <select wire:model="name"    class="form-control users" >
+                        <option selected disabled> Select Users</option>
                         @foreach($users as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>
                         @endforeach
@@ -58,3 +58,18 @@
         {{$leave_allocations->links()}}
     </div>
 </div>
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />    <script>
+        $(document).ready(function () {
+            $('.users').select2({
+                theme: "bootstrap-5"
+            });
+        });
+
+    </script>
+
+@endsection
