@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class MyScheduledTask extends Command
 {
@@ -28,7 +29,7 @@ class MyScheduledTask extends Command
     public function handle()
     {
 
-        \Log::info("My Schedule Task");
+        Log::info("My Schedule Task");
         return 0;
 //        return Command::SUCCESS;
     }
