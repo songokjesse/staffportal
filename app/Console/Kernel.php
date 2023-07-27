@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('megaphone:clear-announcements')->daily();
-        $schedule->command('my:scheduled-task')->everyMinute();
+//        $schedule->command('my:scheduled-task')->everyMinute();
     }
 
     /**
