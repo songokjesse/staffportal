@@ -12,7 +12,7 @@ class MyScheduledTask extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'my:scheduled-task';
 
     /**
      * The console command description.
