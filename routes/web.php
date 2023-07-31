@@ -142,4 +142,5 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('holidays', PublicHolidayController::class);
     Route::get('/individual_report', [IndividualReportController::class, 'index'])->name('individual_report');
     Route::get('/individual_report/{id}', LeaveApplicationViewController::class )->name('individual_report_show');
+
 });

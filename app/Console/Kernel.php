@@ -10,14 +10,14 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('megaphone:clear-announcements')->daily();
-//        $schedule->command('my:scheduled-task')->everyMinute();
+        $schedule->command('check:leave_end_date')->daily();
     }
 
     /**
