@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LeaveApplicationStatusEnum;
 use App\Mail\AgreeAssignedDuty;
 use App\Mail\RefuseAssignedDuty;
 use App\Models\AssignedDuty;
@@ -93,7 +94,7 @@ class AssignedDutiesController extends Controller
 
         $leave_application = LeaveApplication::find( $assigned_duties->leave_application_id);
         $leave_application->state = "Refused Duty Assignment";
-        $leave_application->status = "REJECTED";
+        $leave_application->status = LeaveApplicationStatusEnum::Rejected;
         $leave_application->save();
 
         $notification = new Important(

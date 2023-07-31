@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LeaveApplicationStatusEnum;
 use App\Mail\LeaveNotRecommended;
 use App\Mail\LeavePendingApproval;
 use App\Mail\LeaveRecommended;
@@ -118,7 +119,7 @@ class LeaveRecommendationController extends Controller
 
         $leave_application = LeaveApplication::find($recommendation->leave_application_id);
         $leave_application->state = "Not Recommended";
-        $leave_application->status = "REJECTED";
+        $leave_application->status = LeaveApplicationStatusEnum::Rejected;
         $leave_application->save();
 
         $notification = new Important(

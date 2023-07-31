@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\LeaveApplicationStatusEnum;
 use App\Mail\AssignDuty;
 use App\Models\AssignedDuty;
 use App\Models\LeaveAllocation;
@@ -43,8 +44,8 @@ class LeaveApplicationController extends Controller
         }
 
         $active_or_pending_leave = DB::table('leave_applications')
-            ->where('leave_applications.status', '=', "ACTIVE")
-            ->orWhere('leave_applications.status', '=', "PENDING")
+            ->where('leave_applications.status', '=', LeaveApplicationStatusEnum::Active)
+            ->orWhere('leave_applications.status', '=', LeaveApplicationStatusEnum::Pending)
             ->where('leave_applications.user_id', '=', Auth::id())
             ->get();
 
@@ -90,7 +91,7 @@ class LeaveApplicationController extends Controller
             'recommend_user_id' => $request->recommend_user_id,
             'phone' => $request->phone,
             'email' => $request->email,
-            'status' => 'PENDING',
+            'status' => LeaveApplicationStatusEnum::Pending,
             'state' => 'Application',
         ]);
         // Upload any associated documents

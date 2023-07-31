@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LeaveApplicationStatusEnum;
 use App\Mail\LeaveApproved;
 use App\Mail\LeaveNotApproved;
 use App\Models\LeaveApplication;
@@ -57,7 +58,7 @@ class LeaveApprovalController extends Controller
 
         $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
         $leave_application->state = "Approved";
-        $leave_application->status = "ACTIVE";
+        $leave_application->status = LeaveApplicationStatusEnum::Active;
         $leave_application->save();
 
         //send email notification
@@ -93,7 +94,7 @@ class LeaveApprovalController extends Controller
 
         $leave_application = LeaveApplication::find($leave_approval->leave_application_id);
         $leave_application->state = "Not_Approved";
-        $leave_application->status = "REJECTED";
+        $leave_application->status = LeaveApplicationStatusEnum::Rejected;
         $leave_application->save();
 
         //send email notification
