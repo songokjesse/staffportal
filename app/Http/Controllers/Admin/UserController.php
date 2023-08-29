@@ -95,8 +95,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $job_titles = JobTitle::all();
         return view('admin.users.edit', [
             'user' => $user,
+            'job_titles' => $job_titles,
             'userRole' => $user->roles->pluck('name')->toArray(),
             'roles' => Role::latest()->get()
         ]);
