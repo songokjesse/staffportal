@@ -126,7 +126,7 @@ class UserController extends Controller
             [
                 'pf' => $request['pf'],
                 'department_id' => $request['department_id'],
-                'job_title_id' => $request['job_title_id'],
+                'job_title_id' => $request->job_title_id,
             ]
         );
 
