@@ -20,6 +20,23 @@
                                 @method('patch')
                                 @csrf
                                 <div class="mb-3">
+                                    <label for="phone" class="form-label">Department</label>
+                                    <select
+                                        class="form-control"
+                                        name="department_id"
+                                        required
+                                    >
+                                        <option selected disabled> Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}"> {{$department->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('department_id'))
+                                        <span class="text-danger text-left">{{ $errors->first('department_id') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="name" class="form-label">Job Title</label>
                                     <select name="job_title_id" class="form-control" required>
                                         <option selected disabled> Select Job Title</option>

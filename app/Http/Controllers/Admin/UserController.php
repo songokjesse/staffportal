@@ -95,10 +95,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $departments = Department::all();
         $job_titles = JobTitle::all();
         return view('admin.users.edit', [
             'user' => $user,
             'job_titles' => $job_titles,
+            'departments' => $departments,
             'userRole' => $user->roles->pluck('name')->toArray(),
             'roles' => Role::latest()->get()
         ]);
@@ -118,6 +120,15 @@ class UserController extends Controller
             'phone' => ['required', 'string', 'max:255'],
         ]);
         $user->update($request->all());
+
+        Profile::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'pf' => $request['pf'],
+                'department_id' => $request['department_id'],
+                'job_title_id' => $request['job_title_id'],
+            ]
+        );
 
         $user->syncRoles($request->get('role'));
 
