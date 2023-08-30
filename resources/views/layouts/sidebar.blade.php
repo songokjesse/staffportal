@@ -77,6 +77,12 @@
                 </ul>
 
             </li>
+            @hasrole('Registrar Administration')
+            <li>
+                <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
+                    <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Users</span></a>
+            </li>
+            @endhasrole()
             @role('Admin')
             <li>
                 <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
