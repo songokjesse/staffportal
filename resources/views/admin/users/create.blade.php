@@ -81,7 +81,7 @@
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Department</label>
                                     <select
-                                           class="form-control"
+                                           class="form-control department_list"
                                            name="department_id"
                                           required
                                     >
@@ -111,8 +111,10 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />    <script>
         $(document).ready(function () {
-
             $('.job_title').select2({
+                theme: "bootstrap-5"
+            });
+            $('.department_list').select2({
                 theme: "bootstrap-5"
             });
         });
