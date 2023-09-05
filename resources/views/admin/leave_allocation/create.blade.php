@@ -22,7 +22,7 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Name</label>
-                                        <select class="form-control" name="user_id">
+                                        <select class="form-control user_search" name="user_id">
                                             <option disabled selected></option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->name}}</option>
@@ -65,3 +65,15 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />    <script>
+        $(document).ready(function () {
+            $('.user_search').select2({
+                theme: "bootstrap-5"
+            });
+        });
+
+    </script>
