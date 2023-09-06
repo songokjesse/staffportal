@@ -1,8 +1,8 @@
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-danger bg-gradient">
+<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0  bg-maroon bg-gradient">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-            @hasrole('Registrar Administration')
+{{--            @hasrole('Registrar Administration')--}}
             <li>
                 <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                     <i class="bi bi-people"></i><span class="ms-1 d-none d-sm-inline">Staff</span></a>
@@ -25,7 +25,7 @@
                 </ul>
 
             </li>
-            @endhasrole()
+{{--            @endhasrole()--}}
 
             <li>
                 <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
@@ -41,7 +41,7 @@
                     <li>
                         <a href="{{route('leave_recommendation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Recommendation</span></a>
                     </li>
-               @hasrole('Registrar Administration')
+{{--               @hasrole('Registrar Administration')--}}
                     <li class="w-100">
                         <a href="{{route('holidays.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Pubic Holidays</span> </a>
                     </li>
@@ -60,29 +60,23 @@
                     <li class="w-100">
                         <a href="{{route('leave_allocation.index')}}" class="nav-link px-3"> <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i>Leave Allocation </span> </a>
                     </li>
-                @endhasrole()
+{{--                @endhasrole()--}}
                 </ul>
             </li>
             <li>
                 <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
                     <i class="bi bi-card-list"></i><span class="ms-1 d-none d-sm-inline">Reports</span></a>
                 <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-                    @hasrole('Registrar Administration')
+{{--                    @hasrole('Registrar Administration')--}}
                     <li>
                         <a href="{{route('leave_reports.index')}}" class="nav-link px-3">
                             <span class="d-none text-white d-sm-inline"><i class="bi bi-caret-right"></i> Leave Reports </span>
                         </a>
                     </li>
-                    @endhasrole()
+{{--                    @endhasrole()--}}
                 </ul>
 
             </li>
-            @hasrole('Registrar Administration')
-            <li>
-                <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">
-                    <i class="fs-4 bi-person-gear"></i> <span class="ms-1 d-none  d-sm-inline">Users</span></a>
-            </li>
-            @endhasrole()
             @role('Admin')
             <li>
                 <a href="{{route('users.index')}}" class="nav-link px-0 align-middle text-white">

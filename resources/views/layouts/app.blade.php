@@ -16,6 +16,11 @@
     @livewireStyles
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        .bg-maroon {
+            background-color: maroon;
+        }
+    </style>
 
 </head>
 <body>

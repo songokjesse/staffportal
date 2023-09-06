@@ -24,6 +24,9 @@
         span.select2.select2-container.select2-container--classic{
             width: 100% !important;
         }
+        .bg-maroon {
+            background-color: maroon;
+        }
     </style>
 </head>
 <body>
