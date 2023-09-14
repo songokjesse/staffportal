@@ -34,7 +34,7 @@ class AssignDuty extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no-reply@ksu.ac.ke', 'System Generated'),
+            from: new Address('no-reply@ksu.ac.ke', 'Do Not Reply'),
             subject: 'KSUC Leave Duty Assignment',
         );
     }

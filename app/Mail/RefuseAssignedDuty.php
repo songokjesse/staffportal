@@ -33,7 +33,7 @@ class RefuseAssignedDuty extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no-reply@ksu.ac.ke', 'System Generated'),
+            from: new Address('no-reply@ksu.ac.ke', 'Do Not Reply'),
             subject: 'Refuse Assigned Duty',
         );
     }
