@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('status');
             $table->string('state');
             $table->text('comments')->nullable();
-            $table->unsignedBigInteger('duties_by_user_id');
+            $table->unsignedBigInteger('recommend_user_id');
             $table->string('phone');
             $table->string('email');
-            $table->foreign('duties_by_user_id')->references('id')->on('users');
+            $table->foreign('recommend_user_id')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('leave_categories_id')->references('id')->on('leave_categories');
             $table->timestamps();
