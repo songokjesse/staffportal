@@ -33,6 +33,7 @@ class LeaveNotRecommended extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('no-reply@ksu.ac.ke', 'System Generated'),
             subject: 'Leave Application Not Recommended',
         );
     }

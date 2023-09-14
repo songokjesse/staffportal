@@ -3,4 +3,5 @@
 <p>{{$assigned_name}} has not agreed to perform your duties when you proceed for leave.</p>
 
 <p>Best regards,</p>
-<p>Staff Portal</p>
+<p><b>HR.</b></p>
+<p><b>KOITALEEL SAMOEI UNIVERSITY COLLEGE.</b></p>
