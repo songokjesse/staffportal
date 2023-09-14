@@ -34,7 +34,7 @@ class AgreeAssignedDuty extends Mailable
     {
         return new Envelope(
             from: new Address('no-reply@ksu.ac.ke', 'System Generated'),
-            subject: 'Response to Duty Assignment',
+            subject: 'Response to Leave Duty Assignment',
         );
     }
 
