@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\LeaveApplicationStatusEnum;
 use App\Mail\AgreeAssignedDuty;
+use App\Mail\Recommendation;
 use App\Mail\RefuseAssignedDuty;
 use App\Models\AssignedDuty;
 use App\Models\LeaveApplication;
@@ -61,7 +62,7 @@ class AssignedDutiesController extends Controller
 
         $user = User::find($leave_application->recommend_user_id);
         $user->notify($notification);
-        Mail::to($user->email)->queue(new AgreeAssignedDuty($user->name, $applicant_name->name));
+        Mail::to($user->email)->queue(new Recommendation($user->name, $applicant_name->name));
 
 
 
