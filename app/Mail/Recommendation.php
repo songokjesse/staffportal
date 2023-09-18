@@ -20,7 +20,7 @@ class Recommendation extends Mailable
      * @return void
      */
     public function __construct(
-        public $assigned_name,
+        public $recommender_name,
         public $applicant_name
     )
     {}

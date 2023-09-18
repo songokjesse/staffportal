@@ -11,9 +11,14 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                            <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
-                        </div>
+{{--                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">--}}
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    {{--                                <a class="btn btn-danger btn-sm">Cancel Leave Application <i class="bi bi-sign-stop"></i></a>--}}
+                                </div>
+                                <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
+                            </div>
+{{--                        </div>--}}
                             <hr class="mt-2 mb-3"/>
                             <h2>{{ __($leaves->applicant_name) }}</h2>
 
@@ -101,9 +106,9 @@
 {{--                                    {{dd($recommendations)}}--}}
                                     <td>{{$recommendations->hod}}</td>
                                     <td>
-                                        @if($recommendations->recommendation === True and $recommendations->not_recommended === False )<span class="badge text-bg-success"> Recommended </span>@endif
-                                        @if($recommendations->not_recommended === True and $recommendations->recommendation === False)<span class="badge text-bg-danger"> Not Recommended </span>@endif
-                                        @if($recommendations->not_recommended === False and $recommendations->recommendation === False )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
+                                        @if($recommendations->recommendation === 1 and $recommendations->not_recommended === 0 )<span class="badge text-bg-success"> Recommended </span>@endif
+                                        @if($recommendations->not_recommended === 1 and $recommendations->recommendation === 0)<span class="badge text-bg-danger"> Not Recommended </span>@endif
+                                        @if($recommendations->not_recommended === 0 and $recommendations->recommendation === 0 )<span class="badge text-bg-warning"> Pending Recommendation </span>@endif
                                     </td>
                                     <td>{{$recommendations->date_recommended}}</td>
                                     <td>{{$recommendations->recommendation_comments}}</td>
@@ -134,9 +139,9 @@
                                 @else
                                     <td>{{$approvals->approved_by}}</td>
                                     <td>
-                                        @if($approvals->approved === True and $approvals->not_approved === False )<span class="badge text-bg-success"> Approved </span>@endif
-                                        @if($approvals->not_approved === True and $approvals->approved === False)<span class="badge text-bg-danger"> Not Approved </span>@endif
-                                        @if($approvals->not_approved === False and $approvals->approved === False )<span class="badge text-bg-warning"> Pending Approval </span>@endif
+                                        @if($approvals->approved === 1 and $approvals->not_approved === 0 )<span class="badge text-bg-success"> Approved </span>@endif
+                                        @if($approvals->not_approved === 1 and $approvals->approved === 0 )<span class="badge text-bg-danger"> Not Approved </span>@endif
+                                        @if($approvals->not_approved === 0 and $approvals->approved === 0 )<span class="badge text-bg-warning"> Pending Approval </span>@endif
                                     </td>
                                     <td>{{$approvals->date_approved}}</td>
                                     <td>{{$approvals->approval_comments}}</td>
