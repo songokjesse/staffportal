@@ -116,9 +116,6 @@ class LeaveApplicationController extends Controller
         $approvals = $applications['approvals'];
         $assigned_duty = $applications['assigned_duty'];
         $attachments = LeaveDocument::where('leave_application_id', $id)->get();
-        $leave_days_utilized = $leaveEntitlementService->get_utilized_days($id);
-        $current_allocation = $leaveEntitlementService->get_current_allocation($id);
-        $attachments = LeaveDocument::where('leave_application_id', $id)->get();
 
         $leave_days_utilized = $leaveEntitlementService->get_utilized_days($id);
         $current_allocation = $leaveEntitlementService->get_current_allocation($id);
