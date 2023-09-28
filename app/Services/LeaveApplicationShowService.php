@@ -18,10 +18,12 @@ class LeaveApplicationShowService
                 'leave_categories.name as leave_category',
                 'leave_applications.start_date',
                 'leave_applications.id',
+                'leave_applications.user_id',
                 'leave_applications.end_date',
                 'leave_applications.days',
                 'leave_applications.phone',
                 'leave_applications.email',
+                'leave_applications.status',
                 DB::raw("(Select name from users where id = leave_applications.user_id) as applicant_name"),
 //                DB::raw("(Select name from users where id = leave_applications.duties_by_user_id) as left_in_charge"),
             )

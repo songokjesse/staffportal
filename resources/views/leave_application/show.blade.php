@@ -16,6 +16,9 @@
                                 <div>
                                     {{--                                <a class="btn btn-danger btn-sm">Cancel Leave Application <i class="bi bi-sign-stop"></i></a>--}}
                                 </div>
+                                @if($leaves->status == "ACTIVE")
+                                    <a href="/download/{{$leaves->id}}" class="btn btn-warning btn-sm">Download Application <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                                @endif
                                 <a href="{{route('leave_application.index')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> My Leaves</a>
                             </div>
 {{--                        </div>--}}

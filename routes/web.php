@@ -28,6 +28,7 @@ use App\Http\Controllers\Requisition\RequisitionController;
 use App\Http\Controllers\Requisition\RequisitionItemController;
 use App\Services\LeaveDaysService;
 use App\Services\LeaveHistoryService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,7 +56,11 @@ Route::group(['middleware' => [  'auth' ]], function () {
         $leave_days = $leaveDaysService->get_available_days(Auth::id());
         return view('home', compact('history', 'leave_days'));
     });
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', function (LeaveHistoryService $historyService, LeaveDaysService $leaveDaysService) {
+        $history = $historyService->get_history(Auth::id());
+        $leave_days = $leaveDaysService->get_available_days(Auth::id());
+        return view('home', compact('history', 'leave_days'));
+    })->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     //    Requisition
@@ -142,5 +147,12 @@ Route::group(['middleware' => [  'auth' ]], function () {
     Route::resource('holidays', PublicHolidayController::class);
     Route::get('/individual_report', [IndividualReportController::class, 'index'])->name('individual_report');
     Route::get('/individual_report/{id}', LeaveApplicationViewController::class )->name('individual_report_show');
+
+    Route::get('/download/{id}', function (\App\Services\LeaveApplicationDownload $applicationDownload, $id){
+//        dd($applicationDownload->downloadLeaveApplication(34));
+        $pdf = PDF::loadView('leave_application.leave_application_download', $applicationDownload->downloadLeaveApplication($id));
+        // download PDF file with download method
+        return $pdf->download('approved_leave.pdf');
+    });
 
 });
