@@ -12,6 +12,9 @@
                             </div>
                         @endif
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                            @if($leaves->status == "ACTIVE")
+                                <a href="/download/{{$leaves->id}}" class="btn btn-warning btn-sm">Download Application <i class="bi bi-file-earmark-pdf-fill"></i></a>
+                            @endif
                             <a href="{{route('individual_report')}}" class="btn btn-success btn-sm" ><i class="bi bi-journals"></i> Individual Reports</a>
                         </div>
                         <hr class="mt-2 mb-3"/>
