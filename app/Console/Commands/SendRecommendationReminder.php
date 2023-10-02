@@ -33,7 +33,7 @@ class SendRecommendationReminder extends Command
     public function handle(): void
     {
         // Eager load the 'user' relationship on 'leaveApplication' and 'leaveApplication' on 'leaveRecommendation'
-        $usersWithRemindersToSend = LeaveRecommendation::with('user', 'leave_application')
+        $usersWithRemindersToSend = LeaveRecommendation::with('user', 'leaveApplication')
             ->where('recommendation_reminder_sent', 0)
             ->whereDate('created_at', '<=', Carbon::now()->subDays(3))
             ->where('recommendation', '=', 0)
@@ -42,7 +42,7 @@ class SendRecommendationReminder extends Command
 
         foreach ($usersWithRemindersToSend as $leaveRecommendation) {
             $user = $leaveRecommendation->user;
-            $leaveApplication = $leaveRecommendation->leave_application;
+            $leaveApplication = $leaveRecommendation->leaveApplication;
 
             // Access the leave applicant's user information
             $leaveApplicant = $leaveApplication->user;

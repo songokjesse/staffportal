@@ -21,4 +21,8 @@ class LeaveRecommendation extends Model
     {
         return $this->hasOneThrough( LeaveApplication::class, LeaveCategory::class, 'id','leave_categories_id', 'id');
     }
+
+    public function leaveApplication(){
+        return $this->belongsTo(LeaveApplication::class);
+    }
 }
