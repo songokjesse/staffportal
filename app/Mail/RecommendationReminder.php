@@ -10,19 +10,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Recommendation extends Mailable
+class RecommendationReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      *
-     * @param $recommender_name
-     * @param $applicant_name
+     * @return void
      */
     public function __construct(
-        public $recommender_name,
-        public $applicant_name
+        public $applicant_name,
+        public $recommender_name
     )
     {}
 
@@ -35,7 +34,7 @@ class Recommendation extends Mailable
     {
         return new Envelope(
             from: new Address('no-reply@ksu.ac.ke', 'Do Not Reply'),
-            subject: 'Request for Recommendation',
+            subject: 'Leave Application Recommendation Reminder',
         );
     }
 
@@ -47,7 +46,7 @@ class Recommendation extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.recommendation',
+            view: 'emails.recommendation_reminder',
         );
     }
 
