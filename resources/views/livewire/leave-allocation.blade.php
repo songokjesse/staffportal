@@ -19,6 +19,9 @@
                     <div class="input-group-text">Year</div>
                     <select wire:model="year" class="form-control">
                         <option disabled></option>
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
                         <option>2023</option>
                         <option>2022</option>
                         <option>2021</option>
