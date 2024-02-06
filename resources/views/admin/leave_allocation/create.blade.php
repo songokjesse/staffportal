@@ -46,6 +46,9 @@
                                         <label for="exampleInputEmail1" class="form-label">Year</label>
                                         <select class="form-control" name="year">
                                             <option disabled selected></option>
+                                            <option>2026</option>
+                                            <option>2025</option>
+                                            <option>2024</option>
                                             <option>2023</option>
                                             <option>2022</option>
                                             <option>2021</option>
